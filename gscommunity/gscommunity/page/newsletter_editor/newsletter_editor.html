@@ -1,0 +1,242 @@
+
+<div class="row template_heading">
+    <div class="">
+        <div class="col-md-8 left_border">
+            <div class="preview_heading">
+                <h5>Preview</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="block_heading ">
+                <h5>Blocks</h5>
+            </div>            
+        </div>
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 left_border">
+        <div class="preview_details">
+            <div class="fixed_class" data-attr="{{newsletter}}">
+                {% if template %}{{template}}{% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 no_padding ">
+        <div class="block_details">
+            <div class="fixed_class">
+                {% if components!="" %}
+                    {% for f in fields_list %}
+                        <div>
+                            <div data-type="{{f.type}}" data-otr_cls="{{f.otr_class}}" data-inr_cls="{{f.inr_class}}" class="accordion"><b>{{f.inr_class}}</b><span class="{% if f.count==1 %}fa fa-chevron-up{% else %}fa fa-chevron-down{% endif %}"></span></div>
+                            <div class="panel" style="{% if f.count==1 %}display: block;{% endif %}">
+                            {% if f.type=="Text"%}
+                            <h6 style="text-transform: capitalize;">{{f.inr_class}}</h6>
+                            <input type="text" name="{{f.otr_class}}" class="form-control" id="{{f.otr_class}}" data-inclass="{{f.inr_class}}">
+                            {% endif %} 
+                            {% if f.type=="Image" %}
+                            <h6 style="text-transform: capitalize;">{{f.inr_class}}</h6>
+                            <img src="" class="img-responsive {{f.otr_class}}" style="max-height: 170px;margin:auto;" name="{{f.otr_class}}">
+                            <!-- <button id="btn-{{f.otr_class}}" class="btn btn-primary" onclick="show_upload()">Change</button> -->
+                            <input type="file" name="{{f.otr_class}}" class="form-control" id="{{f.otr_class}}" data-inclass="{{f.inr_class}}" onchange="upload(this)">
+                            <input type="hidden" name="image-{{f.otr_class}}" id="image-{{f.otr_class}}">
+                            {% endif %} 
+                            {% if f.type=="Html" %}
+                            <h6 style="text-transform: capitalize;">{{f.inr_class}}</h6>
+                            <textarea name="{{f.otr_class}}" class="form-control" id="{{f.otr_class}}" data-inclass="{{f.inr_class}}"></textarea>
+                            {% endif %}
+                            {% if f.type=="Link" %}
+                            <h6 style="text-transform: capitalize;">{{f.inr_class}}</h6> 
+                            <p>Link Text</p>
+                            <input type="text" name="{{f.otr_class}}" class="form-control" id="{{f.otr_class}}" data-inclass="{{f.inr_class}}">
+                            <p>Link Url</p>
+                            <input type="text" name="{{f.otr_class}}" class="form-control" id="{{f.otr_class}}-url" data-inclass="{{f.inr_class}}">
+                            {% endif %}
+                            {% if f.type=="Button" %}
+                            <h6 style="text-transform: capitalize;">{{f.inr_class}}</h6>
+                            <p>Button Text</p>
+                            <input type="text" name="{{f.otr_class}}" class="form-control" id="{{f.otr_class}}" data-inclass="{{f.inr_class}}">
+                            <p>Button Url</p>
+                            <input type="text" name="{{f.otr_class}}" class="form-control" id="{{f.otr_class}}-url" data-inclass="{{f.inr_class}}">
+                            {% endif %} 
+                            </div>
+                            <div style="border-bottom: 1px solid #ccc"></div>
+                        </div>                   
+                    {% endfor %}
+                    <input type="hidden" name="block" value="{{components.block_ids}}" id="block">
+                    <input type="hidden" name="component_name" value="{{components.name}}" id="component_name">
+                    <input type="hidden" name="parent" value="{{components.parent}}" id="parent">
+                    <input type="hidden" name="fields_type" value="{{components.fields_data_type}}" id="fields_type">
+                    <input type="hidden" name="source_text" value="{{components.source_text}}" id="source_text">
+                    <div style="display: none;" id="html">{{components.html}}</div>
+                    <div class="save_btn">
+                        <button class="btn btn-danger" onclick="save_block()">Save</button>
+                    </div>
+                {% else %}
+                <div class="tab-content" style="text-align: center; text-transform: uppercase;overflow: hidden;margin-top: 25px;">
+                    <p>Please select any block to edit.</p>                
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div id="block_modal" class="modal fade" style="overflow: auto; padding-right: 17px;" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a type="button" class="close" data-dismiss="modal" aria-hidden="true"></a>
+                <h4 class="modal-title">Blocks</h4>
+            </div>
+            <div class="modal-body ui-front">
+                <div id="block_lists"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style type="text/css">
+    .template_heading{
+        margin-top: -60px;
+        border-bottom: 1px solid #c1c1c1;
+    }
+    .block_heading, .preview_heading{
+        text-align: center;
+    }
+    .preview_details{
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+    .preview_details .fixed_class{
+        padding-top: 13px;
+    }
+    .block_heading h5, .preview_heading h5{
+        font-size: 18px;
+    }
+    .left_border{
+        border-right: 1px solid #c1c1c1;
+    }
+    .block_details, .preview_details{
+        min-height: 490px;
+    }    
+    .page-title h1 {
+        margin-top: 5px;
+        font-size: 16px;
+    }
+    .page-title .title-text {
+        margin-right: 7px;
+    }
+    .page-content {
+        margin-top: 90px;
+    }
+    .page-head{
+        height: 40px;
+    }
+    .fixed_class{
+        max-height: 490px;
+        margin-top: 0px;
+    }
+    .accordion {
+        /*background-color: #f1f1f1;*/
+        color: #444;
+        cursor: pointer;
+        padding: 13px;
+        width: 100%;
+        text-align: left;
+        /*border-bottom: 1px solid #ccc;*/
+        outline: none;
+        transition: 0.4s;
+        text-transform: capitalize;
+        /*margin-bottom: 10px;*/
+        border-left: none;
+        border-right: none;
+    }
+
+    .active,
+    .accordion:hover {
+        /*background-color: #eee;*/
+    }
+
+    .panelcode {
+        padding: 0 10px;
+        background-color: white;
+        display: none;
+        overflow: hidden;
+        /*border: 1px solid #ccc;*/
+        border-radius: 0;
+    }
+
+    .panel-group .panel {
+        margin-bottom: 15px;
+    }
+
+    .accordion span {
+        float: right;
+    }
+    .save_btn{
+        text-align: center;
+        margin-bottom: 25px;
+        margin-top: 25px;
+    }
+    .page-actions{
+        padding-top: 4px;
+    }
+    .no_padding{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .block:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    #block_icons{
+        position: relative;
+        right: 7%;
+        top: 2%;
+        display: none;
+    }
+    #block_icons .abs_cls .add_top{
+        position: absolute;
+        left: 55%;
+        /*top: -150px;*/
+        color: #e50041;
+        background: #fff;
+        padding: 2px 7px;
+        border-radius: 50%;
+        z-index: 999;
+        top: -14px;
+        border: 1px solid;
+    }
+    #block_icons .abs_cls .delete{
+        position: absolute;
+        /*top: -155px;*/
+        left: 105%;
+        z-index: 999;
+    }
+    #block_icons .abs_cls .add_bottom{
+        position: absolute;
+        bottom: 0%;
+        color: #e50041;
+        background: #fff;
+        padding: 2px 7px;
+        border-radius: 50%;
+        left: 55%;
+        z-index: 999;
+        border: 1px solid;
+        height: 24px;
+    }    
+    #block_lists .prototype  {        
+        border: 1px solid #c1c1c1;
+        padding: 7px 10px;
+    }
+    #block_lists .list{
+        margin-bottom: 10px;
+    }
+    #block_lists .proto{
+        height: 125px;
+        border: 1px solid #c1c1c1;
+    }
+</style>

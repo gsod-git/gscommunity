@@ -1,0 +1,78 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active"> {{title}} </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">GSOD Community News</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                 {% include 'templates/includes/Advertisement/Topadvertisement.html' %}  
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                {% if NewsList %} {% for news in NewsList %}
+              
+                <div class="col-xs-12 col-md-4 col-sm-6">
+                    <section class="b-team-002">
+                        <div class="b-team-2__media">
+                            <a href="{{news.route}}">            
+                                <img src="{% if news.image %}{{news.image}}{% else %}/assets/frappe/images/background.png{% endif %}" class="img-responsive" href="{{news.route}}" style="height: 300px;object-fit: cover;width: 100%" />            
+                            </a>
+                            <!-- <div class=" helper">
+                                <div class="b-team-2__contacts helper__inner">
+                                    <a class="b-team-2__contact" href="{{news.route}}"><i class="icon fa loaction"></i>{{news.title}}</a>
+                                </div>
+                            </div> -->
+                             <h3 class="b-team-002__name"> <a  href="{{news.route}}"> {{news.title}} </a></h3>
+                        </div>
+                       
+                    </section>
+                </div>
+                {% endfor %} {% endif %}
+            </div>
+
+            <div class="col-md-3 col-sm-12 col-xs-12">
+
+             {% include 'templates/includes/Advertisement/Advertisement.html' %} </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">
+.b-team-002 {
+    text-align: center;
+    background: #ececec;
+    margin-bottom: 15px;
+}
+
+.b-team-002__name {
+    
+    font-size: 12px;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+    color: #e50041;
+    background: #ece5e7;
+    min-height: 60px;
+    height: 60px;
+    padding: 0 5px;
+    line-height: 20px;
+}
+</style>
+{% endblock %}

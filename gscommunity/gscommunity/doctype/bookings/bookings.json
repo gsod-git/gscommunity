@@ -1,0 +1,221 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2018-06-06 15:23:22.085290",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "booking_order_id",
+  "booking_date",
+  "column_break_3",
+  "booking_status",
+  "events",
+  "booking_details",
+  "booked_by",
+  "member",
+  "first_name",
+  "last_name",
+  "column_break_10",
+  "email",
+  "phone_no",
+  "section_break_13",
+  "total_seats",
+  "total_amount",
+  "column_break_16",
+  "seat_name",
+  "ticket_details",
+  "booked_tickets",
+  "section_break_19",
+  "accounting_group",
+  "column_break_21",
+  "accounting_category",
+  "naming_series",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "booking_order_id",
+   "fieldtype": "Data",
+   "label": "Booking Order Id",
+   "reqd": 1
+  },
+  {
+   "fieldname": "booking_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Booking Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "booking_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Booking Status",
+   "options": "Booked\nPaid\nCancelled"
+  },
+  {
+   "fieldname": "events",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Event",
+   "options": "Events"
+  },
+  {
+   "fieldname": "booking_details",
+   "fieldtype": "Section Break",
+   "label": "Booking Details"
+  },
+  {
+   "default": "Member",
+   "fieldname": "booked_by",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Booked By",
+   "options": "Member\nNon Member"
+  },
+  {
+   "depends_on": "eval:doc.booked_by=='Member'",
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Member",
+   "options": "Member"
+  },
+  {
+   "depends_on": "eval:doc.booked_by=='Non Member'",
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "label": "First Name"
+  },
+  {
+   "depends_on": "eval:doc.booked_by=='Non Member'",
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.booked_by=='Non Member'",
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "depends_on": "eval:doc.booked_by=='Non Member'",
+   "fieldname": "phone_no",
+   "fieldtype": "Data",
+   "label": "Phone No"
+  },
+  {
+   "fieldname": "section_break_13",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Specify seat count",
+   "fieldname": "total_seats",
+   "fieldtype": "Int",
+   "label": "Total Seats"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Data",
+   "label": "Total Amount ($ - USD)"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Specify seat name as comma separated",
+   "fieldname": "seat_name",
+   "fieldtype": "Data",
+   "label": "Seat Name"
+  },
+  {
+   "fieldname": "ticket_details",
+   "fieldtype": "Section Break",
+   "label": "Ticket Details"
+  },
+  {
+   "fieldname": "booked_tickets",
+   "fieldtype": "Table",
+   "label": "Booked Tickets",
+   "options": "Booked Tickets"
+  },
+  {
+   "fieldname": "section_break_19",
+   "fieldtype": "Section Break",
+   "label": "Accounting Details"
+  },
+  {
+   "fieldname": "accounting_group",
+   "fieldtype": "Data",
+   "label": "Accounting Group",
+   "options": "events.accounting_group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_21",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "accounting_category",
+   "fieldtype": "Data",
+   "label": "Accounting Category",
+   "options": "events.accounting_head",
+   "reqd": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "B-"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Bookings",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-07-09 01:36:59.846332",
+ "modified_by": "Administrator",
+ "module": "Gscommunity",
+ "name": "Bookings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

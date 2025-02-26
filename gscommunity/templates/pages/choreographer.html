@@ -1,0 +1,127 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+ 
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">Choreographers</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">Choreographers</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax ">
+    <div class="container-fluid event-schedule-area-two">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-9" style="margin-bottom: 20px;">
+                    <div class="col-md-12">
+                        <div class="col-md-12 mb-10 bg-head" style="padding-left: 0;padding-right: 0;    ">
+                            <div class="df">
+                                <div class="col-md-9">
+                                    <h4 class="ui-title-block">Choreographers</h4></div>
+                                <div class="col-md-3"> </div>
+                            </div>
+                        </div>
+                        <table id="choreo-grid" class="table-responsive" style="width:100%">
+                            <thead class="table">
+                                <tr style="background: rgba(227, 217, 220, 0.87);">
+                                    <th scope="col">Picture</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Mobile No</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">State</th>
+                                    <th scope="col">Zip Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if user %} {% for usr in user %}{% if usr.member %}{% for member in usr.member %}
+                                <tr class="inner-box">
+                                    <td>                                        
+                                        {% if member.image and member.public_profile %}
+                                            <a class="js-zoom-images" href="{{member.image}}">   
+                                                <img src="{{member.image}}" alt="" class="event-img img-responsive" style="margin: auto;max-width: 100px;"> 
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{member.member_name}} {% if member.middle_name %}{{member.middle_name}}{% endif %} {{member.last_name}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{% if member.phone_no %}{{member.phone_no}}{% endif %}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{member.city}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{member.state}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{member.zip_code}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}{% endif %}{% endfor %}{% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12 ">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} {% block style %}
+<style type="text/css">
+.table-bordered {
+    border: 1px solid transparent !important;
+}
+
+table.dataTable tbody tr {
+    background-color: #ffffff !important;
+}
+
+table.dataTable tbody td {
+    text-align: left !important;
+}
+
+.dataTables_filter {
+    position: absolute;
+    display: block !important;
+    right: 0;
+    top: -50px;
+    padding-right: 10px;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+    padding: 3px 18px;
+}
+</style>
+{% endblock %}}

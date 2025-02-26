@@ -1,0 +1,275 @@
+{
+ "actions": [],
+ "allow_guest_to_view": 1,
+ "autoname": "naming_series:",
+ "creation": "2018-05-18 14:34:15.633705",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sponsor_type",
+  "member",
+  "sponsor_name",
+  "last_name",
+  "column_break_5",
+  "email",
+  "phone",
+  "sponsorship_details",
+  "sponsorship_type",
+  "published",
+  "column_break_3",
+  "sponsorship_plan",
+  "accounting_head",
+  "published_on",
+  "section_break_6",
+  "starts_on",
+  "validity",
+  "column_break_13",
+  "expires_on",
+  "payment_details",
+  "paid",
+  "column_break_27",
+  "amount",
+  "naming_series",
+  "yellow_page",
+  "yellow_page_count",
+  "yellow_page_detail",
+  "add_new_yellow_page",
+  "ad_section",
+  "advertisement_count",
+  "advertisement_detail",
+  "add_new_advertisement",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "sponsor_type",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Sponsor Type",
+   "options": "\nMember\nGuest",
+   "reqd": 1
+  },
+  {
+   "depends_on": "doc.sponsor_type=='Member'",
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Member",
+   "options": "Member"
+  },
+  {
+   "fetch_from": "member.member_name",
+   "fieldname": "sponsor_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "First Name"
+  },
+  {
+   "fetch_from": "member.last_name",
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fetch_from": "member.phone_no",
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone",
+   "length": 10
+  },
+  {
+   "fieldname": "sponsorship_details",
+   "fieldtype": "Section Break",
+   "label": "Sponsorship Details"
+  },
+  {
+   "fieldname": "sponsorship_type",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Sponsorship Type",
+   "options": "Sponsorship Type",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Active"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sponsorship_plan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sponsorship Plan",
+   "options": "Sponsorship Items"
+  },
+  {
+   "fetch_from": "sponsorship_plan.accounting_head",
+   "fieldname": "accounting_head",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Accounting Head"
+  },
+  {
+   "fieldname": "published_on",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Published On"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break",
+   "label": "Validity"
+  },
+  {
+   "default": "Today",
+   "fieldname": "starts_on",
+   "fieldtype": "Date",
+   "label": "Starts On"
+  },
+  {
+   "fetch_from": "amended_from.validity",
+   "fieldname": "validity",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "validity"
+  },
+  {
+   "fieldname": "column_break_13",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "expires_on",
+   "fieldtype": "Date",
+   "label": "Expires On"
+  },
+  {
+   "fieldname": "payment_details",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "paid",
+   "fieldtype": "Check",
+   "label": "Paid"
+  },
+  {
+   "fieldname": "column_break_27",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "amended_from.amount",
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount ($ - USD)",
+   "read_only": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "SP-"
+  },
+  {
+   "fieldname": "yellow_page",
+   "fieldtype": "Section Break",
+   "label": "Yellow Page"
+  },
+  {
+   "fieldname": "yellow_page_count",
+   "fieldtype": "HTML",
+   "label": "Yellow Page Count"
+  },
+  {
+   "fieldname": "yellow_page_detail",
+   "fieldtype": "HTML",
+   "label": "Yellow Page Detail"
+  },
+  {
+   "fieldname": "add_new_yellow_page",
+   "fieldtype": "Button",
+   "label": "Add New Yellow Page"
+  },
+  {
+   "fieldname": "ad_section",
+   "fieldtype": "Section Break",
+   "label": "Advertisement"
+  },
+  {
+   "fieldname": "advertisement_count",
+   "fieldtype": "HTML",
+   "label": "Advertisement Count"
+  },
+  {
+   "fieldname": "advertisement_detail",
+   "fieldtype": "HTML",
+   "label": "Advertisement Detail"
+  },
+  {
+   "fieldname": "add_new_advertisement",
+   "fieldtype": "Button",
+   "label": "Add New Advertisement"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Sponsorship",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "is_published_field": "published",
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-07-08 08:37:18.454507",
+ "modified_by": "Administrator",
+ "module": "Gscommunity",
+ "name": "Sponsorship",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "sponsor_name,email,phone",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "sponsor_name",
+ "track_changes": 1
+}

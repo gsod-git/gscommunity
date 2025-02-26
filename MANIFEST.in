@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include gscommunity *.css
+recursive-include gscommunity *.csv
+recursive-include gscommunity *.html
+recursive-include gscommunity *.ico
+recursive-include gscommunity *.js
+recursive-include gscommunity *.json
+recursive-include gscommunity *.md
+recursive-include gscommunity *.png
+recursive-include gscommunity *.py
+recursive-include gscommunity *.svg
+recursive-include gscommunity *.txt
+recursive-exclude gscommunity *.pyc

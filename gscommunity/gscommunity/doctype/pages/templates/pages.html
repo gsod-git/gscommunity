@@ -1,0 +1,277 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">{{title}}</li>
+                </ol>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block"> {{title}}  </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% if PagesList %} {% for page in PagesList %}
+<div class="section-content1 row">
+    <div class="col-md-12">
+        <div class="col-md-9">
+            <section class="parallax" style="min-height: 350px;">
+                <div class="container-fluid">
+                    <div class="col-md-12 page_description">
+                        <p>{{page.description}}</p>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                </div>
+                {% if page.PagesSections %} {% for ps in page.PagesSections %} {% if ps.block_style=='Gray Background Section' %}
+                <div class="container-fluid bg-grey" style="padding: 1% 5%;">
+                    <div>
+                        <h6 style="font-size: 18px !important"> {{ps.title}}  </h6> </div>
+                    {% if ps.description %}
+                    <p> {{ps.description}}</p> {% endif %} {% if ps.Module %} {% for pm in ps.Module %}
+                    <div class="col-md-12" style="padding-top: 20px;">
+                        <div class="col-md-12">
+                            <div class="col-md-9">
+                                <h6>   <a href={{pm.route}}>   {{pm.name}}  </a>  </h6> {% if pm.details %}
+                                <table id="grid" class="table table-bordered">
+                                    <thead>
+                                        <tr style="background: rgba(227, 217, 220, 0.87)">
+                                            <th style="text-align: left;font-size: 15px;font-weight: bold;"> Name </th>
+                                            <th style="text-align: left;font-size: 15px;font-weight: bold;"> Designation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for details in pm.details %}
+                                        <tr>
+                                            <td style="width: 50%;text-align: left;">{{details.member_name}}</td>
+                                            <td style="width: 50%;text-align: left">{{details.designation}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %} {% endif %}
+                </div>
+                {% endif %} {% if ps.block_style=='White Background Section' %}
+                <div class="container-fluid " style="padding: 1% 5%;">
+                    <div>
+                        <h6 style="font-size: 18px !important"> {{ps.title}}  </h6> </div>
+                    {% if ps.description %}
+                    <p> {{ps.description}}</p> {% endif %} {% if ps.Module %} {% for pm in ps.Module %}
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="col-md-9">
+                                <h6>   <a href={{pm.route}}>   {{pm.name}}  </a>  </h6> {% if pm.details %}
+                                <table id="grid" class="table table-bordered">
+                                    <thead>
+                                        <tr style="background: rgba(227, 217, 220, 0.87)">
+                                            <th style="text-align: left;font-size: 15px;font-weight: bold;"> Name </th>
+                                            <th style="text-align: left;font-size: 15px;font-weight: bold;"> Designation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for details in pm.details %}
+                                        <tr>
+                                            <td style="width: 50%;text-align: left">{{details.member_name}}</td>
+                                            <td style="width: 50%;text-align: left">{{details.designation}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %} {% endif %}
+                </div>
+                {% endif %} {% if ps.block_style == 'Left Image' %}
+                <section class="bg-grey" style="padding-top:60px">
+                    <div class="container">
+                        <div class="row">
+                            <h6>  {{ps.title}}   </h6>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="b-team-2__media">
+                                    {% if ps.image ==None %}
+                                    <img src="/assets/frappe/images/background.png" class="img-responsive"> {% endif %} {% if ps.image !=None %}
+                                    <img class="img-responsive" src="{{ps.image}}" /> {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="b-team-2__media">
+                                    {% if ps.description %}
+                                    <p> {{ps.description}}</p> {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {% endif %} {% if ps.block_style == 'Right Image' %}
+                <section class="section-reviews" style="padding-top:60px">
+                    <div class="container">
+                        <div class="row">
+                            <h6>  {{ps.title}}   </h6>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="b-team-2__media">
+                                    {% if ps.description %}
+                                    <p> {{ps.description}}</p> {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="b-team-2__media">
+                                    {% if ps.image ==None %}
+                                    <img src="/assets/frappe/images/background.png" class="img-responsive"> {% endif %} {% if ps.image !=None %}
+                                    <img class="img-responsive" src="{{ps.image}}" /> {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {% endif %} {% endfor %} {% endif %}
+            </section>
+        </div>
+        <div class="col-md-3">
+            {% include 'templates/includes/Advertisement/Advertisement.html' %}
+        </div>
+    </div>
+</div>
+{% endfor %}{% endif %} {% endblock %} {% block style %}
+<style>
+.event-schedule-area-two .table {
+    -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.col-white {
+    color: #fff !important;
+}
+
+.event-schedule-area-two .table tbody tr td .event-wrap h5 a:hover {
+    color: #044A91;
+}
+
+.event-schedule-area-two .table tbody tr td .event-wrap h5 {
+    font-size: 18px;
+    line-height: 20px;
+    color: #212121 !important;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.event-schedule-area-two .table tbody tr td .event-wrap .organizers {
+    display: -webkit-inline-box !important;
+    display: -ms-inline-flexbox !important;
+    display: inline-flex !important;
+    margin: 10px 0 !important;
+}
+
+.event-schedule-area-two .table tbody tr td {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.event-schedule-area-two .table tbody tr td .event-wrap .time span {
+    color: #252525;
+    font-family: "Poppins", sans-serif;
+    color: #656565;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.organizers a {
+    font-size: 15px;
+}
+
+.r-no span {
+    font-size: 15px;
+    line-height: 1.375;
+}
+
+.r-no br {
+    font-size: 15px;
+    line-height: 1.375;
+}
+
+.wi-25 {
+    width: 20%;
+}
+
+.event-schedule-area-two .table tbody tr td .event-img img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+}
+
+.event-date p {
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.mar-40 {
+    margin-top: 40px;
+}
+
+.dd img {
+    width: 100%;
+}
+
+.event-body {
+    background: #fff;
+    padding: 40px 0;
+    border: 1px solid #D7D7D7;
+    border-top: 1px solid transparent;
+}
+
+.ad-sec {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ad-sec img {
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.side-ban-new {
+    margin-top: 8% !important;
+    width: 100%;
+}
+
+.page_description {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+table.dataTable tbody tr {
+    background-color: #ffffff !important;
+}
+
+#grid th {
+    padding: 12px 10px;
+}
+
+#grid td {
+    padding: 12px 10px;
+}
+</style>
+{% endblock %}

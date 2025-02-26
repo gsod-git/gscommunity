@@ -1,0 +1,105 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">Survey Response</li>
+                </ol>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">{{survey}}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="col-xs-10 col-md-9">
+                    {% if response %} {% for question in response %}
+                    <div class="question">
+                        <div class="que">
+                            <p>{{question.question_name}}</p>
+                        </div>
+                        <div>
+                            <div class="opts">
+                                {% if question.options %} {% for option in question.options %}
+                                {% set percent=(option.response_count/question.total_response)*100%}
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4">
+                                  <p>{{option.options}}</p>
+                                </div>
+                                <div class="col-md-6 col-sm-6">                                
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{percent}}" aria-valuemin="0" aria-valuemax="100" style="width:{{percent}}%">                                     
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-sm-2">
+                                    <p style="float: right">{{'%0.0f'%percent|round}}%</p>
+                                </div>
+                                </div>  
+                                {% endfor %} {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %} {% endif %}
+                </div>
+                <div class="col-md-3 col-xs-12">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end .b-about-->
+</section>
+<style type="text/css">
+.b-breadcrumb {
+    margin-top: 187px;
+}
+
+@media screen and (max-width: 720px) {
+    .b-breadcrumb {
+        margin-top: 126px;
+    }
+}
+.progress{
+    margin-top: 9px;
+    height: 10px;
+    border: 1px solid #e3d9dc;    
+    transition: background-color 0.3s ease-out;
+    box-shadow: 0 1px 2px rgba(0,0,0,.07);
+}
+.question{
+    border: 1px solid #d1d1d1;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease-out;
+    box-shadow: 0 1px 2px rgba(0,0,0,.07);
+}
+.question .que p{
+    font-weight: 500;
+    background: #f1f1f1;
+    padding: 13px;
+}
+.question .que{
+    border-bottom: 1px solid #ccc;
+}
+.opts{
+    padding: 10px 20px;
+}
+.opts .row{
+    margin-bottom: 6px;
+}
+</style>
+{% endblock %}

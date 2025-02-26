@@ -1,0 +1,14 @@
+<div id="ad_slide">
+            <div class="team-carousel-2 owl-carousel owl-theme enable-owl-carousel" data-min768="1" data-min992="1" data-min1200="1" data-margin="30" data-pagination="false" data-navigation="false" data-stop-on-hover="true">
+                <section data-timing='300' class="b-team-2" style="padding-bottom: 0;background: #fff;padding-top: 5px;    padding-bottom: 10px;">
+                    <div class="b-team-2__media">
+                        <img src="/assets/gscommunity/assets/media/top-1.jpg" class="img-responsive" href="#" style="width: 1000px;height: 100px;margin: auto;">
+                    </div>
+                </section>
+                <section data-timing='2000' class="b-team-2" style="padding-bottom: 0;background: #fff;padding-top: 5px;    padding-bottom: 10px;">
+                    <div class="b-team-2__media">
+                        <img src="/assets/gscommunity/assets/media/banner-2.png" class="img-responsive" href="#" style="width: 1000px;height: 100px;margin: auto;">
+                    </div>
+                </section>
+            </div>
+        </div>

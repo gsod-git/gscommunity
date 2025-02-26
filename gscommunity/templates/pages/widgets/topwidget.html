@@ -1,0 +1,56 @@
+
+{% for item in TopWidget %} 
+      {% for data in item.Widgets %}
+      {% if data.widget_type=='Static' %}
+      {% if data.widget_name.find('Google')!=-1 or data.widget_name.find('Google')!=-1 %}
+      <div class="{% if item.Widgets | length ==2 %}col-sm-6{% elif item.Widgets | length == 1 %}col-sm-12{% endif %}" style="margin-bottom:10px;" id="ad-top-content">{{data.html_content}}</div>
+      <div id="top-content" style="display: none;">{{data.html_content}}</div>
+      {% else %}
+        <div class="{% if item.Widgets | length ==2 %}col-sm-6{% elif item.Widgets | length == 1 %}col-sm-12{% endif %}" style="margin-bottom:10px;">{{data.html_content}}</div>
+        {% endif %}
+      {% else %}
+              
+        <div style="width:100%;margin-bottom: 10px;" class="{% if item.Widgets | length ==2 %}col-sm-6{% elif item.Widgets | length == 1 %}col-sm-12{% endif %} content-table">
+          <div style="padding: 8px;background: #f1f1f1;">
+            <h5 style="color: #000;">{{data.widget_name}}</h5>
+          </div> 
+          {% for widget in data.Content %}  
+
+            {% for list in widget %}                
+              {% if data.link_data=='Blog' %}
+
+              <div style="display: flex;border-top: 1px solid #d4d2d2;padding: 7px;">                
+                {% if list.image ==None%}
+                  <img src="/assets/frappe/images/no-img.jpg"  class="img-responsive" style="height: 50px;margin-right: 5px;width: 70px">
+                {% else %}                
+                  <img src="{{list.image}}" class="img-responsive" style="height: 50px;margin-right: 5px;width: 70px;" />
+                {% endif %} 
+                <a style="color: #000" href="{{list.route}}">{{list.title}}</a>
+              </div>
+              {% else %}
+              <div style="border-top: 1px solid #d4d2d2;padding: 7px;">                
+                <h5 style="color:#000">{{list.user_name}}<span style="bottom: auto !important" class="tg-stars {{list.StarName}}-tg-stars"></span></h5>
+                <h6 style="color: #000">{{list.subject}}</h6>
+              </div>
+              {% endif %} 
+            {% endfor %}
+          {% endfor %}
+          </div>
+        {% endif %}
+
+        {% endfor %}
+      
+{% endfor %}
+<style type="text/css">
+  .content-table{
+    border: 1px solid #d4d2d2;
+  }
+</style>
+<script src="/assets/gscommunity/assets/libs/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var data=$("#top-content").text();
+    var content=$.parseHTML(data)    
+    $("#ad-top-content").html(content[0].outerHTML)
+  })
+</script>

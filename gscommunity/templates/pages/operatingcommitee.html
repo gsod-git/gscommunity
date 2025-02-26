@@ -1,0 +1,245 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">Operating Committee</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">Operating Committee</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax ">
+    <div class="container-fluid event-schedule-area-two">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-9" style="margin-bottom: 20px;">
+                    <div class="col-md-3 col-sm-3">
+                        <div class="tab">
+                            {% for list in committee %} {% if loop.index == 1 %}
+                            <button class="tablinks" id="defaultOpen" onclick="openCommittee(event, '{{list.name}}')">{{list.name}} <span style="padding-right: 10px;float: right;">   <i class="fa fa-chevron-right" aria-hidden="true"></i> </span></button>
+                            {% else %}
+                            <button class="tablinks" onclick="openCommittee(event, '{{list.name}}')">{{list.name}} <span style="padding-right: 10px;float: right;">   <i class="fa fa-chevron-right" aria-hidden="true"></i> </span></button>
+                            {% endif %} {% endfor %}
+                        </div>
+                    </div>
+                    {% if committee %} {% for c in committee %}
+                    <div class="col-md-9 col-sm-9 tabcontent" id="{{c.name}}">
+                        <div class="col-md-12 mb-10 bg-head" style="padding-left: 0;padding-right: 0;">
+                            <div class="df">
+                                <div class="col-md-9">
+                                    <h4 class="ui-title-block">{{c.name}} </h4></div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                        </div>
+                        <table id="op-committee" class="display table-responsive" style="width:100%">
+                            <thead class="table">
+                                <tr style="background: rgba(227, 217, 220, 0.87);">
+                                    <th scope="col">Picture</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Designation</th>
+                                    <th scope="col">Year</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if c.members %} {% for member in c.members %}
+                                <tr class="inner-box">
+                                    <td>
+                                        {% if member.image %}
+                                            <a class="js-zoom-images" href="{{member.image}}">   
+                                                <img src="{{member.image}}" alt="" class="event-img img-responsive" style="margin: auto;max-width: 100px;"> 
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{member.member_name}}{% if member.middle_name %} {{ member.middle_name }}{% endif %} {{member.last_name}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{member.designation}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{member.year}}</span>
+                                        </div>
+                                    </td>
+                                </tr>{% endfor %}{% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endfor %}{% endif %}
+                </div>
+                <div class="col-md-3 col-xs-12 ">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} {% block style %}
+<style type="text/css">
+.table-bordered {
+    border: 1px solid transparent !important;
+}
+
+table.dataTable tbody tr {
+    background-color: #ffffff !important;
+}
+
+table.dataTable.display tbody tr.even>.sorting_1 {
+    background-color: #ffffff !important;
+}
+
+table.dataTable.display tbody tr.odd>.sorting_1 {
+    background-color: #ffffff !important;
+}
+
+
+table.dataTable tbody td {
+    text-align: left !important;
+}
+
+.dataTables_filter {
+    position: absolute;
+    display: block !important;
+    right: 0;
+    top: -50px;
+    padding-right: 10px;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+    padding: 3px 18px;
+}
+
+
+
+
+/* Style the tab */
+
+.tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 100%;
+    height: auto;
+}
+
+
+
+
+/* Style the buttons inside the tab */
+
+.tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+
+
+
+/* Change background color of buttons on hover */
+
+.tab button:hover {
+    background-color: #e3d9dc;
+}
+
+
+
+
+/* Create an active/current "tab button" class */
+
+.tab button.active {
+    background-color: #e3d9dc;
+}
+
+
+
+
+/* Style the tab content */
+
+.tabcontent {
+    float: left;
+    /* padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 100%;
+    border-left: none;*/
+}
+
+.tablinks {
+    border-bottom: 1px solid #e7dee1 !important;
+    font-size: 14px !important
+}
+
+.dataTables_wrapper {
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 756px) {
+    .ui-title-block {
+        padding: 10px 0 33px 0 !important;
+    }
+}
+</style>
+{% endblock %}} {% block script %}
+<script>
+$(document).ready(function() {
+    $('table.display').DataTable();
+});
+
+
+
+function openCommittee(evt, CommitteeName) {
+
+
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+
+    }
+
+
+    document.getElementById(CommitteeName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+$(document).ready(function() {
+
+})
+</script>
+{% endblock %}

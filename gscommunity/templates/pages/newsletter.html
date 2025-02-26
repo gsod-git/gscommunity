@@ -1,0 +1,142 @@
+ {% extends "templates/baseweb.html" %}
+{% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">{{title}}</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block"> {{title}}  </h4>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+     
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section-content1 parallax">
+    <div class="container-fluid event-schedule-area-two">
+ <div class="row" style="margin-bottom: 20px;">  
+       <div class="col-md-6" > 
+        <label style="width: 100%"> First Name </label>
+        <input type="text" name="firstname"   
+      id="firstname" style="width: 100%" required> 
+       </div>
+        
+       <div  class="col-md-6" >  <label style="width: 100%"> Last Name </label>
+       <input type="text" name="lastname"  
+      id="lastname" style="width: 100%"> </div>
+       </div>
+
+<div class="row" style="margin-bottom: 20px;">  
+     
+        
+       <div  class="col-md-6" >  <label style="width: 100%"> Email</label>
+       <input type="email" name="email" 
+      id="email" style="width: 100%"> </div>
+
+        <div class="col-md-6" > 
+        <label style="width: 100%">Phone </label>
+        <input type="number" name="phone"    
+      id="phone" style="width: 100%" required> 
+       </div>
+
+
+       </div>
+
+<div class="row" style="margin-bottom: 20px;">  
+     
+        
+       <div  class="col-md-6" > 
+        <label style="width: 100%"> Subscripe For</label>
+        <select name="type" id="type" style="width: 100%">  
+        <option value="ALL" selected>ALL </option>
+        <option value="Newsletter"> Newsletter </option> 
+        </select>
+    
+
+       </div>
+     <div  class="col-md-6" > 
+          <button   style="margin-top: 15px;"
+
+       class="btn btn-primary  tittlebtn" onclick="myFunction()">Subscribe</button>
+    
+
+       </div>
+
+     </div>
+   </div>
+ </section>
+
+
+
+
+
+
+ <script type="text/javascript">
+   function myFunction() {
+    var inpObj = document.getElementById("email");
+    if (!inpObj.checkValidity()) 
+    {
+        // document.getElementById("demo").innerHTML = inpObj.validationMessage;
+    } 
+    else 
+    {
+       SubmitNewsletter();
+    } 
+} 
+
+
+
+function SubmitNewsletter() {
+     
+  var Email = $("#email").val();  
+  var FirstName = $("#firstname").val(); 
+  var LastName = $("#lastname").val(); 
+  var Phone = $("#phone").val(); 
+
+  frappe.call({
+  method: "frappe.auth.Newsletter",
+  args: 
+  {
+    "email":Email
+  },
+     callback: function(r)
+     {   
+     if(r.message)
+     { 
+     frappe.msgprint("Thanks For Subscribe");
+   frappe.call({
+   method: "gscommunity.gscommunity.api.validate_currentmemberinfo",
+   args: 
+   {
+    "email":Email
+   },
+     callback: function(r)
+     {   
+      console.log(r);
+    }
+    
+  });
+          
+     } 
+    }
+    
+  });
+} 
+ 
+ </script>
+     {% endblock %}

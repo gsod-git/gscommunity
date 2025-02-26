@@ -1,0 +1,358 @@
+{% extends "templates/baseweb.html" %} {% block page_content %}
+
+    <div class="bg-grey breadcrumb-top1">
+
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+               <ol class="breadcrumb">
+                        <li><a href="/"><i class="icon fa fa-home"></i></a>
+                        </li>
+                        <li><a href="/">{{survey.events}}</a>
+                        </li>
+                        <li class="active">Survey</li>
+                    </ol>
+                <div class="row">
+                      <div class="col-md-12" style="margin: 15px;">
+                        <h4 class="ui-title-block">Event Survey</h4>
+                      </div>
+                 </div>
+            </div>
+             <div class="col-md-8">
+                <a href="#">
+    <img src="/assets/gscommunity/assets/media/top-1.jpg" class="d-inline-block align-top" alt="" style="width: 100%"></a>      
+             </div>
+        </div>
+    </div>
+ 
+    </div>
+
+
+<div>
+
+    <div class="container" style="min-height: 350px;">
+        <form>
+            <input type="hidden" id="event" name="event" value="{{survey.events}}">
+            <input type="hidden" id="survey" name="survey" value="{{survey.name}}">
+            <input type="hidden" id="event_route" name="event_route" value="{{event_route.route}}">
+            <h4>Event Survey - {{survey.events}}</h4> 
+            {% if survey.survey_description %}
+                	<p id="desc">
+                		{{survey.survey_description}}
+                	</p>
+                {% endif %}
+            {% if questions %} {% for item in questions %}
+            <div class="questions" id="{{item.name}}">
+                <input type="hidden" id="question-type" name="question-type" value="{{item.question_type}}">             
+                
+                <p><i class="fa fa-circle"></i>{{item.question}}</p>
+                {% if item.question_type=='Single Option' %}
+                <ul>
+                    {% for option in item.options %}
+                    <li>
+                        <input type="radio" name="response-{{item.name}}" value="{{option.options}}"> {{option.options}}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% elif item.question_type=='Statement' %}
+                <textarea class="form-control" name="response-{{item.name}}"></textarea>
+                {% endif %}
+            </div>
+            {% endfor %} {% endif %}
+            <div class="s_button">
+                <input type="button" id="saveresponse" class="btn btn-primary" value="Submit" />
+            </div>
+        </form>
+        <div class="response_submitted">
+        	<p>Survey response already submitted for this event</p>
+        	<a href="/{{event_route.route}}" class="btn btn-primary">Back to event</a>
+        </div>
+    </div>
+</div>
+<div id="userInfoModal" class="modal fade" role="dialog" data-backdrop="false">
+    <div class="modal-dialog" style="z-index: 1050">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Personal Info</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Your Name <span class="mandatory">*</span></label>
+                            <input type="text" name="UserName" id="UserName" placeholder="Enter your name" class="form-control" />
+                            <span class="error uname-err">Please enter your name.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Your Email <span class="mandatory">*</span></label>
+                            <input type="email" name="UserEmail" id="UserEmail" placeholder="Enter your email" class="form-control" />
+                            <span class="error email-err">Please enter your email.</span>
+                            <span class="error email-fmt-err">Please enter valid email.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Your Mobile Number <span class="mandatory">*</span></label>
+                            <input type="text" name="UserPhone" id="UserPhone" placeholder="Enter your mobile number" class="form-control" />
+                            <span class="error phone-err">Please enter your mobile number.</span>
+                            <span class="error phone-len-err">Please enter 10 digit number.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" onclick="getUserInfo()" class="btn btn-primary" style="float: right;">Submit</button>
+                    </div>
+                </div>
+            </div>                     
+        </div>
+    </div>
+</div>
+<div id="overlay"></div>
+<style>
+.form-body {
+    margin-top: 196px;
+    min-height: 355px;
+}
+
+.questions .fa {
+    font-size: 10px;
+    margin: 15px;
+}
+
+.questions ul {
+    list-style: none;
+}
+
+.questions ul li {
+    padding: 10px;
+}
+
+.questions textarea {
+    margin: 10px 40px;
+}
+form h4{
+	margin-top: 20px;
+    margin-bottom: 15px;
+}
+form #desc{
+	margin-bottom: 15px;
+}
+form .s_button{
+	margin: 35px;
+}
+.response_submitted{
+	display: none;
+	margin: 20px;
+}
+.response_submitted a{
+	margin: 10px 0;
+}
+.error{
+    color: red;
+    display: none;
+}
+#userInfoModal .form-control{
+    margin-bottom: 0px;
+}
+#overlay{
+    background: #0000008a;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+</style>
+{% endblock %}
+{% block script %}
+<script>
+$(document).ready(function() {
+	checkuser();
+    $('#UserPhone').keydown(function(e) {
+        Keydown(e)
+    });
+    $('#UserPhone').change(function(e) {
+        var phone=$('#UserPhone').val();
+        $('.phone-len-err').hide();
+        if(phone.length!=10){
+            $('.phone-len-err').show();
+            $('#UserPhone').val('')
+        }
+    });
+    $('#UserEmail').change(function(){        
+        var e_mail=$('#UserEmail').val();
+        $('.email-fmt-err').hide();
+        if(e_mail!=''){                       
+            if(!validate_email(e_mail)){
+                $('.email-fmt-err').show();
+                $('#UserEmail').val('');
+            }
+        }            
+    })
+    $('#saveresponse').click(function() {
+        var responses = {}
+        responses.user = getCookie('user_id');
+        responses.event = $('#event').val();
+        responses.survey=$('#survey').val();
+        var survey_response = []
+        $('form div').each(function() {
+            var id = $(this).attr('id')
+            if (id != undefined) {
+                var result = {};
+                result.question = id;
+                var question_type = $(this).find('#question-type').val()
+                if (question_type == 'Single Option') {
+                    if ($(this).find('input[name=response-' + id + ']:checked').val() == undefined)
+                        result.response = "";
+                    else
+                        result.response = $(this).find('input[name=response-' + id + ']:checked').val()
+                } else {
+                    result.response = $(this).find('textarea[name=response-' + id + ']').val()
+                }
+                if (result.response != "") {
+                    survey_response.push(result)
+                }
+            }
+        });
+        responses.result = survey_response;      
+        if (survey_response.length > 0) {
+            frappe.call({
+                method: 'gscommunity.gscommunity.doctype.event_survey.event_survey.insert_response',
+                args: {
+                    user: responses.user,
+                    data: responses.event,
+                    survey: responses.survey,
+                    username: username,
+                    email: email,
+                    mobile: mobile
+                },
+                callback: function(data) {
+                    var length=survey_response.length;
+                    for(var i=0;i<survey_response.length;i++){
+                    	insertResponse(data.message.name, data.message.doctype, survey_response[i].question, survey_response[i].response)
+                    	if(i==length-1){
+                    		submitDoc(data.message.name)
+                    	}
+                    }
+                    
+                }
+            })
+        }else{
+        	alert('No questions have been answered')
+        }
+
+    })
+})
+
+function submitDoc(name) {
+    frappe.call({
+        method: 'gscommunity.gscommunity.doctype.event_survey.event_survey.submit_doc',
+        args: {
+        	name:name
+        },
+        callback: function(data) {
+            frappe.msgprint("Your response have been recorded. Thank you for your response.", 'Success Message')
+            setTimeout(function(){ 
+            	window.location.href='/'+$('#event_route').val()
+            }, 3000);            
+        }
+    })
+}
+
+function insertResponse(parent, parenttype, question, response) {
+    frappe.call({
+        method: 'gscommunity.gscommunity.doctype.event_survey.event_survey.insert_response_detail',
+        args: {
+            parent: parent,
+            parenttype: parenttype,
+            question: question,
+            response: response,
+            survey:$('#survey').val()
+        },
+        callback: function(data) {
+            // console.log(r.message)
+        }
+    })
+}
+
+function checkuser(){
+	var user=getCookie('user_id');
+    if(user != 'Guest'){
+        $('#overlay').hide();
+        frappe.call({
+            method:'gscommunity.gscommunity.doctype.event_survey.event_survey.check_user',
+            args:{
+                user:user,
+                survey:$('#survey').val()
+            },
+            callback:function(data){
+                if(data.message.response==1){
+                    $('form').hide();
+                    $('.response_submitted').show();
+                }
+            }
+        })
+    } else{
+        $('#userInfoModal').modal('show');
+    }
+}
+let username, email, mobile;
+function getUserInfo() {    
+    username = $('#UserName').val();
+    email = $('#UserEmail').val();
+    mobile = $('#UserPhone').val();
+    var allow = true;
+    if(username == ''){
+        $('.uname-err').show();
+        allow = false;
+    }
+    else{
+        $('.uname-err').hide();
+    }
+    if(email == ''){
+        $('.email-err').show();
+        allow = false;
+    } else{
+        $('.email-err').hide();
+    }
+    if(mobile == ''){
+        $('.phone-err').show();
+    } else{
+        $('.phone-err').hide();
+    }
+    if(allow){
+        frappe.call({
+            method:'gscommunity.gscommunity.doctype.event_survey.event_survey.check_user',
+            args:{
+                user: getCookie('user_id'),
+                survey:$('#survey').val(),
+                email: email
+            },
+            callback:function(data){
+                if(data.message.response == 1){
+                    $('form').hide();
+                    $('.response_submitted').show();
+                }
+                $('#userInfoModal').modal('hide');
+                $('#overlay').hide();
+            }
+        })
+    }
+}
+function Keydown(e) {
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+        // Allow: Ctrl+A, Command+A
+        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+        // Allow: home, end, left, right, down, up
+        (e.keyCode >= 35 && e.keyCode <= 40)) {
+        // let it happen, don't do anything
+        return;
+    }
+    // Ensure that it is a number and stop the keypress
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+    }
+}
+</script>
+{% endblock %}

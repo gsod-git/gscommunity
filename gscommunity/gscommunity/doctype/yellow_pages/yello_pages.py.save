@@ -1,0 +1,40 @@
+# -*- coding: utf-8 -*-
+# Copyright (c) 2018, valiantsystems and contributors
+# For license information, please see license.txt
+
+from __future__ import unicode_literals
+import frappe
+from frappe.website.website_generator import WebsiteGenerator
+from frappe.utils import today, cint, global_date_format, get_fullname, strip_html_tags, markdown, nowdate, getdate
+
+class YellowPages(WebsiteGenerator):
+        def autoname(self):
+
+              
+	def get_context(self,context):    
+
+			YellowpagesList=frappe.db.get_all('Yellow Pages',fields=['business_name','route','business_type','category','subcategory','owner_name','email','address','phone','image','description'],filters={'name':self.name})
+			context.YellowpagesList=YellowpagesList	 
+			RightWidget=get_widgets('Sponsors','Right Panel','List View') 
+			context.RightWidget = RightWidget 
+			context.title=self.name
+
+
+
+def get_widgets(category,position,view): 
+	Widget=frappe.db.get_all('Widget Placeholder', fields=['title','category','view','name','position'],filters={'view':view,'category':category,'position':position})
+	for item in Widget:
+		Widgets=frappe.db.get_all('Widget Config', fields=['widget_name','widget_type','html_content','max_data','link_data','sort_order'],order_by='sort_order',filters={'parent':item.name})
+		for data in Widgets:
+			Content=[];			
+			if data.widget_type=='Dynamic':				
+				if data.link_data=='Sponsors':
+					RelatedData=frappe.db.get_all(data.link_data,fields=['sponsor_name','company_name','logo'],order_by='name desc',limit_page_length=data.max_data)
+					Content.append(RelatedData) 
+
+				else:
+					RelatedData=frappe.db.get_all(data.link_data,fields=['title','route'])
+					Content.append(RelatedData)
+			data.Content=Content	 
+		item.Widgets=Widgets
+	return Widget

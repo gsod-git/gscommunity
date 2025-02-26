@@ -1,0 +1,244 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div>
+    <div class="bg-grey breadcrumb-top1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/"><i class="icon fa fa-home"></i></a>
+                        </li>
+                        <li class="active">Yellow Pages</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sp-image-container" style="    width: 100%;
+    height: 600px;"><img class="sp-image" src="/assets/gscommunity/assets/media/ypbg.jpg" alt="slider" data-default="/assets/gscommunity/assets/media/ypbg.jpg" style="width:100%;height: 100%">
+    </div>
+    <div class="container" style="margin-top: 75px;">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="text-center">
+                    <h2 class="ui-title-block text-white" style="color:white !important">Find Your  Business Destination</h2>
+                    <div class="ui-decor2" style="background-color: #fff;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form class="b-filter">
+        <div class="bg-grey">
+            <div class="container">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-2 col-sm-2"> </div>
+                    <div class="col-md-6 col-sm-6">
+                        <input type="text" class="form-control ui-autocomplete-input" name="searchyellowpage" id="yellowpages_search" placeholder="Enter the search keywords" autocomplete="off" />
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12 srcbtn">
+                        <div>
+                            <button type="button" class="btn btn-lg btn-primary" id="search_item">search </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <section class="section-content1 parallax" style="padding-top:200px;padding-bottom: 40px;    background: #fafbfc !important;">
+        <div class="container-fluid event-schedule-area-two">
+            <div class="row">
+                <div class="container-fluid titlebottom">
+                    <div class="col-md-9">
+                        <div class="col-md-12 mb-10 bg-head" style="padding-left: 0;padding-right: 0;">
+                            <div class="df">
+                                <div class="col-md-9">
+                                    <h4 class="ui-title-block">Featured <span> Business</span></h4></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                <div class="col-md-9 col-xs-12" style="margin-bottom: 20px;">
+                    <main class="">
+                        <div class="goods-group-2 list-goods ">
+                            {% if SponsorshipTypeList %} {% for spt in SponsorshipTypeList %}{% if spt.SponsorsBusinessList %} {% for spb in spt.SponsorsBusinessList %} {% if spb.YellowpagesList %}{% for yp in spb.YellowpagesList %}
+                            <div class="box col-md-4 col-sm-6 ypbox">
+                                <div class="row">
+                                    <div class="col-md-12 col-xs-12">
+                                        <img src="{% if spt.ribbon_image %}{{spt.ribbon_image}}{% endif %}" class="ypribbon">
+                                        <div class="col-md-4 col-xs-4">
+                                            <a class="js-zoom-images" href="{% if yp.image %}{{yp.image}}{% else %}/assets/frappe/images/background.png{% endif %}">
+                                            <img src="{% if yp.image %}{{yp.image}}{% else %}/assets/frappe/images/background.png{% endif %}" alt="gujarati samaj" style="width: 100%;" />
+                                            </a>
+                                        </div>
+                                        <div class="col-md-8 col-xs-8" style="height: 125px;">
+                                            <h4 class="media-heading"> 
+                                                <a href="{{yp.route}}" style="cursor: default;">{{yp.business_name}}</a>
+                                            </h4> {% if yp.phone %}
+                                            <span style="float: left;width: 100%;font-size: 12px;"> 
+                                                <i class=" icon fa fa-phone" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> {{yp.phone}} 
+                                            </span >
+                                            {% endif %}
+                                            {% if yp.email %} 
+                                            <span style="float: left;width: 100%;font-size: 12px;"> 
+                                                <i class="icon fa fa-envelope" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> 
+                                                {{yp.email}} 
+                                            </span >
+                                            {% endif %}
+                                            {% if yp.address %} 
+                                            <span style="float: left;width: 100%;font-size: 12px;"> 
+                                                <i class="icon fa fa-map-marker" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> 
+                                                    {{yp.address}}, {% if yp.address_line_2 %}{{yp.address_line_2}}{% endif %}{% if yp.city %}{{yp.city}}{% endif %} {% if yp.state %} {{yp.state}}{% endif %}{% if yp.zip_code %} {{yp.zip_code}}{% endif %}
+                                                </span >
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            {% endfor %}
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}  
+                            <div style="min-height: 210px;padding: 15px;"> 
+                                <h3> No Records Found </h3> 
+                            </div>
+                            {% endif %}
+                        </div>
+                    </main>
+                    <main class="">
+                        <div class="goods-group-2 list-goods ">
+                            {% if YellowpagesList  %} 
+                            {% for yp in YellowpagesList %}
+                              
+                            <div class="box col-md-4 col-sm-6 ypbox">
+                                <div class="row">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="col-md-4 col-xs-4"> 
+                                            <a class="js-zoom-images" href="{% if yp.image %}{{yp.image}}{% else %}/assets/frappe/images/background.png{% endif %}">
+                                            <img src="{% if yp.image %}{{yp.image}}{% else %}/assets/frappe/images/background.png{% endif %}" alt="gujarati samaj" style="width: 100%;" />
+                                            </a>
+                                        </div>  
+                                        <div class="col-md-8 col-xs-8" style="height: 125px;">
+                                            <h4 class="media-heading"> 
+                                                <a href="{{yp.route}}"> {{yp.business_name}}</a>
+                                            </h4>
+                                            {% if yp.phone %} 
+                                            <span style="float: left;width: 100%;font-size: 12px;"> 
+                                                <i class=" icon fa fa-phone" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> {{yp.phone}} 
+                                            </span >
+                                            {% endif %}
+                                            {% if yp.email %} 
+                                            <span style="float: left;width: 100%;font-size: 12px;"> 
+                                                <i class="icon fa fa-envelope" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> 
+                                                {{yp.email}}    
+                                            </span >
+                                            {% endif %}
+                                            {% if yp.address %}
+                                            <span style="float: left;width: 100%;font-size: 12px;"> 
+                                                <i class="icon fa fa-map-marker" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> 
+                                                {{yp.address}}, {% if yp.address_line_2 %}{{yp.address_line_2}}{% endif %}{% if yp.city %}{{yp.city}}{% endif %} {% if yp.state %} {{yp.state}}{% endif %}{% if yp.zip_code %} {{yp.zip_code}}{% endif %}
+                                            </span >
+                                            {% endif %}
+                                        </div>   
+                                    </div>     
+                                </div> 
+                            </div> 
+                            {% endfor %}                            
+                            {% endif %}
+                        </div>
+                    </main>
+                    <!-- end .l-main-content-->
+                </div>
+                <div class="col-md-3 col-xs-12">
+            {% include 'templates/includes/Advertisement/Advertisement.html' %} 
+            </div></div>
+            </div> <!-- row -->
+        </div>
+    </section> 
+<style type="text/css">
+ 
+.ui-menu{
+    list-style: none;
+    background: #fff;
+    width: 41.2%;
+    width: 555px;
+}
+.ui-menu .ui-menu-item{
+    padding: 10px;
+    margin-left: -40px;
+}
+..ui-menu .ui-menu-item:hover, ..ui-menu .ui-menu-item:active, ..ui-menu .ui-menu-item:focus{
+    background: #96757d;
+    color: #fff;    
+}
+</style>   
+{% endblock %}  
+
+{% block script %}
+<!-- <script type="text/javascript"
+    src="/templates/includes/yellowpages.js"></script> -->
+<script>
+    {% include "templates/includes/yellowpages.js" %}
+</script>
+<script type="text/javascript">
+var pageNumber = 1;
+var scroll = 1;
+$(window).scroll(function() {
+    // console.log(pageNumber);
+    //  console.log(scroll);
+    // if (scroll == 1) {
+    //     if ($(window).scrollTop() >= $(document).height() - $(window).height() - 200) {
+    //         scroll = 0;
+    //         frappe.call({
+    //             method: "gscommunity.gscommunity.doctype.yellow_pages.yellow_pages.get_yellowpagelist_scrolling_data",
+    //             args: { "pageNumber": pageNumber },
+    //             callback: function(Responseresult) {
+    //                 var result = '';
+    //                 console.log(Responseresult);
+
+    //                 if (Responseresult.message.length != 0) {
+    //                     for (var i = 0; i < Responseresult.message.length; i++) {
+    //                         result += '<div class="box col-md-5"  style="cursor: pointer;margin: 1%;width: 48% !important">';
+    //                         result += '<div class="col-md-4">';
+    //                         result += '<a class="js-zoom-images" href="';
+    //                         result += Responseresult.message[i].image
+    //                         result += '">';
+    //                         result += '<img src="';
+    //                         result += Responseresult.message[i].image;
+    //                         result += '"alt="gujarati samaj"  style="width: 100%;">';
+    //                         result += '</a></div>';
+    //                         result += '<div class="col-md-8" style="height: 160px;">';
+    //                         result += '<h4 class="media-heading">';
+    //                         result += '<a href="';
+    //                         result += Responseresult.message[i].route
+    //                         result += '">';
+    //                         result += Responseresult.message[i].business_name;
+    //                         result += '</a>';
+    //                         result += '</h4>';
+    //                         result += '<span style="float: left;width: 100%"><i class=" icon fa fa-phone" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i>';
+    //                         result += Responseresult.message[i].phone;
+    //                         result += ' </span ><span style="float: left;width: 100%"><i class="icon fa fa-envelope" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i>';
+    //                         result += Responseresult.message[i].email;
+    //                         result += '</span ><span style="float: left;width: 100%"><i class="icon fa fa-map-marker" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> ';
+    //                         result += Responseresult.message[i].address;
+    //                         result += '</span ></div> </div>';
+    //                         if (Responseresult.message.length > 0) {
+    //                             $(".list-goods").append(result);
+    //                         }
+    //                         if (Responseresult.message.length >= 15) {
+    //                             alert("No records");
+    //                             scroll = 1;
+    //                         }
+    //                     }
+    //                 } else {
+    //                     alert("dsdsdasdsa");
+
+    //                 }
+    //             }
+    //         });
+    //     }
+    // }
+});
+</script>
+   {% endblock %}

@@ -1,0 +1,116 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li><a href="/samajdarshan">Samaj Darshan</a></li>
+                    <li class="active">Samaj Darshan Archives</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">Samaj Darshan Archives</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                 {% include 'templates/includes/Advertisement/Topadvertisement.html' %}  
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax ">
+    <div class="container-fluid event-schedule-area-two">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="col-md-12 mb-10 bg-head" style="padding-left: 0;padding-right: 0;display: none;">
+                        <div class="df">
+                            <div class="col-md-9">
+                                <h4 class="ui-title-block">Samaj Darshan <span> - Archives</span></h4></div>
+                            <div class="col-md-3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="samaj">
+                        {% if darshan %}
+                        {% for data in darshan %}
+                       
+                            <div class="col-md-2 col-sm-2 col-xs-6" style="margin-top: 15px">
+                                <div style="text-align: center">
+                                <p class="silver1" style="font-size: 18px;font-weight: 500;text-align: center;color: #fff">Samaj Darshan {{data.year}}</p>
+                                <div style="min-height: 220px;background: #e3d9dc;padding-top: 10px;">
+                                {% if data.list %}                                
+                                {% for item in data.list %}
+                                    <a href="{% if item.pdf %}{{item.pdf}}{% else %}#{% endif %}" target="_blank">{{item.month}}</a><br>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            </div>
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin: 15px;">
+                        <p style="text-align: center;">Please Note:<br>
+                        <span style="text-align: center;margin-top: 15px;">You may have to download/install 'Vakil', 'Gopika', 'Shruti' fonts to read some Gujarati text within Samaj Darshan.</span></p>
+                        <p style="text-align: center;"><a href="/assets/gscommunity/assets/fonts/Vakil01.ttf">Download Vakil Font</a></p>
+                        <p style="text-align: center;"><a href="/assets/gscommunity/assets/fonts/Gopika.ttf">Download Gopika Font</a></p>
+                        <p style="text-align: center;"><span style="text-decoration: underline;font-weight: 500">Installing Gujarati Fonts</span><br>
+                            Download above Fonts by Clicking it Open Control panel, click 'Fonts' And then from file menu 'Install font'</p>
+                        <p style="text-align: center">
+                            <a href="http://www.adobe.com/products/acrobat/readstep.html">
+                                <img src="/assets/frappe/images/GetAcrobatReader.gif">
+                            </a><br>
+                            <span style="font-size: 12px">
+                                In order to view the e-SamajDarshans, you will need to have Adobe Acrobat Reader installed on your PC. Adobe Acrobat Reader is a<br> <a href="http://www.adobe.com/products/acrobat/readstep.html" style="font-size: 13px;">free download available here</a>
+                            </span>
+                        </p>
+                    </div>                  
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} {% block style %}
+<style type="text/css">
+.table-bordered {
+    border: 1px solid transparent !important;
+}
+
+table.dataTable tbody tr {
+    background-color: #ffffff !important;
+}
+
+table.dataTable tbody td {
+    text-align: left !important;
+}
+#samaj .silver1{
+    padding: 11px;
+}
+.dataTables_filter {
+    position: absolute;
+    display: block !important;
+    right: 0;
+    top: -50px;
+    padding-right: 10px;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+    padding: 3px 18px;
+}
+.archives{
+    padding: 15px;
+    margin: 15px 2px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+</style>
+{% endblock %}}

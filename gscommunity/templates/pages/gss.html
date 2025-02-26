@@ -1,0 +1,167 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active"> {{title}} </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block"> GSS  Events  </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+               {% include 'templates/includes/Advertisement/Topadvertisement.html' %}  
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax">
+    <div class="container-fluid event-schedule-area-two">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-9" style="margin-bottom: 20px;">
+                    <div class="col-md-12">
+                        <div class="col-md-12 mb-10 bg-head" style="padding-left: 0;padding-right: 0;    ">
+                            <div class="df">
+                                <div class="col-md-9">
+                                    <h4 class="ui-title-block">GSS<span> Events</span></h4></div>
+                                <div class="col-md-3">
+                                    <div class="head-btn">
+                                        <a href="volunteer-registration?new=1" class="btn btn-primary btn-form-submit float-right" style="float: right;margin-top: 5px;height: 36px;padding: 0 10px;font: 600 12px/32px Poppins;">Become A Volunteer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                        <table id="example1" class=" table-responsive  table-striped table-bordered" style="width:100%">
+                            <thead class="table">
+                                <tr>
+                                    <th scope="col">Sr.#</th>
+                                    <th scope="col">Event</th>
+                                    <th scope="col" class="wi-25">Event Name</th>
+                                    <th scope="col">Day</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Venue(Location)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if GSSEventsList %} {% for event in GSSEventsList %}
+                                <tr class="inner-box">
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{loop.index}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="event-img">
+                                            <a class="js-zoom-images" href="{{event.banner_image}}">   <img src="{{event.banner_image}}" alt="" class="event-img"> </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="event-wrap">
+                                            <h5><a href="{{event.route}}">{{event.name}}</a></h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span> {{event.days}} </span>
+                                    </td>
+                                    <th scope="row">
+                                        <div class="event-date">
+                                            <p>{{event.dates}}, {{event.months}}</p>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="primary-btn r-no" style="cursor: pointer;" onclick="LoadMap('{% if event.venue_type=='Event Hall'%}{% if event.event_venue %}{{event.event_venue}},{% endif %}{% endif %} {{event.location}},{% if event.address_line_2 %} {{event.address_line_2}},{% endif %} {{event.city}}, {{event.state}} - {{event.zip_code}}')">
+                                        {% if event.venue_type %}
+                                        <span>{{event.venue_type}}</span><br> 
+                                        {% endif %} 
+                                        {% if event.venue_type=='Event Hall' %}
+                                        {% if event.event_venue %}
+                                        <span>{{event.event_venue}}</span> 
+                                        {% endif %}
+                                        {% endif %} 
+                                        {% if event.location %}
+                                        <span>{{event.location}} </span><br> 
+                                        {% endif %}
+                                        {% if event.address_line_2 %}
+                                        <span>{{event.address_line_2}} </span><br> 
+                                        {% endif %}
+                                        <span>
+                                            {% if event.city %}{{event.city}}{% endif %}
+                                            {% if event.state %} , {{event.state}}{% endif %}
+                                            {% if event.zip_code %} - {{event.zip_code}}{% endif %}
+                                        </span>                                        
+                                    </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}{% endif %}
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="padding-top: 20px;">
+                        <div class="col-md-12 mb-10 bg-head" style="padding-left: 0;padding-right: 0;    ">
+                            <div class="df">
+                                <div class="col-md-9">
+                                    <h4 class="ui-title-block">GSS <span> Articles
+                                </span> </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="example002" class=" table-responsive  table-striped table-bordered" style="width:100%">
+                            <thead class="table">
+                                <tr>
+                                    <th scope="col" style="width: 10%;">Sr.#</th>
+                                    <th scope="col" style="width: 90%;"> GSS Articles </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if PagesList %} {% for art in PagesList %}
+                                <tr class="inner-box" style="width: 10%;">
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{loop.index}}</span>
+                                        </div>
+                                    </td>
+                                    <td style="width: 90%;">
+                                        <div class="event-wrap">
+                                            <h5><a href="{{art.route}}">{{art.name1}}</a></h5>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}{% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12 ">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} {% block style %}
+<style type="text/css">
+.table-bordered {
+    border: 1px solid transparent !important;
+}
+
+
+
+ .table-responsive {
+    overflow-x: initial !important;
+    min-height: 0.01%;
+}
+
+</style>
+{% endblock %}

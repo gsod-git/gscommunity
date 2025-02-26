@@ -1,0 +1,54 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">Gallery</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax">
+    <div class="container-fluid">
+        <div class="row">
+            {% if AlbumGroup %} {% for ag in AlbumGroup %}
+            <div class="col-xs-12 col-md-3">
+                <section class="b-team-002">
+                    <div class="b-team-2__media">
+                        {% if ag.image ==None %}
+                        <img src="/assets/frappe/images/background.png" class="img-responsive" href="{{ag.route}}"> {% endif %} {% if ag.image !=None %}
+                        <img class="img-responsive" src="{{ag.image}}" alt="Foto" href="{{ag.route}}" /> {% endif %}
+                        <div class="b-team-2__inner helper">
+                            <div class="b-team-2__contacts helper__inner">
+                                <a class="b-team-2__contact" href="{{ag.route}}"><i class="icon fa loaction"></i>{{ag.name1}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="b-team-002__name" style="font-size: 16px;text-align: center;"> <a  href="{{ag.route}}"> {{ag.name1}} </a></h3>
+                </section>
+            </div>
+            {% endfor %} {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %} {% block style %}
+<style type="text/css">
+.b-team-002 {
+    text-align: center;
+    background: #ece5e7;
+    padding-bottom: 7px;
+}
+
+.b-team-002__name {
+    margin-top: 10px;
+    font-size: 16px;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+    color: #e50041;
+}
+</style>
+{% endblock %}

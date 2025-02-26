@@ -1,0 +1,26 @@
+{
+ "add_total_row": 0, 
+ "apply_user_permissions": 1, 
+ "creation": "2018-07-25 08:12:35.755330", 
+ "disabled": 0, 
+ "docstatus": 0, 
+ "doctype": "Report", 
+ "idx": 0, 
+ "is_standard": "Yes", 
+ "modified": "2018-07-25 08:12:35.755330", 
+ "modified_by": "Administrator", 
+ "module": "Gscommunity", 
+ "name": "Choreographer Event Report", 
+ "owner": "Administrator", 
+ "ref_doctype": "Events", 
+ "report_name": "Choreographer Event Report", 
+ "report_type": "Script Report", 
+ "roles": [
+  {
+   "role": "Admin"
+  }, 
+  {
+   "role": "System Manager"
+  }
+ ]
+}

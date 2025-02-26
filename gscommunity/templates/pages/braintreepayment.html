@@ -1,0 +1,130 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div style="min-height:500px;" class="wrapper">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form id="checkout" method="post">
+                <input type="hidden" value="gscommunity.templates.pages.braintreepayment.ProccedPayment" name="cmd" />
+                <input type="hidden" name="amount" value="150">
+                <input type="hidden" name="recurring_payment" value="">
+                <input type="hidden" name="customer" value="">
+                <input type="hidden" name="customer_email" value="">
+                <input type="hidden" name="customer_fname" value="">
+                <input type="hidden" name="customer_lname" value="">
+                <input type="hidden" name="plan_id" value="">
+                <input type="hidden" name="order_id" value="">
+                <input type="hidden" name="doctype" value="">
+                <input type="hidden" name="membership_type" value="">
+                <div id="payment-form"></div>
+                <div style="text-align: center;margin-top: 10px;">
+                  <input type="submit" class="btn btn-primary" value="Pay $10">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+<style type="text/css">
+.wrapper {
+    margin-top: 160px;
+}
+
+#braintree-paypal-button {
+    display: none !important;
+}
+button.paypal.is-active{
+  background: #fff !important;
+}
+button.paypal.is-active:hover{
+  background: #fff !important;
+}
+</style>
+<script src="/assets/gscommunity/assets/libs/jquery-1.12.4.min.js"></script>
+<script src="https://js.braintreegateway.com/js/braintree-2.32.1.min.js"></script>
+<script>
+$(document).ready(function() {
+    window.history.pushState(null, "", window.location.href);
+    frappe.call({
+        method: "gscommunity.templates.pages.braintreepayment.generate_client_token",
+        callback: function(Responseresult) {
+            braintree.setup(Responseresult.message,
+                "dropin", {
+                    container: "payment-form",
+                    amount:"500"
+            });
+            $('#braintree-paypal-button').hide()
+        }
+    });
+
+
+var doctype=localStorage.getItem('doctype');
+var docname=localStorage.getItem('docname');
+var membership_type=localStorage.getItem('existing_type');
+$('input[name=order_id]').val(docname)
+$('input[name=doctype]').val(doctype)
+$('input[name=membership_type]').val(membership_type)
+if(doctype=='Membership'){
+    var initial_amount=localStorage.getItem('initial_amount');
+    var final_amount=localStorage.getItem('donationamount');
+    var amount=0;
+    if(initial_amount!=null&&initial_amount!=undefined&&initial_amount!=''){
+        if(parseFloat(initial_amount)==parseFloat(final_amount))
+            amount=parseFloat(final_amount)
+        else
+            amount=parseFloat(final_amount)-parseFloat(initial_amount)
+    }else
+        amount=parseFloat(final_amount)
+        
+    $('input[name=amount]').val(amount)
+    $('input[type=submit]').val('Pay $'+amount)
+}else{
+    var amount=localStorage.getItem('donationamount')
+    $('input[name=amount]').val(amount)
+    $('input[type=submit]').val('Pay $'+amount)
+}
+var recurring_payment=localStorage.getItem('recurring_payment')
+$('input[name=recurring_payment]').val(recurring_payment)
+var email=localStorage.getItem('mem_email')
+var plan_id=localStorage.getItem('plan_id')
+$('input[name=plan_id]').val(plan_id)
+// var doctype=localStorage.getItem('doctype')
+get_user_details(email)
+})
+
+
+function get_user_details(email){
+    frappe.call({
+        method:'gscommunity.gscommunity.web_form.sponsors_registration.sponsors_registration.get_user',
+        args: {
+            user: email
+        },
+        callback:function(data){
+            if(data.message){
+                $('input[name=customer]').val(data.message.braintree_customer_id)
+                $('input[name=customer_email]').val(email)
+                $('input[name=customer_fname]').val(data.message.first_name)
+                $('input[name=customer_lname]').val(data.message.last_name)
+            }
+        }
+    })
+}
+
+// function Submitpay() {
+//    frappe.call({
+//     method: 'gscommunity.templates.pages.braintreepayment.ProccedPayment',
+//     args: {
+//         amount:$('input[name=amount]').val()
+//     },
+//     callback: function(r) 
+//     {  
+//         console.log(r.message);
+        
+//              window.location.href = "/thankyou"; 
+        
+       
+//     }
+// });
+// }
+
+</script>
+{% endblock %}

@@ -1,0 +1,224 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+
+
+
+   <div class="container-fluid">
+             <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active"> {{title}} </li>
+                </ol>
+              
+            </div>
+              
+        </div>
+
+        <div class="row">
+            <div class="col-md-4"> 
+                <div class="row">
+                      <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block"> Events Calender  </h4>
+                      </div>
+                 </div>
+            </div>
+             <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}      
+             </div>
+        </div>
+    </div> 
+
+
+ 
+</div>
+ 
+
+ 
+
+ <section class="section-content1 parallax" style="padding: 30px 15px;">
+ <div class="container-fluid event-schedule-area-two"> 
+      <div class="row"> 
+        <div style="display: flex;margin: 15px;">
+            {% if color_code %}
+            {% for color in color_code %}
+            <div><span class="color_scheme" style="background: {{color.color}}"></span><p class="color_scheme_txt">{{color.event_name}}</p></div>
+            {% endfor %}
+            {% endif %}
+        </div>
+                <div class="col-md-9" style="padding-bottom: 20px;">
+ 
+ 
+ 
+    
+    <div id='calendar' style="position: relative;z-index: 0;"></div>
+    </div>
+
+    <div class="col-md-3 col-xs-12 "  style="padding-bottom: 20px;">
+       {% include 'templates/includes/Advertisement/Advertisement.html' %} 
+       </div>
+    </div>
+    </div>
+
+
+ 
+
+  <table id="EventsList" border="1" cellpadding="3">   
+     
+
+      <thead> 
+
+       
+      <tr style="    background: gray;
+    color: white;
+    font-weight: bold;">  
+      <td>  Event Date </td>
+        <td> Event Name  </td>
+         
+        <td> Event Category </td>
+
+       </tr>
+      
+      </thead>
+
+
+      <tbody> 
+
+          {% for e in PrintEventsList %} 
+
+         <tr>  
+         <td style="width: 20%;"> {{e.start_date}} </td>
+         <td style="width: 40%;"> {{e.name}} </td>
+         <td style="width: 40%;"> {{e.event_type}} </td>
+
+        </tr>
+          {% endfor %} 
+      
+      </tbody>
+    </table>
+ </section>
+ 
+ <style type="text/css">
+   #EventsList
+   {
+    display: none;
+   }
+ 
+ .fc-day-grid-event
+ {
+  padding: 8px;
+ }
+ .color_scheme{
+    width: 40px;
+    height: 20px;
+    position: absolute;
+    border-radius: 4px;
+ }
+ .color_scheme_txt{
+    margin-left: 50px;
+    margin-right: 20px;
+ }
+ </style>
+ 
+ 
+    {% endblock %} 
+
+    {% block script %}
+    <script>
+
+function printDiv(id) {
+   var divName= id; 
+   var divToPrint=document.getElementById(divName);
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();  
+ }
+
+
+$(document).ready(function() {
+
+
+ 
+
+ var list = {{EventsList}};
+
+   var tdate = new Date();
+   var dd = tdate.getDate(); //yields day
+   var MM = tdate.getMonth(); //yields month
+   var yyyy = tdate.getFullYear(); //yields year
+   var currentDate= yyyy + "-" +( MM+1) + "-" +dd ; 
+
+    $('#calendar').fullCalendar({
+
+    header: {
+      left: 'month,agendaWeek,agendaDay custom1',
+      center: 'title',
+      right: 'custom2 prevYear,prev,next,nextYear'
+    },
+    footer: {
+      left: 'custom1,custom2',
+      center: '',
+      right: 'prev,next'
+    },
+    customButtons: {
+      custom1: {
+        text: 'Print Events',
+        click: function() {
+          printDiv('EventsList');
+        }
+      }, 
+    },
+
+      defaultDate: currentDate,
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events : list
+      // events: [
+      //   {
+      //     title: 'All Day Event',
+      //     start: '2018-03-01'
+      //   },
+      //   {
+      //     title: 'Long Event',
+      //     start: '2018-03-07',
+      //     end: '2018-03-10'
+      //   },
+      //   {
+      //     id: 999,
+      //     title: 'Repeating Event',
+      //     start: '2018-03-09T16:00:00'
+      //   },
+      //   {
+      //     id: 999,
+      //     title: 'Repeating Event',
+      //     start: '2018-03-16T16:00:00'
+      //   },
+      //   {
+      //     title: 'Conference',
+      //     start: '2018-03-11',
+      //     end: '2018-03-13'
+      //   },
+      //   {
+      //     title: 'Meeting',
+      //     start: '2018-03-12T10:30:00',
+      //     end: '2018-03-12T12:30:00'
+      //   },
+      //   {
+      //     title: 'Lunch',
+      //     start: '2018-03-12T12:00:00'
+      //   },
+      //   {
+      //     title: 'Meeting',
+      //     start: '2018-03-12T14:30:00'
+      //   },
+        
+      // ]
+    });
+
+  });
+
+</script>
+
+   {% endblock %} 

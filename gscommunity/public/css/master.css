@@ -1,0 +1,72 @@
+/*------------------------------------------------------------------
+[Master Stylesheet]
+
+Project:  MotorLand
+Version:  1.0
+Assigned to:  WebNik
+Primary use:  MotorLand
+-------------------------------------------------------------------*/
+
+
+/* FONTS*/
+/* @import url('https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700|Poppins:100,200,300,400,500,600,700');
+@import '../fonts/font-awesome-4.7/css/font-awesome.min.css';
+@import '../fonts/stroke/style.css';
+@import '../fonts/elegant/style.css';
+@import '../fonts/flaticon/font/flaticon.css';
+
+@import url('https://fonts.googleapis.com/css?family=Caveat+Brush'); */
+
+
+
+/* PLUGIN CSS */
+
+@import '../assets/libs/bootstrap/bootstrap.css';                /* bootstrap */
+@import '../assets/plugins/bootstrap-select/css/bootstrap-select.css';   /* select customization */
+@import '../assets/plugins/headers/header.css';                /* header */
+@import '../assets/plugins/headers/yamm.css';                /* header */
+@import '../assets/plugins/slider-pro/slider-pro.css';         /* main slider */
+@import '../assets/plugins/owl-carousel/owl.carousel.css';                 /* other sliders */
+@import '../assets/plugins/noUiSlider/nouislider.css';                /* nouislider */
+@import '../assets/plugins/magnific-popup/magnific-popup.css';            /* modal */
+@import '../assets/plugins/animate/animate.css';                        /* animations */
+@import '../assets/plugins/datepicker/jquery.datetimepicker.css';        /* datepicker */
+@import '../assets/plugins/parallax/parallax.css';                        /* parallax */
+
+/*@import '../plugins/flowplayer/skin/playful.css';          /* video-player */
+
+
+/* MAIN CSS */
+
+/*@import 'theme.css';*/
+@import 'color.css';
+@import 'responsive.css';
+
+
+/*------------------------------------------------------------------
+[Master Stylesheet]
+
+Project:  MotorLand
+Version:  1.0
+Assigned to:  WebNik
+Primary use:  MotorLand
+-------------------------------------------------------------------*/
+
+
+/* FONTS*/
+@import url('https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700|Poppins:100,200,300,400,500,600,700');
+@import '../assets/fonts/font-awesome-4.7/css/font-awesome.min.css';
+@import '../assets/fonts/stroke/style.css';
+@import '../assets/fonts/elegant/style.css';
+@import '../assets/fonts/flaticon/font/flaticon.css';
+
+@import url('https://fonts.googleapis.com/css?family=Caveat+Brush');
+
+
+
+/* PLUGIN CSS */
+
+
+
+
+/* MAIN CSS */

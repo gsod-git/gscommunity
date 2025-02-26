@@ -1,0 +1,638 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<div class="container cont1" style="">
+    <div class="row" style="text-align: center;background-color:#a88992;color:#fff;margin-left: 0px;margin-right: 5px;">
+        <h3 style="color:#fff;margin-bottom: 12px;">GSOD Old Member Activation</h3>
+    </div>
+    <div class="col-md-8 col-sm-8 texta">
+        <div class="">
+            <form id="validateexistingmember" style="margin-top: 40px;">
+                <!-- Modal content-->
+                <div class="">
+                    <div style="text-align: center;">
+                        <h3>OLD GSOD Website Member Verification / Activation</h3>
+                        <span>Please enter your Existing member details to verify your membership.</span>
+                    </div>
+                    <div style="padding: 35px;margin-top: 5px;margin-left: 45px;">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8">
+                                <div class="form-group" style="text-align: left;">
+                                    <label for="phones_no">Phone No. / E-Mail Address / Membership ID</label>
+                                    <input type="text" class="form-control" id="phones_no" placeholder="Email address or Mobile number or Member id" required="">
+                                    <span id="mem_id" style="display:none;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2" style="margin-top: 28px;">
+                                <button type="submit" class="btn btn-primary">Check Status</button>
+                            </div>
+                        </div>
+                        <!--  <li>{{  frappe.get_doc('User', phone_no)}}</li> -->
+                    </div>
+                </div>
+            </form>
+            <div id="membergrid" style="margin-left:10px;margin-right: 10px;">
+                <!-- <h6 style="padding-bottom: 15px; font-size: 20px !important;"> Membership Information</h6> -->
+                <table class="table table-bordered" style="">
+                    <thead style="background-color: #e3d9dc;">
+                        <tr>
+                            <th>Phone No. / E-Mail Address / Membership ID</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span id="mem_name"></span></td>
+                            <td>
+                                <div id="activemember" style="display: none;">
+                                    <span class="activeclass">Active Member</span>
+                                    <p> <i class="fa fa-angle-right" aria-hidden="true"></i><a href="/login#login" style="margin-top: 10px;"> Click here to login</a></p>
+                                    <p> <i class="fa fa-angle-right" aria-hidden="true"></i> <a onclick="sendmail_password()" style="margin-top: 10px;cursor: pointer;">Send login details to E-Mail</a></p>
+                                </div>
+                                <div id="inactivemember" style="display: none;">
+                                    <span class="activeclass">Active Member (Old Website)</span>
+                                    <p> <a onclick="show_form()" style="margin-top: 10px;cursor: pointer;"><i class="fa fa-angle-right" aria-hidden="true"></i> Create Account on New Site. Click Here</a></p>
+                                </div>
+                                <div id="inactiveold" style="display: none;">
+                                    <span class="inactiveclass">Inactive Member (Old Website)</span>
+                                    <p> <a onclick="show_form()" style="margin-top: 10px;cursor: pointer;"><i class="fa fa-angle-right" aria-hidden="true"></i> Create Account on New Site. Click Here</a></p>
+                                </div>
+                                <div id="notactivemember" style="display: none;">
+                                    <span class="inactiveclass">Not-Active Account</span>
+                                    <p> <i class="fa fa-angle-right" aria-hidden="true"></i><a href="/login#login" style="margin-top: 10px;"> Click here to login</a></p>
+                                    <p> <i class="fa fa-angle-right" aria-hidden="true"></i> <a onclick="sendmail_password()" style="margin-top: 10px;cursor: pointer;">Send login details to E-Mail</a></p>
+                                </div>
+                                <div id="none" style="display: none;">
+                                    <span class="inactiveclass">Member Not Found</span>
+                                    <p> <i class="fa fa-angle-right" aria-hidden="true"></i><a href="/membership" style="margin-top: 10px;"> Click here to Signup</a></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <form id="validatemember" novalidate style="display: none">
+            <!-- Modal content-->
+            <div class="new">
+                <div style="text-align: center;margin-top: 30px;">
+                    <h3>New Site Registration</h3>
+                </div>
+                <div class="" style="padding: 25px;margin-top: 25px">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label for="FullName">First Name</label>
+                                <input type="text" class="form-control" id="Full_Name" required="">
+                                <input type="text" class="form-control" id="fm_firstname" required="" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label for="LastName">Last Name</label>
+                                <input type="text" class="form-control" id="Last_Name" required="">
+                                <input type="text" class="form-control" id="fm_lastname" required="" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label for="phone_no">Old Website Member ID</label>
+                                <input type="text" class="form-control" id="member_id" required="">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label for="email_id">Email</label>
+                                <input type="Email" class="form-control" id="email_id" required="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-lg-6">
+                            <div class="form-group" styel="">
+                                <div>
+                                    <label for="phone_no">Phone Number Type/ Phone Number</label>
+                                </div>
+                                <div class="col-sm-6" style="padding-right: 0;padding-left: 0;">
+                                    <select class="form-control" id="phone_no_type" style="margin-right:0px;">
+                                        <option value="">Select</option>
+                                        <option value="phone_no">Mobile No</option>
+                                        <option value="home_phone_no">Home No</option>
+                                        <option value="mobile_no">Whatsapp No</option>
+                                        <option value="office_no">Office No</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6" style="padding-right: 0;padding-left: 0;">
+                                    <input type="text" class="form-control" id="phone_no" required="" style="margin-right:0px;padding: 6px 22px 11px !important;float:left;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group" id="req_number" style="display:none;">
+                                <label for="newphone_no" style="width:100%;">Mobile Number</label>
+                                <input type="text" class="form-control" id="newphone_no" required="" style="width:100%;margin-right:0px;padding: 6px 22px 11px !important;float:left;">
+                                <!--  <select class="form-control" id="phone_type" style="width:50%;margin-right:0px;" disabled="disabled">
+                                    <option value="phone_no">Mobile No</option>
+                                </select> -->
+                                <span id="newmsg" style="color:red;width:100%;">* Mobile number is required for new website.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  <li>{{  frappe.get_doc('User', phone_no)}}</li> -->
+                </div>
+                <div class="submit_btn">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4 col-sm-4" style="">
+        <div class="textb">
+            <div class="">
+                <div style="text-align: center;margin-top: 41px;">
+                    <h3>Help</h3>
+                </div>
+                <div style="padding: 25px;font-size: 15px;">
+                    <p> <i class="fa fa-angle-right" aria-hidden="true"></i> Please enter your existing member details</p>
+                    <p> <i class="fa fa-angle-right" aria-hidden="true"></i> Then you will get new membership details</p>
+                    <!--  <li>{{  frappe.get_doc('User', phone_no)}}</li> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+#validatemember {
+    margin-top: 25px;
+    border-color: rgb(225, 200, 200);
+    border-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    margin-bottom: 25px;
+}
+
+p {
+    margin: 10px 0 6px;
+}
+
+p+p {
+    margin-top: 12px;
+}
+
+i {
+    color: blue;
+}
+
+.activeclass {
+    background-color: green;
+    color: white;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.inactiveclass {
+    background-color: red;
+    color: white;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.reg_toggle {
+    margin-top: 12%;
+    text-align: center;
+}
+
+.reg_toggle li a {
+    padding: 10px 15px;
+    border-right: none;
+}
+
+.reg_toggle li {
+    background: #ccc;
+}
+
+.reg_toggle li a:hover {
+    color: #fff;
+}
+
+.reg_toggle li.active {
+    background: #674b53;
+}
+
+.reg_toggle li.active a {
+    color: #fff;
+}
+
+.submit_btn {
+    margin-left: 80%;
+    margin-bottom: 3%;
+}
+
+.form-control {
+    padding: 5px 22px 11px;
+}
+
+.tab-content {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.tab-pane {
+    border: 1px solid #ccc;
+}
+
+.textb {
+
+    margin-top: 25px;
+
+    border-color: rgb(225, 200, 200);
+    border-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    margin-right: -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.textc {
+    height: 293px;
+    margin-top: 25px;
+    border-color: rgb(225, 200, 200);
+    border-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    margin-right: -10px;
+}
+
+.texta {
+    margin-top: 25px;
+    border-color: rgb(225, 200, 200);
+    border-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    margin-bottom: 25px;
+}
+
+.table tbody td {
+    padding: 15px !important;
+}
+
+.table>thead>tr>th {
+    padding: 12px 10px;
+}
+
+th,
+td {
+    text-align: left !important;
+}
+
+.table-bordered>thead>tr>th,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>tbody>tr>td,
+.table-bordered>tfoot>tr>td {
+    border: 1px solid #ccc;
+}
+
+.table>caption+thead>tr:first-child>th,
+.table>colgroup+thead>tr:first-child>th,
+.table>thead:first-child>tr:first-child>th,
+.table>caption+thead>tr:first-child>td,
+.table>colgroup+thead>tr:first-child>td,
+.table>thead:first-child>tr:first-child>td {
+    border: 1px solid #ccc;
+}
+
+.color1 {
+    color: green;
+}
+
+.color2 {
+    color: red;
+}
+.cont1{
+    margin-top:165px;
+    margin-bottom:35px;
+    min-height: 460px;
+}
+@media screen and (max-width: 1024px) and (min-width: 768px){
+    .cont1{
+        margin-top: 190px;
+        min-height: 620px;
+    }
+}
+</style>
+{% endblock %} {% block script %}
+<script type="text/javascript">
+$('#membergrid').hide();
+
+$('#Full_Name').change(function(e) {
+    var news = $('#Full_Name').val();
+    if (!/^[a-zA-Z\s]*$/g.test(news)) {
+        // alert("please enter characters only");
+        return false;
+    }
+});
+
+$('#Last_Name').change(function(e) {
+    var news = $('#Last_Name').val();
+    if (!/^[a-zA-Z\s]*$/g.test(news)) {
+
+        frappe.msgprint("please enter characters only")
+        return false;
+    }
+
+});
+
+$('#phone_no_type').change(function(e) {
+    var m_number = $('#phone_no_type').val();
+    console.log(m_number)
+    if (m_number != "phone_no" && m_number != '') {
+        $('#req_number').show();
+        var newp = $('#newphone_no').val();
+
+        $('#newphone_no').change(function(e) {
+            var number = $('#newphone_no').val();
+            if (!validate_number(number)) {
+                alert('Please enter a valid mobile number')
+                $('#newphone_no').val('');
+            }
+            if (number.length != 10) {
+                alert('Please enter 10 digit mobile number')
+                $('#newphone_no').val('');
+            }
+        });
+    } else if (m_number == "phone_no") {
+        $('#req_number').hide();
+    }
+
+});
+$('#phone_no').change(function(e) {
+    var number = $('#phone_no').val();
+    if (!validate_number(number)) {
+        alert('Please enter a valid phone number')
+        $('#phone_no').val('');
+    }
+    if (number.length != 10) {
+        alert('Please enter 10 digit phone number')
+        $('#phone_no').val('');
+    }
+});
+$("#validatemember").submit(function(e) {
+    var m_number = $('#phone_no_type').val();
+    e.preventDefault();
+    if (m_number != '') {
+
+        frappe.call({
+            method: "gscommunity.gscommunity.api.post_existing_detail",
+            args: {
+                "first_name": $("#fm_firstname").val(),
+                "last_name": $("#fm_lastname").val(),
+                "email": $("#email_id").val(),
+                "mobile_no": $("#phone_no").val(),
+                "member_id": $("#member_id").val(),
+                "phone_type": $('#phone_no_type option:selected').val(),
+                "other_numbers": $('#newphone_no').val()
+
+            },
+            callback: function(r) {
+
+                if (r.message) {
+                    window.location.href = "/congratulations";
+                }
+
+            }
+        });
+    } else {
+        frappe.msgprint('Please select phone number type')
+    }
+})
+
+$('#phones_no').change(function(e) {
+    var d = $("#phones_no").val();
+    if (d == "") {
+        $('#membergrid').hide();
+    }
+})
+
+$("#validateexistingmember").submit(function(e) {
+    // window.location.href = "/membership-registration?new=1";
+    e.preventDefault();
+
+    frappe.call({
+        method: "gscommunity.gscommunity.api.validate_existingmembers",
+        args: {
+            "mobile_no": $("#phones_no").val()
+        },
+        callback: function(r) {
+            var t = r.message
+            console.log(t)
+
+            if (t == "notactivemember") {
+
+                $('#membergrid').show();
+                $('#notactivemember').show();
+                $('#activemember').hide();
+                $('#none').hide();
+                $('#inactivemember').hide();
+                $('#inactiveold').hide();
+                var added = $("#phones_no").val();
+                var newmobile = new Array(added.length - 3).join('*') + added.substr(added.length - 4, 4);
+
+                $('#mem_name').text(newmobile);
+
+            } else if (t == "none") {
+
+                $('#membergrid').show();
+                $('#none').show();
+                $('#notactivemember').hide();
+                $('#activemember').hide();
+                $('#inactivemember').hide();
+                $('#inactiveold').hide();
+                var added = $("#phones_no").val();
+                var newmobile = new Array(added.length - 3).join('*') + added.substr(added.length - 4, 4);
+
+                $('#mem_name').text(newmobile);
+
+            } else if (t == "activemember") {
+                $('#membergrid').show();
+                $('#activemember').show();
+                $('#notactivemember').hide();
+                $('#inactivemember').hide();
+                $('#none').hide();
+                $('#inactiveold').hide();
+                var added = $("#phones_no").val();
+
+
+                var newmobile = new Array(added.length - 3).join('*') + added.substr(added.length - 4, 4);
+
+                $('#mem_name').text(newmobile);
+                frappe.call({
+                    method: "gscommunity.gscommunity.api.get_existingmembers",
+                    args: {
+                        "mobile_no": $("#phones_no").val()
+                    },
+                    callback: function(r) {
+                        var gs = r.message[0]
+                        console.log(gs)
+                        console.log(gs.name)
+                        $('#mem_id').text(gs.name);
+
+                    }
+                })
+
+            } else if (t == "inactiveold") {
+
+                frappe.call({
+                    method: "gscommunity.gscommunity.api.old_existingmembers",
+                    args: {
+                        "mobile_no": $("#phones_no").val()
+                    },
+                    callback: function(r) {
+                        console.log(r.message)
+                        $('#inactivemember').hide();
+                        $('#inactiveold').show();
+                        $('#notactivemember').hide();
+                        $('#activemember').hide();
+                        $('#none').hide();
+                        var added = $("#phones_no").val();
+
+                        var newmobile = new Array(added.length - 3).join('*') + added.substr(added.length - 4, 4);
+
+                        $('#mem_name').text(newmobile);
+                        var g = r.message[0]
+                        console.log(g)
+
+                        if (g.member_name.length > 4) {
+                            var first = new Array(g.member_name.length - 3).join('*') + g.member_name.substr(g.member_name.length - 4, 4);
+                        } else {
+                            var first = new Array(g.member_name.length - 1).join('*') + g.member_name.substr(g.member_name.length - 2, 2);
+                        }
+                        if (g.last_name.length > 4) {
+                            var last = new Array(g.last_name.length - 3).join('*') + g.last_name.substr(g.last_name.length - 4, 4);
+                        } else {
+                            var last = new Array(g.last_name.length - 1).join('*') + g.last_name.substr(g.last_name.length - 2, 2);
+                        }
+                        $('#Full_Name').val(first);
+                        $('#Last_Name').val(last);
+                        $('#fm_firstname').val(g.member_name);
+                        $('#fm_lastname').val(g.last_name);
+                        document.getElementById("Full_Name").setAttribute("readonly", true);
+                        document.getElementById("Last_Name").setAttribute("readonly", true);
+
+                        // $('#email_id').val(g.email);
+                        // $('#phone_no').val(g.phone_no);
+                        $('#membergrid').show();
+                        $('#success').show();
+                        $('#member').hide();
+
+
+                        $('#mem_name').text(newmobile);
+                    }
+                })
+
+            } else {
+
+                $('#inactivemember').show();
+                $('#notactivemember').hide();
+                $('#activemember').hide();
+                $('#none').hide();
+                $('#inactiveold').hide();
+                var added = $("#phones_no").val();
+
+                var newmobile = new Array(added.length - 3).join('*') + added.substr(added.length - 4, 4);
+
+                $('#mem_name').text(newmobile);
+                var g = t[0]
+                console.log(g)
+
+                if (g.member_name.length > 4) {
+                    var first = new Array(g.member_name.length - 3).join('*') + g.member_name.substr(g.member_name.length - 4, 4);
+                } else {
+                    var first = new Array(g.member_name.length - 1).join('*') + g.member_name.substr(g.member_name.length - 2, 2);
+                }
+                if (g.last_name.length > 4) {
+                    var last = new Array(g.last_name.length - 3).join('*') + g.last_name.substr(g.last_name.length - 4, 4);
+                } else {
+                    var last = new Array(g.last_name.length - 1).join('*') + g.last_name.substr(g.last_name.length - 2, 2);
+                }
+                $('#Full_Name').val(first);
+                $('#Last_Name').val(last);
+                $('#fm_firstname').val(g.member_name);
+                $('#fm_lastname').val(g.last_name);
+                document.getElementById("Full_Name").setAttribute("readonly", true);
+                document.getElementById("Last_Name").setAttribute("readonly", true);
+
+                // $('#email_id').val(g.email);
+                // $('#phone_no').val(g.phone_no);
+                $('#membergrid').show();
+                $('#success').show();
+                $('#member').hide();
+
+
+                $('#mem_name').text(newmobile);
+            }
+        }
+    });
+
+})
+
+function show_form() {
+    $('#validatemember').show();
+}
+
+
+
+function formatDate(date) {
+    var year = date.getFullYear().toString();
+    var month = (date.getMonth() + 101).toString().substring(1);
+    var day = (date.getDate() + 100).toString().substring(1);
+    return year + "-" + month + "-" + day;
+}
+
+function sendmail_password() {
+    var member = $('#mem_id').text();
+    console.log(member)
+    frappe.call({
+        method: "gscommunity.gscommunity.api.get_existinguser",
+        args: {
+            "member": member
+        },
+        callback: function(r) {
+            var umail = r.message[0].email
+            console.log(r.message)
+            frappe.call({
+                method: "frappe.core.doctype.user.user.reset_password",
+                args: {
+                    "user": umail
+                },
+                callback: function(r) {
+                    console.log(r.message)
+
+                }
+
+            });
+        }
+
+    });
+
+}
+</script>
+{% endblock %}
+<!-- <input id="account" value="1234567899876543" />
+
+<input id="account_changed" />
+
+var account = document.getElementById('account');
+var changed = document.getElementById('account_changed');
+
+changed.value = new Array(account.value.length-3).join('x') + account.value.substr(account.value.length-4, 4); -->

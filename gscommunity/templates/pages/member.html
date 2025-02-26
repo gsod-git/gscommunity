@@ -1,0 +1,192 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active"> {{title}} </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">  MemberShip </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                 {% include 'templates/includes/Advertisement/Topadvertisement.html' %}  
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <section class="section-content1  parallax">
+        <div class="container-fluid">
+            <div class="page-container" id="page-members" data-path="members">
+                <div class="page-content without-sidebar">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <h3 class="ui-title-block bg-head" style="font-size: 24px !important;padding: 10px 15px !important;margin-bottom: 20px !important;">Membership <span> Types</span></h3>
+                                <div class="prices-box">
+                                    <div class="row">
+                                        {% if MemberTypeList %} {% for ms in MemberTypeList %}
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 price-table aos-init aos-animate" data-aos="fade-right">
+                                            <div class="top-content text-center silver1">
+                                                <div class="title">
+                                                    <!-- <img src={{ms.image}} style="width: 20%; min-height: 55px;" /> -->
+                                                    <h4 style="font-size: 15px;">{{ms.name}}</h4>
+                                                </div>
+                                            </div>
+                                            <div class="bottom-content text-center" style="min-height: 350px;">
+                                                <span style="width: 100%;padding: 10px 20px;float: left;text-align: left;"> 
+                                                    <i class="fa fa-check" aria-hidden="true" style="color: #4caf50;font-size: 14px;padding-right: 10px;"></i> {{ms.membership_info}}
+                                                </span> 
+                                                {% if ms.benefits %} {% for msb in ms.benefits %}
+                                                <span style="width: 100%;padding: 10px 20px;float: left;text-align: left;"> 
+                                                    <i class="fa fa-check" aria-hidden="true" style="color: #4caf50;font-size: 14px;padding-right: 10px;"></i> {{msb.title}}
+                                                </span> 
+                                                {% endfor %} {% endif %}
+                                            </div>
+                                            <div class="" style="padding: 10px;background: #d3c3c7;text-align: center;">
+                                                <h4 style="color:#574046">  $ {{ms.amount}}<span> </span> </h4>
+                                            </div>
+                                            <div style="margin-bottom: 20px">
+                                                <button onclick="reg_membership('{{ms.name}}','{{ms.amount}}')" data-field="{{ms.name}}" id="memberpay" class="btn silver1 bnew">
+                                                    <h5 style="text-align: center;color:white !important">  Become a Member  </h5> </button>
+                                            </div>
+                                        </div>
+                                        {% endfor %} {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 
+
+    <section class="section-content1 parallax">
+        <div class="container-fluid">
+            <div class="page-container" id="page-members" data-path="members">
+                <div class="page-content without-sidebar">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="page-content-wrapper">
+                                    <div class="page_content">
+                                        <section>
+                                            <div class="col-md-12 bg-head">
+                                                <h4 class="ui-title-block">Membership  <span> Types</span></h4>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                {% if MemberTypeList %} {% for ms in MemberTypeList %}
+                                                <div class="media centered col-md-4 aa">
+                                                    <div class="media-left">
+                                                        <a>
+                                        <img class="media-object" src="{{ms.image}}" style="opacity: 0.4">
+                                    </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">{{ms.name}}</h4>
+                                                        <br>Info : <b> {{ms.membership_info}}</b>
+                                                        <br>Validity : <b> {{ms.validity}} Months</b>
+                                                        <br>Membership Rate: <b> {{ms.amount}}</b>
+                                                    </div>
+                                                </div>
+                                                {% endfor %} {% endif %}
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                        </div>
+                       
+                    </div>
+                   
+                </div>
+                
+            </div>
+        </div>
+</div>
+</div>
+</div>
+</section> -->
+    <style type="text/css">
+    .aa {
+        margin: 1% !important;
+        width: 31.33% !important;
+        height: 225px;
+        border: 1px solid #e3d9dc;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .07);
+    }
+
+    .bnew {
+        height: 60px;
+        /*width: 300px;*/
+        -webkit-transition: none !important;
+        transition: none !important;
+        background-position: none !important;
+        /*background-image: radial-gradient(circle farthest-side at center bottom, #e50041, #ca1b4d 125%) !important;*/
+        border-color: none;
+    }
+
+    .aa:hover {
+        box-shadow: 0 0 5px 1px rgba(0, 0, 0, .1);
+    }
+
+    .box h4,
+    .media-body h4 {
+        margin-bottom: 0rem !important;
+    }
+
+    .ui-title-block {
+        padding: 10px 0 !important;
+    }
+    .btn{
+        width: 100%;
+    }
+    .btn:hover{
+        box-shadow: none;
+        text-shadow: none; 
+    }
+    </style>
+    {% endblock %} {% block script %}
+    <script type="text/javascript">
+    function reg_membership(type,amount) {
+        // var type=$(this).attr('data-field');
+        console.log(type)
+        console.log(amount)
+        localStorage.setItem("membership_typename", type);
+        localStorage.setItem("membership_payment", amount);
+        var locl_type = localStorage.getItem("membership_typename");
+        if (locl_type) {
+            window.location.href = "/membership";
+        }
+    }
+
+    //       $('#memberpay').click(function() {
+
+
+    //         localStorage.setItem("membership_payment", pay);
+    //       });
+    //       if (typeof(Storage) !== "undefined") {
+
+    //     localStorage.setItem("membership_payment", "trewterwytwery");
+
+    //     // document.getElementById("result").innerHTML = localStorage.getItem("membership_payment");
+    // } else {
+    //     // document.getElementById("result").innerHTML = "";
+    // }
+    </script>
+    {% endblock %}

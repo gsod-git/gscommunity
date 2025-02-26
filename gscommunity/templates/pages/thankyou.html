@@ -1,0 +1,156 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">Thank You</li>
+                </ol>
+            </div>
+            <div class="col-md-4">
+                <!-- <div class="row">
+                      <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">  About Gujarati Samaj </h4>
+                      </div>
+                 </div> -->
+            </div>
+            <div class="col-md-8">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 thankyou">
+                <p id="alert">Thank You!</p>
+                <p id="alert-message">Your Payment has been completed</p>                
+            </div>
+        </div>
+    </div>
+    <!-- end .b-about-->
+</section>
+<style type="text/css">
+.b-breadcrumb {
+    margin-top: 187px;
+}
+
+@media screen and (max-width: 720px) {
+    .b-breadcrumb {
+        margin-top: 126px;
+    }
+}
+.thankyou p{
+    text-align: center;
+    font-size: 22px;
+    color: #1a981a;
+}
+.thankyou{
+    margin-top: 4%;
+}
+.breadcrumb-top1{
+    margin-top:139px;
+}
+.breadcrumb-top1 .container-fluid{
+    padding-bottom: 15px;
+}
+@media screen and (max-width:720px){
+    .breadcrumb-top1{
+        margin-top:117px;
+    }
+}
+@media screen and (max-width:1020px) and (min-width: 768px){
+    .breadcrumb-top1{
+        margin-top:164px;
+    }
+    .thankyou {
+        margin-top: 8%;
+        min-height: 459px;
+    }
+}
+</style>
+{% endblock %} {% block script %}
+<script>
+$(document).ready(function() {
+    var response = getCookies('response')
+    var response_text = localStorage.getItem('response_text')
+    var transaction_id = getCookies('transaction')
+    if (response.response == '1' && transaction_id != '' && transaction_id != undefined && transaction_id != null) {
+        // make_payment(transaction_id)
+        localStorage.removeItem('doctype')
+                localStorage.removeItem('docname')
+                localStorage.removeItem('mem_email')
+                localStorage.removeItem('donationamount')
+                localStorage.removeItem('initial_amount')
+                localStorage.removeItem('response')
+                localStorage.removeItem('response_text')
+                localStorage.removeItem('transaction')
+                localStorage.removeItem('recurring_payment')
+    } else {
+        $('.thankyou #alert').text('Sorry!')
+        $('.thankyou #alert-message').text('Your payment is declined. Please try again later.')
+        $('.thankyou p').css('color','#ff7600')
+    }
+})
+
+function make_payment(transaction_id) {
+    var doctype = localStorage.getItem('doctype');
+    var docname = localStorage.getItem('docname');
+    var member_email = localStorage.getItem('mem_email');
+    var full_amount = localStorage.getItem('donationamount');
+    var initial_amount = localStorage.getItem('initial_amount');
+    var membership_type=localStorage.getItem('existing_type');
+    var amount = 0;
+    var url = ''
+    var email = ''
+    if (doctype == 'Donation') {
+        url = 'gscommunity.gscommunity.doctype.donation.donation.make_payment';
+    } else if (doctype == 'Sponsorship') {
+        url = 'gscommunity.gscommunity.doctype.sponsorship.sponsorship.make_payment';
+    } else if (doctype == 'Membership') {
+        // var pay_amount=localStorage.getItem('mem_amount_paypal');
+        var member_ids = getCookies('user_id');
+        url = 'nonprofit.nonprofit.doctype.membership.membership.make_payment';
+        email = member_ids.user_id;
+        if(initial_amount!=null&&initial_amount!=undefined&&initial_amount!=''){
+            if(parseFloat(full_amount)==parseFloat(initial_amount))
+                amount=full_amount;
+            else            
+                amount = full_amount - initial_amount;
+        }else{
+            amount=full_amount;
+        }            
+    }
+    var transaction=''
+    if(transaction_id.transaction!=undefined&&transaction_id.transaction!=null&&transaction_id.transaction!=''){
+        transaction=transaction_id.transaction
+    }
+    if (doctype != '') {
+        frappe.call({
+            method: url,
+            args: {
+                docname: docname,
+                email: email,
+                amount: amount,
+                membershiptype:membership_type,
+                transaction_id:transaction
+            },
+            callback: function(data) {
+                localStorage.removeItem('doctype')
+                localStorage.removeItem('docname')
+                localStorage.removeItem('mem_email')
+                localStorage.removeItem('donationamount')
+                localStorage.removeItem('initial_amount')
+                localStorage.removeItem('response')
+                localStorage.removeItem('response_text')
+                localStorage.removeItem('transaction')
+                localStorage.removeItem('recurring_payment')
+            }
+        })
+    }
+}
+</script>
+{% endblock %}

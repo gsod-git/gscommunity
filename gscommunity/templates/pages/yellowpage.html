@@ -1,0 +1,254 @@
+{% extends "templates/baseweb.html" %} {% block title %} {{ _("My Account") }} {% endblock %} {% block header %}
+<h1>{{ _("My Account") }}</h1>{% endblock %} {% block page_sidebar %} {% include "templates/pages/web_sidebar.html" %} {% endblock %} {% block page_content %}
+<!-- no-cache -->
+<div class="row your-account-info pagecenter">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 price-table 
+    aos-init aos-animate dir_address" data-aos="fade-right">
+        {% include "templates/pages/gssidemenu.html" %}
+    </div>
+    <div class="col-md-9 col-sm-9 yp-list">
+        <div class="col-md-12 bottom-content yp-list-head" style="padding-left: 0;padding-right: 0;border-bottom: 1px solid #ccc;">
+            <h6 style="padding: 10px; font-size: 20px !important">  Yellow Pages
+                {% if not YellowpagesList %}
+                <span class="add_yp_btn">
+                    <a class="btn btn-primary" onclick="add_newyp()" href='/yellow-pages-form?new=1'>Add Yellowpage</a>
+                </span>
+                {% endif %}
+                {% if renew %}
+                <span class="add_yp_btn"><a class="btn btn-primary" href='/sponsorstype'>Renew Now</a></span>
+                {% endif %}
+            </h6>
+        </div>
+        <input type="hidden" id="sponsor_type" value="None">
+        <div class="col-md-12" style="padding: 20px;">
+            <table class="table table-bordered" style="width: 100%">
+                <thead style="background-color: #e3d9dc;">
+                    <tr>
+                        <th>Name </th>
+                        <th class="dir_address">Email</th>
+                        <th class="dir_address"> Phone </th>
+                        <th>Expiry Date</th>
+                        <th>Status</th>
+                        <th> Actions </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if(YellowpagesList) %} {% for yp in YellowpagesList %}
+                    <tr>
+                        <td>{{yp.business_name}} </td>
+                        <td class="dir_address">{{yp.email}}</td>
+                        <td class="dir_address">{{yp.phone}}</td>
+                        <td>{{yp.expires_on}} </td>
+                        <td>{{yp.status1}}</td>
+                        <td>
+                            <a href="/yellow-pages-form?name={{yp.name}}" target="_blank" class="btn btn-primary">Edit</a> {% if yp.published %}
+                            <a href={{yp.route}} class="btn btn-default">View</a> {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %} {% else %}
+                    <tr>
+                        <td colspan="6">No Records Found </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 hide" style="min-height: 400px; padding: 10px 0 0 0">
+    <ul class="list-group">
+        <a class="list-group-item" href="/profile">
+            {{ _("Profile") }}
+        </a> {% for item in sidebar_items -%}
+        <a class="list-group-item" href="{{ item.route }}" {% if item.target %}target="{{ item.target }}" {% endif %}>
+                {{ _(item.title or item.label) }}
+            </a> {%- endfor %}
+    </ul>
+</div>
+<style type="text/css">
+th,
+td {
+    text-align: left !important;
+}
+
+.sptitle {
+    color: #e50041;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.silver2 {
+    background: linear-gradient(#dee7f6, #7e5c65) !important;
+    padding: 10px;
+}
+
+.protitle {
+    color: white;
+    font-size: 15px;
+}
+
+
+.lirow {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #e1c8c8;
+}
+
+.pagecenter {
+    margin-top: 13%;
+    display: block;
+    padding: 0 2%;
+}
+
+.avatar {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+}
+
+.avatar-frame {
+    display: inline-block;
+    width: 100%;
+    height: 0;
+    padding: 50% 0px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 40px;
+}
+
+.avatar img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+}
+
+.avatar-empty {
+    border: 1px dashed #d1d8dd;
+    border-radius: 4px;
+}
+
+.avatar-small {
+    margin-right: 5px;
+    width: 24px;
+    height: 24px;
+}
+
+.avatar-small .standard-image {
+    font-size: 14px;
+}
+
+.avatar-small .avatar-frame {
+    border-radius: 3px;
+}
+
+.avatar-medium {
+    margin-right: 5px;
+    width: 36px;
+    height: 36px;
+}
+
+.avatar-medium .standard-image {
+    font-size: 18px;
+}
+
+.avatar-large {
+    margin-right: 10px;
+    width: 72px;
+    height: 72px;
+}
+
+.avatar-large .standard-image {
+    font-size: 36px;
+}
+
+.avatar-xl {
+    margin-right: 10px;
+    width: 108px;
+    height: 108px;
+}
+
+.avatar-xl .standard-image {
+    font-size: 72px;
+}
+
+.avatar-xs {
+    margin-right: 3px;
+    margin-top: -2px;
+    width: 17px;
+    height: 17px;
+    border: none;
+    border-radius: 3px;
+}
+
+.avatar-xs .standard-image {
+    font-size: 9px;
+}
+
+.avatar-text {
+    display: inline;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+}
+
+.table-bordered>thead>tr>th,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>tbody>tr>td,
+.table-bordered>tfoot>tr>td {
+    border: 1px solid #ccc;
+}
+
+.table>caption+thead>tr:first-child>th,
+.table>colgroup+thead>tr:first-child>th,
+.table>thead:first-child>tr:first-child>th,
+.table>caption+thead>tr:first-child>td,
+.table>colgroup+thead>tr:first-child>td,
+.table>thead:first-child>tr:first-child>td {
+    border: 1px solid #ccc;
+}
+
+.table thead tr th,
+.table tbody tr td {
+    padding: 13px 16px;
+}
+
+.add_yp_btn {
+    float: right;
+    margin-top: -11px;
+}
+.pagecenter{
+    min-height: 400px; 
+    padding-bottom: 50px;
+}
+.yp-list{
+    min-height: 315px;
+    padding-right: 0;
+    padding-left: 0;
+    border: 1px solid #ccc
+}
+@media screen and (max-width: 1024px) and (min-width: 720px){
+    .pagecenter{
+        margin-top: 25%;
+    }
+    .yp-list-head{
+        margin-top: -7px;
+    }
+}
+</style>
+{% endblock %} {% block script %}
+<script type="text/javascript">
+$(document).ready(function() {
+
+})
+
+function add_newyp() {
+    var sp_type = $('#sponsor_type').val()
+    console.log(sp_type)
+    localStorage.setItem("sponsor_type", sp_type);
+}
+</script>
+{% endblock %}

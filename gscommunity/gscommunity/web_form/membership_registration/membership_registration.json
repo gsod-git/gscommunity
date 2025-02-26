@@ -1,0 +1,564 @@
+{
+ "accept_payment": 0, 
+ "allow_comments": 0, 
+ "allow_delete": 0, 
+ "allow_edit": 1, 
+ "allow_incomplete": 0, 
+ "allow_multiple": 0, 
+ "allow_print": 0, 
+ "amount": 500.0, 
+ "amount_based_on_field": 0, 
+ "breadcrumbs": "[{\"label\":_(\"Membership Registration\"), \"route\":\"membership-registration\"}]", 
+ "creation": "2018-05-07 18:12:42.656962", 
+ "currency": "INR", 
+ "doc_type": "Member", 
+ "docstatus": 0, 
+ "doctype": "Web Form", 
+ "idx": 0, 
+ "introduction_text": "", 
+ "is_standard": 1, 
+ "login_required": 1, 
+ "max_attachment_size": 0, 
+ "modified": "2018-10-18 06:32:08.411876", 
+ "modified_by": "Administrator", 
+ "module": "Gscommunity", 
+ "name": "membership-registration", 
+ "owner": "Administrator", 
+ "payment_button_label": "Process Payment", 
+ "published": 1, 
+ "route": "membership-registration", 
+ "show_sidebar": 0, 
+ "sidebar_items": [
+  {
+   "enabled": 1, 
+   "reference_doctype": "User", 
+   "role": "System Manager", 
+   "route": "update-profile", 
+   "title": "Update Profile"
+  }, 
+  {
+   "enabled": 1, 
+   "reference_doctype": "User", 
+   "role": "System Manager", 
+   "route": "update-password", 
+   "title": "Reset Password"
+  }, 
+  {
+   "enabled": 1, 
+   "reference_doctype": "Member", 
+   "role": "System Manager", 
+   "route": "membership-registration", 
+   "title": "Membership Registration"
+  }, 
+  {
+   "enabled": 1, 
+   "reference_doctype": "Yellow Pages", 
+   "role": "System Manager", 
+   "route": "new-yellowpage", 
+   "title": "YellowPage"
+  }
+ ], 
+ "success_message": "Membership Registration Completed!", 
+ "success_url": "/me", 
+ "title": "Membership Registration", 
+ "web_form_fields": [
+  {
+   "fieldname": "membership_type", 
+   "fieldtype": "Link", 
+   "hidden": 0, 
+   "label": "Membership Type", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "Membership Type", 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Column Break", 
+   "hidden": 0, 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "default": "", 
+   "fieldname": "self_relation", 
+   "fieldtype": "Link", 
+   "hidden": 1, 
+   "label": "Member ", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "Relationship", 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "member_group", 
+   "fieldtype": "Data", 
+   "hidden": 1, 
+   "label": "Member Group", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "ageyears", 
+   "fieldtype": "Data", 
+   "hidden": 1, 
+   "label": "Age", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "has_family", 
+   "fieldtype": "Data", 
+   "hidden": 1, 
+   "label": "Has Family", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "membership_type.has_family", 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "default": "", 
+   "fieldname": "active", 
+   "fieldtype": "Check", 
+   "hidden": 1, 
+   "label": "Active", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Section Break", 
+   "hidden": 0, 
+   "label": "Primary Member Info", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "member_name", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "First name", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "gender", 
+   "fieldtype": "Link", 
+   "hidden": 0, 
+   "label": "Gender", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "Gender", 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "email", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Email", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "", 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Column Break", 
+   "hidden": 0, 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "middle_name", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Middle Name", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "date_of_birth", 
+   "fieldtype": "Date", 
+   "hidden": 0, 
+   "label": "Date Of Birth (MM-DD-YYYY)", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "image", 
+   "fieldtype": "Attach", 
+   "hidden": 0, 
+   "label": "Image", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Column Break", 
+   "hidden": 0, 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "last_name", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Last name", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "membership_expiry_date", 
+   "fieldtype": "Date", 
+   "hidden": 0, 
+   "label": "Membership Expiry Date", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 1, 
+   "reqd": 0
+  }, 
+  {
+   "default": "1", 
+   "fieldname": "public_profile", 
+   "fieldtype": "Check", 
+   "hidden": 0, 
+   "label": "Make Picture Visible To Members?", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Section Break", 
+   "hidden": 0, 
+   "label": "Contact Info", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "phone_no", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Mobile No", 
+   "max_length": 10, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "mobile_no", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Whatsapp No", 
+   "max_length": 10, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Column Break", 
+   "hidden": 0, 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "home_phone_no", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Home Phone No", 
+   "max_length": 10, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "office_no", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Office No", 
+   "max_length": 10, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Section Break", 
+   "hidden": 0, 
+   "label": "Address", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "address_line_1", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Address Line 1", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "state", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "State", 
+   "max_length": 2, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Column Break", 
+   "hidden": 0, 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "address_line_2", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Address Line 2", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "zip_code", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Zip Code", 
+   "max_length": 5, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Column Break", 
+   "hidden": 0, 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "city", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "City", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Section Break", 
+   "hidden": 0, 
+   "label": "Newsletter & Samaj Subscription", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "default": "", 
+   "fieldname": "newsletter", 
+   "fieldtype": "Link", 
+   "hidden": 0, 
+   "label": "Newsletter", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "Email Group", 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Column Break", 
+   "hidden": 0, 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "samaj_darshan", 
+   "fieldtype": "Link", 
+   "hidden": 0, 
+   "label": "Samaj Darshan", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "Email Group", 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "description": "", 
+   "fieldname": "", 
+   "fieldtype": "Section Break", 
+   "hidden": 0, 
+   "label": "Family Information", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldtype": "HTML", 
+   "hidden": 0, 
+   "label": "Family Member Count", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "table_25", 
+   "fieldtype": "Table", 
+   "hidden": 0, 
+   "label": "", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "Other Members", 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Section Break", 
+   "hidden": 0, 
+   "label": "Payment Info", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "membership", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Membership ", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "", 
+   "read_only": 1, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "membership_expiry_date", 
+   "fieldtype": "Date", 
+   "hidden": 1, 
+   "label": "Membership Expiry Date", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Column Break", 
+   "hidden": 0, 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "membership_amount", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Membership Amount ($ - USD)", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "membership_type.amount", 
+   "read_only": 1, 
+   "reqd": 0
+  }, 
+  {
+   "default": "0", 
+   "fieldname": "first_edit", 
+   "fieldtype": "Data", 
+   "hidden": 1, 
+   "label": "First Edit", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "recurring_payment", 
+   "fieldtype": "Data", 
+   "hidden": 1, 
+   "label": "Recurring Payment", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Section Break", 
+   "hidden": 0, 
+   "label": "Recurring Payment", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "default": "0", 
+   "fieldtype": "Check", 
+   "hidden": 0, 
+   "label": "Make Recurring Payment?", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }
+ ], 
+ "web_page_link_text": ""
+}

@@ -1,0 +1,17 @@
+ <ul class="ad-sec">
+                        {% if(RightWidget) %} 
+                        {% for item in RightWidget %}
+                          {% for data in item.Widgets %} 
+                         {% for widget in data.Content %}  
+
+                         {% for list in widget %}   
+                  
+                        <li>
+                            <img src="{{list.logo}}"></li>
+                          {% endfor %}
+                        {% endfor %}
+                         {% endfor %}
+                        {% endfor %}
+                        {% endif %}
+ </ul>
+ 

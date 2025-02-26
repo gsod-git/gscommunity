@@ -1,0 +1,185 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2018-05-04 11:06:38.550023",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "donate_as_guest",
+  "section_break_2",
+  "member",
+  "member_name",
+  "full_name",
+  "address",
+  "zip_code",
+  "column_break_3",
+  "last_name",
+  "email",
+  "phone",
+  "section_break_9",
+  "donation_amount",
+  "paid",
+  "naming_series",
+  "column_break_12",
+  "donation_for",
+  "amended_from",
+  "accounting_head"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "donate_as_guest",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Donate as Guest"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.donate_as_guest=='0'",
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "label": "Member",
+   "options": "Member"
+  },
+  {
+   "depends_on": "eval:doc.donate_as_guest=='0'",
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Member Name",
+   "options": "member.member_name",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.donate_as_guest=='1'",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "First Name"
+  },
+  {
+   "depends_on": "eval:doc.donate_as_guest=='1'",
+   "fieldname": "address",
+   "fieldtype": "Data",
+   "label": "Address"
+  },
+  {
+   "depends_on": "eval:doc.donate_as_guest=='1'",
+   "fieldname": "zip_code",
+   "fieldtype": "Data",
+   "label": "Zip Code",
+   "length": 5
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.donate_as_guest=='1'",
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone",
+   "length": 10,
+   "options": "member.phone_no"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break",
+   "label": "Donation Details"
+  },
+  {
+   "fieldname": "donation_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Donation Amount ($ - USD)",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "paid",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Paid"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "DON-"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "donation_for",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Donation For",
+   "options": "Donation Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Donation",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "accounting_head",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Accounting Head",
+   "options": "donation_for.accounting_head"
+  }
+ ],
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-07-09 01:44:54.970481",
+ "modified_by": "Administrator",
+ "module": "Gscommunity",
+ "name": "Donation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "member_name"
+}

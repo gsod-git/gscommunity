@@ -1,0 +1,132 @@
+<div class="row" style="margin-bottom: 15px;">
+    <div id="owl-demo" class="owl-carousel owl-theme" style="z-index: 0;position: relative;">
+        {% for ads in AdsList %}{% if ads.views<=ads.max_no_of_views %} {% for a in ads.SponsorType %} {% for b in a.AdsMaxImpressionCount %}
+        <div class="item" data-timing='{{ads.slot_timing}}' data-slidername="{{ads.advertisement_name}}" data-views='{{ads.views}}' data-maxviews='{{b.advertisement_count}}'>
+            <div> <img src="{% if b.ribbon_image %}{{b.ribbon_image}}{% endif %}" class="sponsorsribbon2">
+                <a href="{% if ads.redirect_url %}{{ads.redirect_url}}{% else %}#{% endif %}" target="_blank"> 
+        <img src="{% if ads.image_upload %}{{ads.image_upload}}{% endif %}" class="img-responsive"  
+        style="width:100%;height: 200px;">
+      </a> </div>
+        </div>
+        {% endfor %} {% endfor %} {% endif %}{% endfor %}
+    </div>
+</div>
+{% for w in Widgets %} 
+{% if w.type == "Dynamic" and w.reference=='News' %}
+<div class="row" class="w3-content w3-section">
+    <div style="border-bottom: 2px solid #e50041 ">
+        <h3>Recent News</h3> </div>
+    <div style="padding: 10px">
+        {% for list in RecentNewsList %}
+        <div class="row" style="margin-bottom: 12px;border-bottom: 1px solid #dbd3d3;">
+            <div class="col-md-3" style="border: 1px solid #e1cccc;padding: 4px;">
+                <img src="{% if list.image %}{{list.image}}{% endif %}" style="width: 100%;height: 50px;object-fit: cover;" />
+            </div>
+            <div class="col-md-9">
+                <p style="font-size: 13px"> <a href="{% if list.route %}{{list.route}}{% else %}#{% endif %}" style="color: black">  {{list.title}}  </a></p>
+                <span style="font-weight: 600;color: #beacb1;"> Date :  {{list.date}} </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %} 
+{% if w.type == "Dynamic" and w.reference=='Events' %}
+<div class="row" class="w3-content w3-section" style="margin-bottom: 15px;">
+    <div style="background: #e50041;
+    padding: 10px 0;">
+        <h3 style="text-align: center;color: white;font-size:20px;">
+            <span style="padding-right: 10px;">    
+                <i class="fa fa-clock-o" > </i> 
+            </span>
+            Upcoming Events
+        </h3> 
+    </div>
+    <div style="background-image: linear-gradient(121deg,rgba(120, 88, 99, 0.36) 0%,#b69fabdb 60%),url(/assets/gscommunity/assets/media/slide1.png);background-repeat: no-repeat;background-size: cover;position: relative;">
+        <div class="overlay"> </div>
+        <div style="position: relative">
+            {% for list in EvList%}
+            <div style="padding:10px">
+                <p style="color: white">
+                    <span style="padding-right: 10px;">   
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i> 
+                    </span>
+                    <a href="{% if list.route %}{{list.route}}{% else %}#{% endif %}" style="color: white">  {{list.name}} </a> 
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %} 
+{% if w.title == "Follow Us" %}
+<div class="row" style="margin-bottom: 15px;">
+    <div style="border-bottom: 2px solid #e50041 ">
+        <h3>Follow Us</h3> </div>
+    <div class="row">
+         <a href="https://www.facebook.com/Gujarat-Samaj-Of-Detroit-117702799968" target="_blank"> 
+            <div class="col-md-3" style="background: #3b5998;height: 50px;width: 50px;margin: 15px;float: left;">
+                <span class="fa fa-facebook" aria-hidden="true" style="font-size: 25px;padding-top: 15px;padding-left: 5px;color: white;"></span> 
+            </div>  
+        </a>
+        <div class="col-md-3" style="background: #305777;height: 50px;width: 50px;margin: 15px;float: left;">
+            <span class="fa fa-instagram" aria-hidden="true" style="font-size: 25px;padding-top: 12px;color: white;">                
+            </span>
+        </div>
+        <a href="https://twitter.com/IncSamaj" target="_blank">  
+            <div class="col-md-3" style="background: #00aced;height: 50px;width: 50px;margin: 15px;float: left;">
+                <span class="fa fa-twitter" aria-hidden="true" style="font-size: 25px;padding-top: 12px;color: white;">                    
+                </span>
+            </div> 
+        </a>
+        <div class="col-md-3" style="background: #C4302B;height: 50px;width: 50px;margin: 15px;float: left;">
+            <span class="fa fa-youtube-play" aria-hidden="true" style="font-size: 25px;padding-top: 12px;color: white;">                
+            </span>
+        </div>
+    </div>
+</div>
+{% endif %} 
+{% if w.type == "Static" %}
+<div class="row" class="w3-content w3-section" style="margin-bottom: 15px;">
+    <div style="    background: #e50041;
+    padding: 10px 0;">
+        <h3 style="text-align: center;color: white;font-size:20px;">
+    {{w.title}}</h3> </div>
+    <div style="    background-image: linear-gradient(121deg,rgba(15, 91, 145, 0.36) 0%,#1b323bdb 60%),url(/assets/gscommunity/assets/media/handshake.png);
+    background-repeat: no-repeat;
+    background-size: cover;position: relative;">
+        <div class="overlay"> </div>
+        <div style="position: relative">
+            {% for list in w.content %}
+            <div style="padding:10px">
+                <p style="color: white">
+                    <span style="padding-right: 10px;">   
+                        <i class="fa fa-check" aria-hidden="true"></i> 
+                    </span> {{list.content}} 
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="head-btn" style="margin-top: 20px;">
+            <p style="text-align: center;">
+                {% if w.reference=='Sponsorship'%}
+                <a href="/sponsorstype" class="btn btn-primary btn-form-submit float-right" style="margin-top: 5px;padding-top: 10px;height: 36px;margin-bottom: 10px;width: 80%;font: 600 15px/32px Poppins;   padding-bottom: 40px;">Become A Sponsor</a> 
+                {% elif w.reference=='Membership' %}
+                <a href="/member" class="btn btn-primary btn-form-submit float-right" style="margin-top: 5px;    padding-top: 10px;height: 36px;margin-bottom: 10px;width: 80%;font: 600 15px/32px Poppins;  padding-bottom: 40px;">Become A Member</a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+{% endif %} {% endfor %}
+<style type="text/css">
+.overlay {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    background-color: #000;
+    opacity: 0.5;
+    height: 100%
+}
+</style>

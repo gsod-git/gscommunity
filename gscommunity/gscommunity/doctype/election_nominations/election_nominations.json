@@ -1,0 +1,192 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2018-07-21 06:51:11.698485",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "election",
+  "nominee_info",
+  "member",
+  "email",
+  "column_break_5",
+  "member_name",
+  "mobile_number",
+  "parent_info",
+  "parent_mem_id",
+  "column_break_10",
+  "parent_name",
+  "nomination_choices",
+  "election_nomination_choice",
+  "attachments",
+  "resume",
+  "signature",
+  "column_break_15",
+  "nomination_form",
+  "require_parent",
+  "naming_series",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "election",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Election",
+   "options": "Elections",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nominee_info",
+   "fieldtype": "Section Break",
+   "label": "Nominee Info"
+  },
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Member",
+   "options": "Member",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "member.email",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "label": "Member Name",
+   "options": "member.member_name",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "label": "Mobile Number",
+   "options": "member.phone_no",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.require_parent==\"1\"",
+   "fieldname": "parent_info",
+   "fieldtype": "Section Break",
+   "label": "Nominee's Parent Info"
+  },
+  {
+   "fieldname": "parent_mem_id",
+   "fieldtype": "Link",
+   "label": "Parent's Member Id",
+   "options": "Member"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "parent_name",
+   "fieldtype": "Data",
+   "label": "Parent's Name",
+   "options": "parent_mem_id.member_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "nomination_choices",
+   "fieldtype": "Section Break",
+   "label": "Nomination Choices"
+  },
+  {
+   "fieldname": "election_nomination_choice",
+   "fieldtype": "Table",
+   "label": "Election Nomination Choice",
+   "options": "Election Nomination Choice",
+   "reqd": 1
+  },
+  {
+   "fieldname": "attachments",
+   "fieldtype": "Section Break",
+   "label": "Attachments"
+  },
+  {
+   "fieldname": "resume",
+   "fieldtype": "Attach",
+   "label": "Resume"
+  },
+  {
+   "fieldname": "signature",
+   "fieldtype": "Data",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "nomination_form",
+   "fieldtype": "Attach",
+   "label": "Nomination Form"
+  },
+  {
+   "fieldname": "require_parent",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Require Parent",
+   "options": "election.require_parent_name"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "EN-"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Election Nominations",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-07-09 01:46:09.428945",
+ "modified_by": "Administrator",
+ "module": "Gscommunity",
+ "name": "Election Nominations",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

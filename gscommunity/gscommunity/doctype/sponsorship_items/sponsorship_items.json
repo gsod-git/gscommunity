@@ -1,0 +1,189 @@
+{
+ "actions": [],
+ "creation": "2018-06-11 18:45:16.881234",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sponsorship_type",
+  "item_name",
+  "display_id",
+  "column_break_4",
+  "sponsor_for",
+  "item_amount",
+  "validity",
+  "yellow_page_settings",
+  "yellowpage_feature",
+  "advertisement_settings",
+  "advertisement_count",
+  "images",
+  "image",
+  "column_break_14",
+  "ribbon_image",
+  "features",
+  "table_5",
+  "accounts",
+  "accounting_group",
+  "column_break_20",
+  "accounting_head",
+  "braintree_recurring_plan",
+  "recurring_payments"
+ ],
+ "fields": [
+  {
+   "fieldname": "sponsorship_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sponsorship Type",
+   "options": "Sponsorship Type",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Item Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "display_id",
+   "fieldtype": "Int",
+   "label": "Display Order"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sponsor_for",
+   "fieldtype": "Select",
+   "label": "Sponsor For",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "item_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Item Amount ($ - USD)",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "depends_on": "eval:doc.sponsorship_type=='General'",
+   "description": "Specify in months",
+   "fieldname": "validity",
+   "fieldtype": "Int",
+   "label": "Validity"
+  },
+  {
+   "fieldname": "yellow_page_settings",
+   "fieldtype": "Section Break",
+   "label": "Yellow Page Settings"
+  },
+  {
+   "fieldname": "yellowpage_feature",
+   "fieldtype": "HTML",
+   "label": "Yellowpage Feature"
+  },
+  {
+   "fieldname": "advertisement_settings",
+   "fieldtype": "Section Break",
+   "label": "Advertisement Settings"
+  },
+  {
+   "fieldname": "advertisement_count",
+   "fieldtype": "Int",
+   "label": "No. of Advertisement Impressions"
+  },
+  {
+   "fieldname": "images",
+   "fieldtype": "Section Break",
+   "label": "Images"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ribbon_image",
+   "fieldtype": "Attach Image",
+   "label": "Ribbon Image"
+  },
+  {
+   "fieldname": "features",
+   "fieldtype": "Section Break",
+   "label": "Features"
+  },
+  {
+   "fieldname": "table_5",
+   "fieldtype": "Table",
+   "options": "Sponsor Features"
+  },
+  {
+   "fieldname": "accounts",
+   "fieldtype": "Section Break",
+   "label": "Accounts"
+  },
+  {
+   "fieldname": "accounting_group",
+   "fieldtype": "Link",
+   "label": "Accounting Group",
+   "options": "Accounting Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "accounting_head",
+   "fieldtype": "Link",
+   "label": "Accounting Category",
+   "options": "Accounting Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "braintree_recurring_plan",
+   "fieldtype": "Section Break",
+   "label": "Braintree Recurring Plan"
+  },
+  {
+   "fieldname": "recurring_payments",
+   "fieldtype": "Table",
+   "label": "Recurring Payments",
+   "options": "Recurring Payments"
+  }
+ ],
+ "links": [],
+ "modified": "2024-07-09 01:43:21.293940",
+ "modified_by": "Administrator",
+ "module": "Gscommunity",
+ "name": "Sponsorship Items",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

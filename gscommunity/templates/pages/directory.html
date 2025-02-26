@@ -1,0 +1,164 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">Directory</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">Directory  </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax ">
+    <div class="container-fluid event-schedule-area-two">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-9" style="margin-bottom: 20px;">
+                    <div class="col-md-12 mb-10 bg-head" style="padding-left: 0;padding-right: 0;    ">
+                        <div class="df">
+                            <div class="col-md-12 col-xs-12">
+                                <h4 class="ui-title-block">Directory</h4></div>
+                        </div>
+                    </div>
+                    <table id="example" class="table-responsive" style="width:100%">
+                        <thead class="table">
+                            <tr style="background: rgba(227, 217, 220, 0.87);">
+                                <th scope="col">Picture </th>
+                                <th scope="col">Name </th>
+                                <th scope="col">Phone </th>
+                                <th scope="col" class="dir_address">Address </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if(MemberList) %} {% for member in MemberList %}
+                            <tr class="inner-box">
+                                <td>                                    
+                                    {% if member.image and member.public_profile %}
+                                    <a class="js-zoom-images" href="{{member.image}}">   
+                                        <img src="{{member.image}}" alt="" class="event-img img-responsive" style="margin: auto;max-width: 100px;"> 
+                                    </a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="r-no">
+                                        <span>{{member.member_name}} {% if member.last_name%} {{member.last_name}}{% endif %} </span>
+                                    </div>
+                                </td>
+                                <!-- <td>
+                                    <div class="r-no">
+                                        <span>{{member.email}}</span>
+                                    </div>
+                                </td> -->
+                                <td>
+                                    <div class="r-no">
+                                        <span>{{member.phone_no}}</span>
+                                    </div>
+                                </td>
+                                <td class="dir_address">
+                                    <div class="r-no">
+                                        <span>
+                                 {% if member.address_line_1 %} 
+                                 {{member.address_line_1}}
+                                  {% endif %}
+                                  {% if member.address_line_2 %} 
+                                   ,{{member.address_line_2}}
+                                  {% endif %}
+                                  {% if member.city %} 
+                                   ,{{member.city}}
+                                  {% endif %}
+                                  {% if member.state %} 
+                                   ,{{member.state}}
+                                  {% endif %}
+                                  {% if member.zip_code %} 
+                                   ,{{member.zip_code}}
+                                  {% endif %}
+                                      </span>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}{% endif %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-3 col-xs-12 ">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container" id="not-permitted">
+    <p>You are not permitted to access this page.</p>
+    <br>
+    <a href='/login#login' class="btn btn-primary">Login</a>
+</div>
+{% endblock %} {% block style %}
+<style type="text/css">
+.table-bordered {
+    border: 1px solid transparent !important;
+}
+
+table.dataTable tbody tr {
+    background-color: #ffffff !important;
+}
+
+#not-permitted {
+    display: none;
+    min-height: 265px;
+    margin-top: 50px;
+}
+
+#not-permitted a {
+    margin-bottom: 20px;
+}
+
+table.dataTable tbody td {
+    text-align: left !important;
+}
+
+.dataTables_filter {
+    position: absolute;
+    display: block !important;
+    right: 0;
+    top: -50px;
+    padding-right: 10px;
+}
+
+.ui-title-block {
+  padding: 10px 0 14px 0 !important;
+}
+@media screen and (max-width: 540px){
+    .ui-title-block{
+        padding: 10px 0 40px 0 !important
+    }
+}
+</style>
+{% endblock %} {% block script %}
+<script>
+$(document).ready(function() {
+    var member = getCookie('member_id');
+    if (member == '') {
+        $('.section-content1').hide();
+        $('#not-permitted').show();
+    } else {
+        $('.section-content1').show();
+        $('#not-permitted').hide();
+    }
+})
+</script>
+{% endblock %}}

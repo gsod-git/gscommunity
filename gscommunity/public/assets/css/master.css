@@ -1,0 +1,27 @@
+/*------------------------------------------------------------------
+[Master Stylesheet]
+
+Project:  MotorLand
+Version:  1.0
+Assigned to:  WebNik
+Primary use:  MotorLand
+-------------------------------------------------------------------*/
+
+
+/* FONTS*/
+@import url('https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700|Poppins:100,200,300,400,500,600,700');
+@import '../assets/fonts/font-awesome-4.7/css/font-awesome.min.css';
+@import '../assets/fonts/stroke/style.css';
+@import '../assets/fonts/elegant/style.css';
+@import '../assets/fonts/flaticon/font/flaticon.css';
+
+@import url('https://fonts.googleapis.com/css?family=Caveat+Brush');
+
+
+
+/* PLUGIN CSS */
+
+
+
+
+/* MAIN CSS */

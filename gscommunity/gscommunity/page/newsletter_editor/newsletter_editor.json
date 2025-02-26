@@ -1,0 +1,23 @@
+{
+ "content": null, 
+ "creation": "2018-08-14 07:55:00.375005", 
+ "docstatus": 0, 
+ "doctype": "Page", 
+ "idx": 0, 
+ "modified": "2018-08-14 07:55:53.278363", 
+ "modified_by": "Administrator", 
+ "module": "Gscommunity", 
+ "name": "newsletter-editor", 
+ "owner": "Administrator", 
+ "page_name": "Newsletter Editor", 
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ], 
+ "script": null, 
+ "standard": "Yes", 
+ "style": null, 
+ "system_page": 0, 
+ "title": "Newsletter Editor"
+}

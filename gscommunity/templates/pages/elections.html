@@ -1,0 +1,88 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">Elections</li>
+                </ol>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">Elections</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="col-xs-12 col-md-9" style="margin-bottom: 20px;">
+                    <table id="election-grid" class="table-responsive" style="width:100%">
+                        <thead class="table">
+                            <tr style="background: rgba(227, 217, 220, 0.87);">
+                                <th scope="col">Election</th>
+                                <th scope="col">Registration Start Date</th>
+                                <th scope="col">Registration End Date</th>
+                                <th scope="col">Register</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if election %}{% for item in election %}
+                            <tr>
+                                <td>
+                                  <div class="r-no">
+                                        <span>{{item.title}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                  <div class="r-no">
+                                        <span>{{item.registration_start_date}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                  <div class="r-no">
+                                        <span>{{item.registration_end_date}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                  <div class="r-no">
+                                        <span><a href="/{{item.route}}">Register Now</a></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}{% else %}
+                            <tr><td colspan="4">No records found.</td></tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-3 col-xs-12 ">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end .b-about-->
+</section>
+<style type="text/css">
+.b-breadcrumb {
+    margin-top: 187px;
+}
+
+@media screen and (max-width: 720px) {
+    .b-breadcrumb {
+        margin-top: 126px;
+    }
+}
+</style>
+{% endblock %}

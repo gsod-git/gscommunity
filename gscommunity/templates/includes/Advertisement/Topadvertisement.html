@@ -1,0 +1,42 @@
+
+
+<div id="owl-demo-top" class="owl-carousel owl-theme" 
+style="z-index: 0;position: relative;">
+    {% for ads in TopAdsList %}
+    {% for a in ads.SponsorType %}
+    {% for b in a.AdsMaxImpressionCount %}  
+    <div class="item"  data-timing='{{ads.slot_timing}}' 
+    data-slidername="{{ads.advertisement_name}}" 
+    data-views='{{ads.views}}' data-maxviews='{{b.advertisement_count}}' >
+  <div> <img src="{{b.ribbon_image}}" class="sponsorsribbon3">
+      <a href="{% if ads.redirect_url %}{{ads.redirect_url}}{% else %}#{% endif %}" target="_blank"> 
+        <img src="{{ads.image_upload}}" class="img-responsive topimages"  
+        style="">
+      </a> </div>
+    </div> 
+    {% endfor %}
+    {% endfor %}
+    
+ {% endfor %}
+</div> 
+</div> 
+<!-- 
+<div id="owl-demo-top" class="owl-carousel owl-theme" 
+style="z-index: 0;position: relative;">
+    {% for TA in TopAdsList %}
+    {% for a in TA.SponsorType %}
+    {% for b in a.AdsMaxImpressionCount %}
+    <div class="item"  data-timing='{{TA.slot_timing}}' 
+    data-slidername="{{TA.advertisement_name}}" 
+    data-views='{{TA.views}}' data-maxviews='{{b.advertisement_count}}' >
+    <div> <img src="{{b.ribbon_image}}" class="sponsorsribbon3">
+      <a href="{{TA.redirect_url}}" target="_blank">   
+       <img src="{{TA.image_upload}}" class="img-responsive" 
+        style="width: 1000px;height: 100px;margin: auto;">  </a></div>
+    </div> 
+    {% endfor %}
+    {% endfor %}
+    
+ {% endfor %}
+</div>
+ -->

@@ -1,0 +1,257 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<section class="parallax breadcrumb-top1" style="padding-top:40px;padding-bottom: 40px;min-height: 400px;">
+    <div class="container-fliuid">
+        <div class="page-container" id="page-members" data-path="members">
+            <div class="page-content without-sidebar">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12 payment">
+                            <h4 class="payment_title" style="font-size: 25px !important;    padding-bottom: 20px;"> 
+                            Payment  </h4>
+                            <div class="prices-box">
+                                <div class="row">
+                                    <div class="col-md-12  col-sm-12 col-xs-12 mb-30 text-center">
+                                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="FormPay">
+                                            <input type="hidden" name="item_name" value="hat">
+                                            <input type="hidden" name="cmd" value="_s-xclick">
+                                            <input type="hidden" name="hosted_button_id" value="6RNT8A4HBBJRE">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 form-group">
+                                                    <label class="control-label text-muted small"> First Name </label>
+                                                    <input type="text" name="first_name" id="first_name" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 form-group">
+                                                    <label> Last Name </label>
+                                                    <input type="text" name="last_name" id="last_name" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 form-group">
+                                                    <label> Amount ($) </label>
+                                                    <input type="text" name="amount" id="amount" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 form-group">
+                                                    <label> Phone </label>
+                                                    <input type="phone" name="phone" id="phone" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-bottom: 15px;border-bottom: 1px solid #eaeaeb">
+                                                <div class="col-md-6 col-sm-6 form-group">
+                                                    <label> Address </label>
+                                                    <input type="text" name="address1" id="address1" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 form-group">
+                                                    <label> Email </label>
+                                                    <input type="email" name="email" id="email" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top: 15px;">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <input type="hidden" name="currency" id="currency" value="USD">
+                                                    <input type="hidden" name="country" id="country" value="USA">
+                                                    <button style="float: left;" type="button" class="btn btn-primary btn-form-submit" onclick="SubmitPaypal()">
+                                                        Proceed to Pay
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="hosted_button_id" value="6RNT8A4HBBJRE">
+  <input type="image"
+    src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_buynow_107x26.png" alt="Buy Now">
+  <img alt="" src="https://paypalobjects.com/en_US/i/scr/pixel.gif"
+    width="1" height="1">
+</form>
+ -->
+                                        <!-- <form method=post id="FormPay" action=https://api-3t.sandbox.paypal.com/nvp>
+  <input type=hidden name=USER value=testing.valiant3-facilitator_api1.gmail.com>
+  <input type=hidden name=PWD value=7E97BMETJUYM6CAA>
+  <input type=hidden name=SIGNATURE value=An5ns1Kso7MWUdW4ErQKJJJ4qi4-AJH34q67YLl2LRkXLKked0MA6UP2>
+  <input type=hidden name=VERSION value=100.0>
+  <input type=hidden name=PAYMENTREQUEST_0_PAYMENTACTION value=Sale>
+  <input name=PAYMENTREQUEST_0_AMT value=19.95> 
+  <input type=hidden name=RETURNURL value=http://192.168.0.125:8013>
+  <input type=hidden name=CANCELURL value=http://192.168.0.125:8013>
+  <input type=submit name=METHOD value=SetExpressCheckout>
+</form>
+
+
+<form method=post action=https://api-3t.sandbox.paypal.com/nvp>
+  <input type=hidden name=USER value=testing.valiant3-facilitator_api1.gmail.com>
+  <input type=hidden name=PWD value=7E97BMETJUYM6CAA>
+  <input type=hidden name=SIGNATURE value=An5ns1Kso7MWUdW4ErQKJJJ4qi4-AJH34q67YLl2LRkXLKked0MA6UP2>
+  <input type=hidden name=VERSION value=1.0>
+  <input name=TOKEN value=EC-d32C95283D2130330A>
+  <input type=submit name=METHOD value=GetExpressCheckoutDetails>
+</form> -->
+                                        <!-- <div class="featured-item flat-border-box box-1">
+                                            <div class="icon text-center">
+                           <p style="text-align: center;font-size: 40px; color: #f71253;"> $10 </p>
+                                            </div>
+                                            <div class="desc">
+                                                <h2 class="b-advantages-1__title"> GSOD</h2>
+                                                <p style="text-align: center;"><a href="/gsod-donation" class="btn btn-primary btn-form-submit">
+                                        Donate Now </a> </p>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+.payment {
+    padding: 0 5%;
+}
+
+.payment_title {
+    border-bottom: 1px solid #eaeaeb;
+    padding: 10px;
+}
+
+form {
+    padding: 10px;
+}
+
+.form-control {
+    padding: 5px !important;
+    width: 75% !important;
+    border: 1px solid #cecaca !important;
+}
+
+label {
+    font-weight: normal;
+    font-size: 16px;
+}
+.form-group .text-muted {
+    color: #121111 !important;
+    font-size: 16px;
+    font-weight: normal;
+}
+.form-group{
+  text-align: left;
+}
+</style>
+{% endblock %} {% block script %}
+<script type="text/javascript">
+function SubmitPaypal() {
+    localStorage.setItem("mem_amount_paypal", $("#amount").val()); 
+    if ($("#amount").val() != "") {
+        $("#FormPay").find("input[name=item_name]").val("GSOD Donation");
+        $("#FormPay").find("input[name=amount]").val($("#amount").val());
+        $("#FormPay").find("input[name=first_name]").val($("#first_name").val());
+        $("#FormPay").find("input[name=last_name]").val($("#last_name").val());
+        $("#FormPay").find("input[name=address1]").val($("#address1").val());
+        $("#FormPay").find("input[name=city]").val($("#city").val());
+        $("#FormPay").find("input[name=phone]").val($("#phone").val());
+        $("#FormPay").find("input[name=country]").val($("#country").val());
+        $("#FormPay").find("input[name=currency]").val($("#currency").val());
+        $("#FormPay").find("input[name=email]").val($("#email").val());
+        $("#FormPay").submit();
+    } else {
+        frappe.msgprint(__('Please Enter the Amount to Proceed'));
+    }
+
+}
+
+// function getCookie(cname) {
+//         var name = cname + "=";
+//         var decodedCookie = decodeURIComponent(document.cookie);
+//         var ca = decodedCookie.split(';');
+//         for (var i = 0; i < ca.length; i++) {
+//             var c = ca[i];
+//             while (c.charAt(0) == ' ') {
+//                 c = c.substring(1);
+//             }
+//             if (c.indexOf(name) == 0) {
+//                 return c.substring(name.length, c.length);
+//             }
+//         }
+//         return "";
+//     }
+frappe.ready(function() {
+    var member_ids = getCookie('member_id');
+    console.log(member_ids)
+    var amount = localStorage.getItem('donationamount');
+    var initial_amount = localStorage.getItem('initial_amount');
+    var initial = localStorage.getItem('new_amount');
+     var doctypes=localStorage.getItem('doctype');
+    if(doctypes =='Membership'){
+                frappe.call({
+            method: "gscommunity.gscommunity.api.getmemberdetails",
+            args: {
+                "memberid": member_ids
+            },
+            callback: function(r) {
+                console.log(r.message)
+                $("input[name=email]").val(r.message[0].email);
+                $("input[name=first_name]").val(r.message[0].member_name);
+                $("input[name=last_name]").val(r.message[0].last_name);
+                $("input[name=phone]").val(r.message[0].phone_no);
+                $("input[name=city]").val(r.message[0].city);
+                $("input[name=address1]").val(r.message[0].address_line_1 + " , " + r.message[0].city);
+            }
+        });
+    }
+ 
+        if(amount && initial){
+            var cur_amount = amount - initial;
+        console.log(amount)
+        console.log(initial)
+        console.log(cur_amount)
+        $("input[name=amount]").val(cur_amount);
+        localStorage.setItem("initial", "");
+        }
+      
+   else if (amount != '' && initial == '') {
+        console.log(amount)
+        $("input[name=amount]").val(amount);
+    }
+      else{
+          $("input[name=amount]").val(initial);
+           localStorage.setItem("initial", "");   
+        }
+    console.log(frappe.session.user)
+    // if (frappe.session.user) {
+
+    // }
+    var doctype=localStorage.getItem('doctype');
+    var docname=localStorage.getItem('docname');
+    if(doctype && docname && doctype!='Membership'){
+        frappe.call({
+            method:'gscommunity.gscommunity.doctype.donation.donation.get_details',
+            args:{
+                doctype:doctype,
+                docname:docname
+            },
+            callback:function(r){
+                console.log(r)
+                if(doctype=='Donation'){
+                    if(r.message[0].donate_as_guest){
+                        $("input[name=first_name]").val(r.message[0].full_name)
+                    }else{
+                        $("input[name=first_name]").val(r.message[0].member_name)
+                        $("input[name=first_name]").val(r.message[0].last_name)
+                    }
+                }
+                if(doctype=='Sponsorship'){
+                    if(r.message[0].sponsor_type=='Member'){
+                        $("input[name=first_name]").val(r.message[0].last_name)
+                    }
+                    $("input[name=first_name]").val(r.message[0].member_name)
+                }
+                $("input[name=email]").val(r.message[0].email);
+                $("input[name=phone]").val(r.message[0].phone);
+            }
+        })        
+    }   
+
+})
+</script>
+{% endblock %}

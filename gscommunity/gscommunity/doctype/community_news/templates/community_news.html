@@ -1,0 +1,189 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                 <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li><a href="/news"> News</a>
+                    </li>
+                    <li class="active">{{title}}</li>
+                </ol>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                      <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">   Community News  </h4>
+                      </div>
+                 </div>
+            </div>
+             <div class="col-md-8" style="padding: 10px;">
+                 {% include 'templates/includes/Advertisement/Topadvertisement.html' %}         
+             </div>
+        </div>
+    </div> 
+ 
+</div>
+<section class="section-content1 parallax">
+    {% if NewsList %} {% for news in NewsList %}
+    <div class="container-fluid event-schedule-area-two">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-9">                    
+                    <section class="b-car-details">
+                        <div class="b-car-details__section" style="padding-top: 0">
+                            <div class="" style="border: 1px solid #ddd;padding-bottom: 10px;">
+                                <div class="div-text">
+                                    <div class="clearfix contact-det">
+                                        <div class="news-heading">
+                                            <h4 class="" style="padding-left: 20px;">{{news.title}}</h4>
+                                            <div style="display: flex">
+                                                <h5 class="card-title" style="width: 90%">{% if news.date %}<i class="icon fa fa-calendar"></i> {{news.date}}{% endif %} </h5>
+                                                {% if news.facebook_link %}
+                                                <a target="_blank" href="{{news.facebook_link}}"><i class="fa fa-facebook"></i></a>{% endif %}
+                                                {% if news.youtube_link %}
+                                                <a target="_blank" href="{{news.youtube_link}}" style="margin-left: 10px;"><i class="fa fa-youtube"></i></a>{% endif %}
+                                            </div>
+                                        </div>                                     
+                                        <div class="">
+                                            <div class="col-md-6">
+                                                {% if (news.contact_person) %}
+                                                <span class="about-author__title yellow-title yellow-i" style="font-size: 12px;text-transform: capitalize;"> <i class="icon fa fa-user" aria-hidden="true" ></i> {{news.contact_person}}</span></span>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-6">
+                                                {% if (news.location) %}
+                                                <span class="about-author__title yellow-title yellow-i" style="font-size: 12px;text-transform: capitalize;"> <i class="icon fa fa-map-marker" aria-hidden="true" ></i> {{news.location}}</span></span>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-6" style="padding-right: 0;padding-top: 15px">
+                                                {% if (news.phone) %}
+                                                <span class="about-author__title yellow-title yellow-i" style="font-size: 12px"><i class="fa fa-phone" ></i>{{news.phone}}</span></span>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-6" style="padding-top: 15px">
+                                                {% if (news.email) %}
+                                                <span class="about-author__title yellow-title yellow-i" style="font-size: 12px;text-transform: none;"><i class="fa fa-envelope-open"></i>{{news.email}}</span></span>
+                                                {% endif %}
+                                            </div>
+                                            <div>
+                                                <img class="sp-image img-responsive" src="{% if news.image %}{{news.image}}{% else %}/assets/frappe/images/background.png{% endif %}" alt="slider" data-default="{{news.image}}" style="width:100%;padding: 25px;">
+                                            </div>
+                                            <div class="col-md-12">         
+                                                {% if (news.description) %}
+                                                <h5 class="card-title">Description</h5>
+                                                <p>{{news.description}}</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}{% endif %}
+</section>
+{% endblock %} {% block style %}
+<style type="text/css">
+pad-d {
+    padding: 20px 30px 20px !important;
+}
+
+
+.yellow-li li {
+    font-weight: 600;
+}
+
+.ad-sec {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ad-sec img {
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.list-goods_th .b-goods-1__name {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.b-filter-2__title {
+    background: #212121
+}
+
+.mi-20 {
+    margin-top: 20px;
+}
+
+.flex-1 {
+    diyp.ay: inline-flex;
+}
+
+.div-text {
+    width: 100%;
+}
+
+
+
+/*.div-img{
+      width: 30%;
+   
+}*/
+
+.contact-det {
+    padding: 0 !important;
+    border: 1px solid tranyp.rent;
+    border-radius: 2px;    
+}
+
+.yellow-i i {
+    font-size: 12px;
+    color: #e50041;
+    margin-right: 10px;
+}
+
+.yellow-i {
+    font-size: 16px;
+    background: #f5f5f5;
+    padding: 15px 15px;
+    font-weight: 700;
+}
+
+.pad-20 {
+    padding-top: 20px;
+}
+
+.ad-sec {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ad-sec img {
+    width: 100%;
+    padding-bottom: 10px;
+}
+.news-heading{
+    background: #f4f0f1;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+.news-heading h5{
+    margin-left: 2%;
+}
+.news-heading i{
+    margin-right: 1%;
+}
+</style>
+{% endblock %}

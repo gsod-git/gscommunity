@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<!-- Built on Frappe. https://frappe.io/ -->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {{ title | striptags }} {% endblock %}</title>
+    <meta name="generator" content="frappe"> {% block favicon %}
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+    <link rel="shortcut icon" href="{{ (favicon or " /assets/gscommunity/images/favicon.png ") | abs_url }}" type="image/x-icon">
+    <link rel="icon" href="{{ (favicon or " /assets/gscommunity/images/favicon.png ") | abs_url }}" type="image/x-icon"> {% endblock %} {%- block head -%} {% block meta_block %} {% endblock %} {% if head_html is defined -%} {{ head_html or "" }} {%- endif %} {% block header_actions %} {% endblock %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700|Poppins:100,200,300,400,500,600,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Caveat+Brush">
+
+    <!-- SWITCHER-->
+    <link rel="stylesheet" href="/assets/gscommunity/css/master.css" />    
+    <link rel="stylesheet" href="/assets/gscommunity/css/custom_website.css" />
+
+    <link href="/assets/gscommunity/assets/plugins/switcher/css/color2.css" rel="alternate stylesheet" title="color2" />
+    <link href="/assets/gscommunity/assets/plugins/switcher/css/color3.css" rel="alternate stylesheet" title="color3" />
+    <link href="/assets/gscommunity/assets/plugins/switcher/css/color4.css" rel="alternate stylesheet" title="color4" />
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+     {%- for link in custom_web_include_css %}
+    <link type="text/css" rel="stylesheet" href="{{ link|abs_url }}"> {%- endfor -%} {%- block head_include %}{{ head_include or "" }}{% endblock -%} {%- block style %}{%- endblock -%} {%- endblock -%}
+    <script>
+    window.frappe = {};
+    frappe.ready_events = [];
+    frappe.ready = function(fn) {
+        frappe.ready_events.push(fn);
+    }
+    window.dev_server =  {{ dev_server }} ;
+    </script>
+</head>
+
+<body data-path="{{ path }}">
+    <div id="page-preloader"><span class="spinner border-t_second_b border-t_prim_a"></span>
+    </div>
+    <!-- Loader end-->
+    <!-- ==========================-->
+    <!-- MOBILE MENU-->
+    <!-- ==========================-->
+    <div data-off-canvas="mobile-slidebar left overlay">
+        <button class="menu-mobile-button01 visible-xs-block js-toggle-mobile-slidebar toggle-menu-button"><i class="toggle-menu-button-icon"><span></span><span></span><span></span><span></span><span></span><span></span></i>
+        </button>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About US<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown dropdown-submenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">About Samaj</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/aboutus">About Gujarati Samaj </a></li>
+                            <li><a href="/history">History of Gujarati Samaj</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/directory">Directory </a></li>
+                    <li><a href="/samaj-benefits">Samaj Benefits</a></li>
+                    <li><a href="/news">Community News</a></li>
+                    <li><a href="/current-by-laws">Current By Laws</a></li>
+                    <li class="dropdown dropdown-submenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Committee</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/operatingcommitee">Current Committee</a></li>
+                            <li><a href="/previouscommittee">Previous Committee</a></li>
+                            <li><a href="/pastpresident">Previous Chairman &amp; President</a></li>
+                            <li><a href="/choreographer">Choreographers</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/samajdarshan">Samaj Darshan </a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/help">Help</a></li>
+                </ul>
+            </li>
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">GSOD Members <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/membership">Become a Member</a></li>
+                    <li><a href="/existingmember">Old Member Registration</a></li>
+                    <li><a href="/member"> Membership Types</a></li>
+                    <li><a href="/membership-form"> Membership Form</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">Events <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/event">  Events</a></li>
+                    <li><a href="/eventcalendar">  Event Calender</a></li>
+                </ul>
+            </li>
+            
+            <li class="active"><a href="/albums">Gallery</a></li>
+            <li class="dropdown" style="display:none;">
+                <a class="dropdown-toggle" data-toggle="dropdown"> Yellow Pages <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li class="active"><a href="/yellowpages"> All</a></li>
+                    {% if(YellowpageCategoryList) %} {% for ypc in YellowpageCategoryList %}
+                    <li class="dropdown dropdown-submenu">
+                        <a href="{{ypc.route}}">{{ypc.name}}</a> {% if(ypc.YellowpageSubCategoryList) %}
+                        <ul class="dropdown-menu">
+                            {% for ypsc in ypc.YellowpageSubCategoryList %}
+                            <li><a href={{ypsc.route}}> {{ypsc.name}} </a></li>
+                            {% endfor %}
+                        </ul> {% endif %}
+                    </li>
+                    {% endfor %}{% endif %}
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Senior (GSS) <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/about-gss"> About GSS</a></li>
+                    <li><a href="/gss"> Senior (GSS) Events</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Youth (GSY) <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/about-gsy">About GSY</a></li>
+                    <li><a href="/gsy"> Youth (GSY) Events</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sponsors <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/sponsorstype">Become a Sponsor</a></li>
+                    <li><a href="/sponsors">Sponsors</a></li>
+                </ul>
+            </li>
+           
+            {% if frappe.user == 'Guest' %}
+            <li class="active"><a href="/login#login"> Login </a></li>
+            {% else %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">  My Account <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/me">My Account</a></li>
+                    <li><a href="/desk">Admin</a></li>
+                    <li><a href="/?cmd=web_logout">  Sign out</a></li>
+                </ul>
+            </li>
+            {% endif %}
+            {% if elections %}
+            <li><a href="/elections">Elections</a></li>
+            {% endif %}
+            <li><a href="/contact_us"> Contact Us </a></li>
+            <li class="dropdown" style="background: #e50041;">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Event <span class="blink">Tickets</span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a style="cursor: pointer;" onclick="check_login()" data-url="https://www.i9live.com/diwali-2019">Member Tickets</a></li>
+                                <li><a target="_blank" href="https://www.i9live.com/diwali-2019">Non Member Tickets</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="l-theme animated-css" data-header="sticky" data-header-top="200" data-canvas="container">
+        {% include "templates/includes/navbar/webnavbar.html" %} {% block content %} {% endblock %} {% block page_content %} {% endblock %} {% include "templates/includes/footer/webfooter.html" %}
+    </div>
+    <div id="Support"><span class="fa fa-question-circle"></span></div>
+    <div id="subscribe_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Subscribe</h4>
+      </div>
+      <div class="modal-body">
+        <label>Email</label>
+        <input type="email" required="required" class="form-control" name="subscribe_email" id="subscribe_email" placeholder="Enter your email">
+        <label>Email Group</label>
+        <select name="subscribe_email_group" required="required" class="form-control" id="subscribe_email_group" placeholder="Select Email Group">
+            <option value=""></option>
+            {% if newsletter %}{% for item in newsletter %}
+            <option value="{{item.name}}">{{item.name}}</option>
+            {% endfor %}{% endif %}
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="save_subscriber()">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div> 
+
+  </div>
+</div>
+
+    {% block base_scripts %}
+    <!-- js should be loaded in body! -->
+    <!--  <script type="text/javascript"
+    src="/assets/frappe/js/lib/jquery/jquery.min.js"></script>-->
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyBf-_voLhRG3aC8WTZGGJ5c7HQzR-ApwOE" async defer></script>
+    <script src="/assets/gscommunity/assets/libs/jquery-1.12.4.min.js"></script>
+    <script src="/assets/gscommunity/assets/js/jq.js"></script>
+   {{ include_script('frappe-web.bundle.js') }}
+    <script src="/assets/gscommunity/assets/libs/jquery-migrate-1.2.1.js"></script>
+    <!-- Bootstrap-->
+    <script src="/assets/gscommunity/assets/libs/bootstrap/bootstrap.min.js"></script>
+    <!-- User customization-->
+    <script src="/assets/gscommunity/assets/js/custom.js"></script>
+    <!-- Headers scripts-->
+    <script src="/assets/gscommunity/assets/plugins/headers/slidebar.js"></script>
+    <script src="/assets/gscommunity/assets/plugins/headers/header.js"></script>
+    <!-- Color scheme-->
+    <script src="/assets/gscommunity/assets/plugins/switcher/js/dmss.js"></script>
+    <!-- Select customization & Color scheme-->
+    <script src="/assets/gscommunity/assets/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <!-- Slider-->
+    <script src="/assets/gscommunity/assets/plugins/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Pop-up window-->
+    <script src="/assets/gscommunity/assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Mail scripts-->
+    <script src="/assets/gscommunity/assets/plugins/jqBootstrapValidation.js"></script>
+    <!-- Filter and sorting images-->
+    <script src="/assets/gscommunity/assets/plugins/isotope/isotope.pkgd.min.js"></script>
+    <script src="/assets/gscommunity/assets/plugins/isotope/imagesLoaded.js"></script>
+    <!-- Progress numbers-->
+    <script src="/assets/gscommunity/assets/plugins/rendro-easy-pie-chart/jquery.easypiechart.min.js"></script>
+    <script src="/assets/gscommunity/assets/plugins/rendro-easy-pie-chart/waypoints.min.js"></script>
+    <!-- NoUiSlider-->
+    <script src="/assets/gscommunity/assets/plugins/noUiSlider/nouislider.min.js"></script>
+    <script src="/assets/gscommunity/assets/plugins/noUiSlider/wNumb.js"></script>
+    <!-- Animations-->
+    <script src="/assets/gscommunity/assets/plugins/scrollreveal/scrollreveal.min.js"></script>
+    <!-- Main slider-->
+    <script src="/assets/gscommunity/assets/plugins/slider-pro/jquery.sliderPro.min.js"></script>
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+    <script type="text/javascript" src="/assets/gscommunity/assets/js/jquery-ui_f4f5bf63c99e760f7053ac9b9e1327ab.js"></script>
+    
+    {% endblock %} {%- if js_globals is defined %}
+    <script>
+    { % - for key, value in js_globals.iteritems() % }
+    window. { { key } } = "{{ value[0] }}"; { % -endfor - % }
+    </script>
+    {% endif -%}
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        console.log($(window).width());
+
+        $('#example').DataTable();
+        $('#example1').DataTable();
+        $('#example2').DataTable();
+
+        $('#event-grid').DataTable({
+            "pageLength": 5
+        });        
+        $('#gss-grid').DataTable({
+            "pageLength": 5
+        });
+        $('#gsy-grid').DataTable({
+            "pageLength": 5
+        });
+
+        $('#event-gridmob').DataTable({
+            "pageLength": 5
+        });
+        $('#gss-gridmob').DataTable({
+            "pageLength": 5
+        });
+        $('#gsy-gridmob').DataTable({
+            "pageLength": 5
+        });
+
+        $('#OPexample1').DataTable();
+        $('#OPexample2').DataTable();
+        $('#OPexample3').DataTable();
+        $('#OPexample4').DataTable();
+        $('#OPexample').DataTable();
+        $('#past-grid').DataTable({
+            paging: false,
+            searching: false,
+            ordering: false
+        });
+        $('#choreo-grid').DataTable({
+
+        });
+        $('#lightgallery').lightGallery();
+        $(".bootstrap-select").click(function() {
+            $(this).toggleClass("open");
+        }); 
+        $('#Support').click(function(){
+            var url=window.location.href;
+            localStorage.setItem('support_url',url)
+            window.location.href='/web-support'
+        })       
+    })
+    function cancel_subscription(e){
+        var subscription_id=$(e).attr('data-subscription');
+        var html='<div>Please click on confirm button to cancel your subscription</div><div \
+            style="margin-top:25px;text-align:right;"><button class="btn btn-default" \
+            data-dismiss="modal" style="margin-right:10px;">Cancel</button><button class="btn btn-primary" \
+            onclick="confirm_cancel_subscription(this)" data-subscription="'+subscription_id+'">Confirm</button></div>';
+            frappe.msgprint(html,'Confirm')
+    }
+    function confirm_cancel_subscription(e){
+        var subscription_id=$(e).attr('data-subscription');
+        if(subscription_id!=''&&subscription_id!=null&&subscription_id!=undefined){
+            frappe.call({
+                method:'gscommunity.gscommunity.api.cancel_subscription',
+                args:{
+                    subscription_id:subscription_id
+                },
+                callback:function(data){
+                    location.reload();
+                }
+            })
+        }
+    }
+
+    $('.slides img:gt(0)').hide();
+    changeSlide();
+
+    function changeSlide() {
+        var changeIn = +$('.slides :first-child').data("time");
+        // console.log(changeIn);
+        setTimeout(function() {
+            $('.slides :first-child').fadeOut("slow")
+                .next('img').fadeIn("slow")
+                .end().appendTo('.slides');
+            changeSlide();
+        }, changeIn);
+    }
+
+
+    $('.slides1 img:gt(0)').hide();
+    changeSlide1();
+
+    function changeSlide1() {
+        var changeIn = +$('.slides1 :first-child').data("time");
+        // console.log(changeIn);
+        setTimeout(function() {
+            $('.slides1 :first-child').fadeOut("slow")
+                .next('img').fadeIn("slow")
+                .end().appendTo('.slides1');
+            changeSlide1();
+        }, changeIn);
+    }
+    </script>
+    <script type="text/javascript" src=" https://malsup.github.io/jquery.cycle.all.js"></script>
+    <style>
+    .mySlides {
+        display: none;
+    }
+
+    .mySlides1 {
+        display: none;
+    }
+
+    .mySlides2 {
+        display: none;
+    }
+
+    .modal-header .close {
+        float: right;
+    }    
+    .social-bg{
+        width: 20px !important;
+    }
+    .contact-mail{
+        width: 150px !important;
+    }
+    #Support{
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        font-size: 25px;
+        background: #75515b;
+        border-radius: 50%;
+        padding: 2px 13px;
+    }
+    #Support span{
+        color: #fff;
+    }
+    .footer {
+        padding-top:60px
+    }
+    .footer-list__item1{
+        display: block;
+        padding-right: 30px;
+        vertical-align: top;
+    }
+    .footer__main{
+        padding-bottom: 30px;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px){
+        .social-bg{
+            width: 10px !important;
+        }
+        .contact-mail{
+            width: 110px !important;
+        }
+        .pad-left{
+            font-size: 12px;
+            padding-left: 12px;
+        }
+        .menu-last{
+            margin-left: 5px;
+            margin-top: -1px;
+        }
+        .flo-right {
+            margin-top: 12px;
+            height: 70px !important;
+        }
+        .breadcrumb{
+            padding-top: 57px !important;
+        }
+        .nav > li > a{
+            padding-top: 0px !important;
+        }
+    }
+    @media screen and (min-width: 720px){
+        .mobileimg{
+            display: none;
+        }
+    }
+    @media screen and (orientation:landscape) and (max-width: 767px) and (min-width: 320px){
+        .bg-main{
+            height: auto !important;
+        }
+        .socialweb{
+            display: none;
+        }
+        .mobileimg{
+            display: block;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .navbar-header {
+            display: block;
+        }
+        .float-right{
+            float: right;
+        }
+        .navbar-header ul.social-network{
+            padding: 0px 0;
+        }
+        .Navigationbar{
+            background-color: #e3d9dc !important;
+            min-height: 30px;
+            box-shadow: 0 1px 3px 2px rgba(0,0,0,.15);
+        }
+        .social-circle i,.social-gmail-text{
+            color: #946b77 !important;
+        }
+    }
+    </style>
+    <script>
+    var myIndex = 0;
+    var itemIndex = 0;
+
+    var myIndex1 = 0;
+    var itemIndex1 = 0;
+
+
+    var myIndex2 = 0;
+    var itemIndex2 = 0;
+
+    carousel();
+    carousel1();
+    carousel2();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+
+        if (x.length != 0)
+
+        {
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+
+            }
+            myIndex++;
+            itemIndex++;
+
+            if (myIndex > x.length) {
+                myIndex = 1;
+                itemIndex = 0;
+            }
+            x[myIndex - 1].style.display = "block";
+            var id = myIndex;
+            var Time = $('#platinumadsImage' + id).data('time');
+
+            setTimeout(carousel, Time);
+        }
+
+        // Change image every 2 seconds
+    }
+
+
+    function carousel1() {
+        var i;
+        var x = document.getElementsByClassName("mySlides1");
+
+        if (x.length != 0) {
+            for (i = 0; i < x.length; i++) {
+
+                x[i].style.display = "none";
+
+            }
+            myIndex1++;
+            itemIndex1++;
+            if (myIndex1 > x.length) {
+                myIndex1 = 1;
+                itemIndex1 = 0
+            }
+            x[myIndex1 - 1].style.display = "block";
+            var id = myIndex1;
+            var Time = $('#goldadsImage' + id).data('time');
+
+            setTimeout(carousel1, Time);
+        }
+
+        // Change image every 2 seconds
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function validate_email(email){
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;        
+        if(email!=''){            
+            return regex.test(email)
+        }     
+    }
+
+    function validate_state(state){
+        var regex = /[a-zA-Z]+$/;        
+        if(state!=''){            
+            return regex.test(state)
+        }     
+    }
+
+    function validate_number(number){
+        var regex=/[0-9]+$/;
+        if(number!=''){            
+            return regex.test(number)
+        } 
+    }
+
+    function carousel2() {
+        var i;
+        var x = document.getElementsByClassName("mySlides2");
+
+        if (x.length != 0) {
+            for (i = 0; i < x.length; i++) {
+
+                x[i].style.display = "none";
+
+            }
+            myIndex2++;
+            itemIndex2++;
+            if (myIndex2 > x.length) {
+                myIndex2 = 1;
+                itemIndex2 = 0
+            }
+            x[myIndex2 - 1].style.display = "block";
+            var id = myIndex2;
+            var Time = $('#silveradsImage' + id).data('time');
+
+            setTimeout(carousel2, Time);
+        }
+
+
+        // Change image every 2 seconds
+    }
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        var owl = $("#rightad_slide .owl-carousel").owlCarousel({
+            autoplayTimeout: 60000,
+            autoplay: true,
+            items: 1,
+            loop: true,
+            dots: false,
+            nav: true,
+            onDragged: setDelay,
+
+        });
+        owl.on('changed.owl.carousel', function(event) {
+            setDelay();
+        });
+
+        function setDelay() {
+            owl.trigger('stop.owl.autoplay');
+
+            var defaultTiming = 2;
+            var carouselTiming =
+                $('#rightad_slide .owl-item.active .b-team-200').data('timing') ?
+                $('#rightad_slide .owl-item.active .b-team-200').data('timing') : defaultTiming;
+            setTimeout(function() {
+                owl.trigger('next.owl.carousel');
+            }, carouselTiming * 1000);
+        }
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        var owl = $("#rightad_slide1 .owl-carousel").owlCarousel({
+            autoplayTimeout: 60000,
+            autoplay: true,
+            items: 1,
+            loop: true,
+            dots: false,
+            nav: true,
+            onDragged: setDelay,
+
+        });
+        owl.on('changed.owl.carousel', function(event) {
+            setDelay();
+        });
+
+        function setDelay() {
+            owl.trigger('stop.owl.autoplay');
+
+            var defaultTiming = 1000;
+            var carouselTiming =
+                $('#rightad_slide1 .owl-item.active .b-team-200').data('timing') ?
+                $('#rightad_slide1 .owl-item.active .b-team-200').data('timing') : defaultTiming;
+            setTimeout(function() {
+                owl.trigger('next.owl.carousel');
+            }, carouselTiming);
+        }
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        var owl = $("#rightad_slide2 .owl-carousel").owlCarousel({
+            autoplayTimeout: 60000,
+            autoplay: true,
+            items: 1,
+            loop: true,
+            dots: false,
+            nav: true,
+            onDragged: setDelay,
+
+        });
+        owl.on('changed.owl.carousel', function(event) {
+            setDelay();
+        });
+
+        function setDelay() {
+            owl.trigger('stop.owl.autoplay');
+
+            var defaultTiming = 1000;
+            var carouselTiming =
+                $('#rightad_slide2 .owl-item.active .b-team-200').data('timing') ?
+                $('#rightad_slide2 .owl-item.active .b-team-200').data('timing') : defaultTiming;
+            setTimeout(function() {
+                owl.trigger('next.owl.carousel');
+            }, carouselTiming);
+        }
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        var owl = $("#homepagead_slide .owl-carousel").owlCarousel({
+            autoplayTimeout: 60000,
+            autoplay: true,
+            items: 1,
+            loop: true,
+            dots: false,
+            nav: true,
+            onDragged: setDelay,
+
+        });
+        owl.on('changed.owl.carousel', function(event) {
+            setDelay();
+        });
+
+        function setDelay() {
+            owl.trigger('stop.owl.autoplay');
+
+            var defaultTiming = 2;
+            var carouselTiming =
+                $('#homepagead_slide .owl-item.active .b-team-200').data('timing') ?
+                $('#homepagead_slide .owl-item.active .b-team-200').data('timing') : defaultTiming;
+
+
+            setTimeout(function() {
+                owl.trigger('next.owl.carousel');
+            }, carouselTiming * 1000);
+        }
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        //Sort random function
+        function random(owlSelector) {
+            owlSelector.children().sort(function() {
+                return Math.round(Math.random()) - 0.5;
+            }).each(function() {
+                $(this).appendTo(owlSelector);
+            });
+        }
+
+
+        var owl = $('#owl-demo-home');
+        owl.owlCarousel({
+            autoplay: true,
+            items: 1,
+            dots: false,
+            loop: true,
+            onDragged: setDelay,
+            onInitialize: function(element) {
+                owl.children().sort(function() {
+                    return Math.round(Math.random()) - 0.5;
+                }).each(function() {
+                    $(this).appendTo(owl);
+                });
+            },
+
+
+        });
+
+        owl.on('changed.owl.carousel', function(event) {
+            setDelay();
+            var SliderName = $('#owl-demo-home .owl-item.active .item').data('slidername')
+            var SliderView = $('#owl-demo-home .owl-item.active .item').data('views')
+            var homeAdsMaxView = $('#owl-demo-home .owl-item.active .item').data('maxviews')
+            var homeviews = parseInt(SliderView) + 1;
+            $('#owl-demo .owl-item.active .item').data('views',homeviews)
+            frappe.call({
+                method: "gscommunity.gscommunity.doctype.gsod_promotions.gsod_promotions.top_add_pagecount",
+                args: { "name": SliderName, "pagecount": homeviews, "maxviews": homeAdsMaxView },
+                callback: function(r) {
+                    if(r.message==1){
+                        $('#owl-demo-home .owl-item').find('div[data-slidername="'+SliderName+'"]').parent().remove()
+                    }
+                }
+            });
+        });
+
+        function setDelay() {
+            owl.trigger('stop.owl.autoplay');
+
+            var defaultTiming = 2;
+            var carouselTiming =
+                $('#owl-demo-home .owl-item.active .item').data('timing') ?
+                $('#owl-demo-home .owl-item.active .item').data('timing') : defaultTiming;
+            setTimeout(function() {
+                owl.trigger('next.owl.carousel');
+            }, carouselTiming * 1000);
+        }
+
+
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        //Sort random function
+        function random(owlSelector) {
+            owlSelector.children().sort(function() {
+                return Math.round(Math.random()) - 0.5;
+            }).each(function() {
+                $(this).appendTo(owlSelector);
+            });
+        }
+
+
+        var owl = $('#owl-demo-top');
+        owl.owlCarousel({
+            autoplay: true,
+            items: 1,
+            dots: false,
+            loop: true,
+            onDragged: setDelay,
+            onInitialize: function(element) {
+                owl.children().sort(function() {
+                    return Math.round(Math.random()) - 0.5;
+                }).each(function() {
+                    $(this).appendTo(owl);
+                });
+            },
+
+
+        });
+
+        owl.on('changed.owl.carousel', function(event) {
+            setDelay();
+            var SliderName = $('#owl-demo-top .owl-item.active .item').data('slidername')
+            var SliderView = $('#owl-demo-top .owl-item.active .item').data('views')
+            var topAdsMaxView = $('#owl-demo-top .owl-item.active .item').data('maxviews')
+            var topviews = parseInt(SliderView) + 1;
+            $('#owl-demo .owl-item.active .item').data('views',topviews)
+            frappe.call({
+                method: "gscommunity.gscommunity.doctype.gsod_promotions.gsod_promotions.top_add_pagecount",
+                args: { "name": SliderName, "pagecount": topviews, "maxviews": topAdsMaxView },
+                callback: function(r) {
+                    if(r.message==1){
+                        $('#owl-demo-home .owl-item').find('div[data-slidername="'+SliderName+'"]').parent().remove()
+                    }
+                }
+            });
+        });
+
+        function setDelay() {
+            owl.trigger('stop.owl.autoplay');
+
+            var defaultTiming = 2;
+            var carouselTiming =
+                $('#owl-demo-top .owl-item.active .item').data('timing') ?
+                $('#owl-demo-top .owl-item.active .item').data('timing') : defaultTiming;
+            setTimeout(function() {
+                owl.trigger('next.owl.carousel');
+            }, carouselTiming * 1000);
+        }
+
+
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        //Sort random function
+        function random(owlSelector) {
+            owlSelector.children().sort(function() {
+                return Math.round(Math.random()) - 0.5;
+            }).each(function() {
+                $(this).appendTo(owlSelector);
+            });
+        }
+
+
+        var owl = $('#owl-demo');
+        owl.owlCarousel({
+            autoplay: true,
+            items: 1,
+            dots: false,
+            loop: true,
+            onDragged: setDelay,
+            onInitialize: function(element) {
+                owl.children().sort(function() {
+                    return Math.round(Math.random()) - 0.5;
+                }).each(function() {
+                    $(this).appendTo(owl);
+                });
+            },
+
+
+        });
+
+        owl.on('changed.owl.carousel', function(event) {
+            setDelay();
+            var SliderName = $('#owl-demo .owl-item.active .item').data('slidername')
+            var SliderView = $('#owl-demo .owl-item.active .item').data('views')
+            var AdsMaxView = $('#owl-demo .owl-item.active .item').data('maxviews')
+            var views = parseInt(SliderView) + 1;
+            $('#owl-demo .owl-item.active .item').attr('data-views',views)
+            frappe.call({
+                method: "gscommunity.gscommunity.doctype.gsod_promotions.gsod_promotions.add_pagecount",
+                args: { "name": SliderName, "pagecount": views, "maxviews": AdsMaxView },
+                callback: function(r) {
+                    if(r.message==1){
+                        $('#owl-demo-home .owl-item').find('div[data-slidername="'+SliderName+'"]').parent().remove()
+                    }
+                }
+            });
+        });
+
+        function setDelay() {
+            owl.trigger('stop.owl.autoplay');
+
+            var defaultTiming = 2;
+            var carouselTiming =
+                $('#owl-demo .owl-item.active .item').data('timing') ?
+                $('#owl-demo .owl-item.active .item').data('timing') : defaultTiming;
+            setTimeout(function() {
+                owl.trigger('next.owl.carousel');
+            }, carouselTiming * 1000);
+        }
+
+
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.slideshow ').cycle({
+            fx: 'fade',
+            speed: 'fast',
+            timeoutFn: function(curr, next, opts, fwd) {
+                return parseInt($(opts.elements[opts.currSlide]).attr("data-duration")) *
+                    1000;
+            }
+        });
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var member = getCookie('member_id');
+        var is_member=getCookie('is_member')
+        var active=getCookie('active')
+        if (member == '' || active=="0" || is_member=="0") {
+            $('a[href="/directory"]').parent().hide()
+            $('a[href="/current-by-laws"]').parent().hide()
+            $('a[href="/samajdarshan"]').parent().hide()
+            $('a[href="/elections"]').parent().hide()
+        }
+        var system_user=getCookie('system_user');
+        if(system_user=='no'){
+            $('a[href="/desk"]').parent().hide()
+        }
+        jQuery(function($) {
+            var tabset0 = $('.tabset0').pwstabs({
+                onBeforeInit: function() {
+                    // console.log('before init');
+                },
+                onAfterInit: function() {
+                    // console.log('after init');
+                }
+            });
+        });
+        var owl = $("#ad_slide .owl-slider").owlCarousel({
+            autoplayTimeout: 60000,
+            autoplay: true,
+            items: 1,
+            loop: true,
+            dots: false,
+            nav: true,
+            onDragged: setDelay,
+        });
+        owl.on('initialized.owl.carousel translated.owl.carousel', function() {
+            setDelay();
+        });
+
+        function setDelay() {
+            owl.trigger('stop.owl.autoplay');
+            console.log('1')
+            var defaultTiming = 1000;
+            var carouselTiming = $('#ad_slide .owl-item.active .b-team-2').data('timing') ? $('#ad_slide .owl-item.active .b-team-2').data('timing') : defaultTiming;
+
+            setTimeout(function() {
+                owl.trigger('next.owl.carousel', [carouselTiming]);
+            }, carouselTiming);
+        }
+    });
+    function subscribe_now(){
+        $('#subscribe_modal').modal('show')
+    }
+    function save_subscriber(){
+        var email=$('#subscribe_modal #subscribe_email').val();
+        var email_group=$('#subscribe_email_group option:selected').val();
+        console.log(email_group)
+        if(email!='' && email_group!=''){
+            frappe.call({
+                method:'nonprofit.nonprofit.doctype.member.member.add_newsletter',
+                args:{
+                    emailgroup:email_group,
+                    email:email
+                },callback:function(data){
+                    $('#subscribe_modal').modal('hide')
+                    frappe.msgprint('Your email is registered successfully.')
+                }
+            })
+        }else{
+
+        }
+    }
+    function check_login(){
+        let url='https://www.i9live.com/diwali-2019';
+        var member = getCookie('member_id');
+        if(member != ''){
+            // window.location.href=url;
+            url='https://www.i9live.com/redirectpage?Event=Diwali 2019'
+            var windowReference = window.open();
+            frappe.call({
+                method: 'gscommunity.gscommunity.api.generate_user_token',
+                args: {
+                    member: member
+                },
+                callback: function(data) {
+                    // var user = Encrypt(frappe.session.user)
+                    url = url + '&token=' + data.message.token + '&user=' + data.message.user
+                    localStorage.removeItem('redirect_url')
+                    // window.open(url,'_blank')
+                    windowReference.location = url;
+                }
+            })
+        }else{
+            createCookie('redirect',url)
+            window.location.href='/login'
+        }
+    }
+    function createCookie(name,value){
+        document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value)
+    }
+    </script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/gscommunity/assets/js/sidebar-menu.js"></script>
+    <script src="/assets/gscommunity/assets/js/tabulous.js"></script>
+    <script src="/assets/gscommunity/assets/js/js.js"></script>
+    <script src="/assets/gscommunity/assets/js/jquery.pwstabs.js"></script>
+    <script src="/assets/gscommunity/assets/js/moment.min.js"></script>
+    <script src="/assets/gscommunity/assets/js/fullcalendar.min.js"></script>
+    <!--  <script src="/assets/gscommunity/assets/js/mailin.js"></script> -->
+    <script src="/assets/gscommunity/assets/js/lightgallery-all.min.js"></script>
+    <script src="/assets/gscommunity/assets/js/picturefill.min.js"></script>
+    <script src="/assets/gscommunity/assets/js/jquery.mousewheel.min.js"></script>
+    {%- for link in web_include_js %}
+    <script type="text/javascript" src="{{ link|abs_url }}"></script>
+    {%- endfor -%} {%- block script %}{%- endblock %}
+    <!-- csrf_token -->
+    {%- block body_include %}{{ body_include or "" }}{% endblock -%}
+    <!-- <script type="text/javascript">
+  $(document).ready(function() {
+   var adBlockTester = document.createElement('div');
+adBlockTester.innerHTML = '&nbsp;';
+adBlockTester.className = 'adsbox';
+document.body.appendChild(adBlockTester);
+window.setTimeout(function() {
+  if( adBlockTester.offsetHeight === 0 ){
+   alert("Blocking ads")
+  }else{
+    console.log("Not blocking ads")
+  }
+  document.body.removeChild(adBlockTester);
+}, 60);
+})
+
+ </script> -->
+</body>
+
+</html>

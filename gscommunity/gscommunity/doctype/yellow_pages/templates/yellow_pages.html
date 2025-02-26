@@ -1,0 +1,244 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+
+
+<div class="container-fluid">
+             <div class="row">
+            <div class="col-md-12">
+               <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li><a href="/yellowpages"> Yellowpages</a> </li>
+                    {% for c in CategoryList %}
+                    <li><a href="{{c.route}}"> 
+                        {{c.name}}</a>
+                    </li>
+                    {% endfor %} {% if SubCategoryList %} {% for s in SubCategoryList %}
+                    <li><a href="{{s.route}}"> 
+                        {{s.name}}</a>
+                    </li>
+                    {% endfor %} {% endif %}
+                    <li class="active">{{title}}</li>
+                </ol>
+              
+            </div>
+              
+        </div>
+
+        <div class="row">
+            <div class="col-md-4"> 
+                <div class="row">
+                      <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block"> {{title}} </h4>
+                      </div>
+                 </div>
+            </div>
+             <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}      
+             </div>
+        </div>
+    </div> 
+</div>
+<section class="section-content1  parallax">
+    {% if YellowpagesList %} {% for yp in YellowpagesList %}
+    <div class="container-fluid event-schedule-area-two">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-9" style="margin-bottom: 20px;">
+                    <section class="b-car-details">
+                        <div class="" >
+                            <div class="" style="border: 1px solid #dbced2;padding-bottom: 10px;">
+                                <div class="div-text">
+                                    <div class="clearfix contact-det">
+                                        <input type="hidden" id="ViewCount" name="ViewCount" value="{{yp.view_count}}">
+                                        <input type="hidden" id="YPName" name="YPName" value="{{yp.business_name}}">
+                                        <h4 class="b-car-details__section-title yellow-header" style="padding-left: 20px;margin-top: 0px;"> {{yp.business_name}}
+
+                                           <span style="float: right;font-size: 14px;color: #7b6a6f;"> <i class="fa fa-eye" style="padding: 0 10px;"></i>
+                                            {% if yp.view_count!='null' %}{{yp.view_count}}{% else %}0{% endif %} Views
+                                           </span>
+                                            {% if (yp.address) %}
+                                            <span class="about-author__title yellow-title yellow-i aa1" onclick="LoadMap('{{ yp.address }},{% if yp.address_line_2 %} {{ yp.address_line_2 }},{% endif %} {% if yp.city %}{{yp.city}},{% endif %} {% if yp.state %}{{yp.state}}{% endif %} - {% if yp.zip_code %}{{yp.zip_code}}{% endif %}')"
+                                                style="cursor: pointer;"> <i class="icon fa fa-map-marker" aria-hidden="true" ></i> {{yp.address}}, 
+                                            {% if yp.address_line_2 %}{{yp.address_line_2}},{% endif %} {% if yp.city %}{{yp.city}},{% endif %} {% if yp.state %}{{yp.state}} {% endif %} {% if yp.zip_code %}- {{yp.zip_code}}{% endif %}</span> 
+                                            {% endif %}
+                                            {% if yp.website_url %}
+                                            <span class="web_link">
+                                                <a href="{{yp.website_url}}" target="_blank">{{yp.website_url}}</i></a>
+                                            </span>
+                                            {% endif %}
+                                        </h4>
+
+                                     
+                                        <div class="col-md-12">
+                                            {% if (yp.owner_name) %}
+                                            <div class="col-md-4 col-sm-4">
+                                                <span class="about-author__title yellow-title yellow-i" ><i class="fa fa-user"></i>{{yp.owner_name}}</span>
+                                            </div>
+                                            {% endif %}
+                                            
+                                            <div class="col-md-4 col-sm-4" >
+                                                {% if (yp.phone) %}
+                                                <span class="about-author__title yellow-title yellow-i"><i class="fa fa-phone" ></i>{{yp.phone}}</span> {% endif %}
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                {% if (yp.email) %}
+                                                <span class="about-author__title yellow-title yellow-i" style="text-transform: lowercase;"><i class="fa fa-envelope-open"></i>{{yp.email}}</span> {% endif %}
+                                            </div>
+                                            <!-- <div class="col-md-3" >
+                                                {% if (yp.website_url) %}
+                                                <a href="{{yp.website_url}}" target="_blank"><span class="about-author__title yellow-title yellow-i" style="text-transform: none;"><i class="fa fa-globe" ></i>{{yp.website_url}}</span></a> {% endif %}
+                                            </div> -->
+                                           
+                                            <div class="col-md-12" style="padding-top: 15px;margin-top: 15px;border-top: 1px solid #f4f0f1;">
+                                                <div style="width: 100%;"><img class="sp-image" src="{% if yp.image %}{{yp.image}}{% else %}/assets/frappe/images/background.png{% endif %}" alt="Yellowpages" data-default="{{yp.image}}" style="display: block;height: auto;max-width: 100%;">
+                                                </div>
+                                            </div>
+                                           </div>
+                                          
+                                            {% if (yp.description) %}
+                                            <div class="col-md-12" style="padding-top: 20px">
+                                                <p>{{yp.description}}</p>
+                                            </div>
+                                            {% endif %}
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-3">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}{% endif %}
+</section>
+{% endblock %} {% block style %}
+<style type="text/css">
+pad-d {
+    padding: 20px 30px 20px !important;
+}
+
+.yellow-li li {
+    font-weight: 600;
+}
+
+.ad-sec {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ad-sec img {
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.list-goods_th .b-goods-1__name {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.b-filter-2__title {
+    background: #212121
+}
+
+.mi-20 {
+    margin-top: 20px;
+}
+
+.flex-1 {
+    diyplay: inline-flex;
+}
+
+.div-text {
+    width: 100%;
+}
+
+
+
+/*.div-img{
+      width: 30%;
+   
+}*/
+
+.contact-det {
+    padding: 0 !important;
+    border: 1px solid tranyp.rent;
+    border-radius: 2px;
+  /*  margin-top: 20px;*/
+}
+
+.yellow-i i {
+    font-size: 14px;
+    color: #e50041;
+    margin-right: 10px;
+}
+
+.yellow-i {
+    font-size: 14px;
+    background: #f5f5f5;
+    padding: 15px 15px;
+    font-weight: 500;
+}
+
+.pad-20 {
+    padding-top: 20px;
+}
+
+.ad-sec {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ad-sec img {
+    width: 100%;
+    padding-bottom: 10px;
+}
+.web_link{
+    float: right;
+    margin-top: -2%;
+}
+.web_link a{
+    font-size: 14px;
+}
+</style>
+{% endblock %} {% block script %}
+<script type="text/javascript">
+
+function LoadMap(address) 
+{ 
+var URL  = "https://www.google.com/maps/search/?api=1&query="+ 
+encodeURIComponent(address); 
+window.open(URL); 
+}
+
+
+
+$(document).ready(function() {
+    var Name = $("#YPName").val();
+    var Value = $("#ViewCount").val();
+     if (Value == "null") 
+    {
+        $("#ViewCount").val("0");
+         Value = $("#ViewCount").val();  
+    }
+    
+    var PageCount = parseInt(Value) + 1;
+    console.log(Name);
+    console.log(PageCount);
+    frappe.call({
+        method: "gscommunity.gscommunity.doctype.yellow_pages.yellow_pages.add_pagecount",
+        args: { "name": Name, "pagecount": PageCount },
+
+        callback: function(r) {
+            console.log(r);
+        }
+    });
+})
+</script>
+{% endblock %}

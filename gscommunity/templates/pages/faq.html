@@ -1,0 +1,124 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">FAQ's</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">FAQ's</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}  
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<section class="section-content1 parallax">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="col-md-9">
+                <div class="panel-group" id="accordion" style="margin: 15px;">
+                    {% if faq|len > 0 %} {% for item in faq %}
+                    <div class="accordion"><b>Q: {{item.question}}</b><span class="{% if loop.index==1 %}fa fa-chevron-up{% else %}fa fa-chevron-down{% endif %}"></span></div>
+                    <div class="panel" style="{% if loop.index==1 %}display: block;{% endif %}">
+                        <p><b>A:</b> {{item.answer}}</p>
+                    </div>
+                    {% endfor %} {% endif %}
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12 ">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">
+.b-team-002 {
+    text-align: center;
+    background: #ece5e7;
+    padding-bottom: 7px;
+}
+
+.b-team-002__name {
+    margin-top: 10px;
+    font-size: 16px;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+    color: #e50041;
+}
+
+.accordion {
+    background-color: #f1f1f1;
+    color: #444;
+    cursor: pointer;
+    padding: 13px;
+    width: 100%;
+    text-align: left;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.4s;
+    margin-bottom: 15px;
+}
+
+.active,
+.accordion:hover {
+    background-color: #eee;
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.panel-group .panel {
+    margin-bottom: 15px;
+}
+
+.accordion span {
+    float: right;
+}
+</style>
+{% endblock %} {% block script %}
+<script>
+$(document).ready(function() {
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            if ($(this).find('span').attr('class') == 'fa fa-chevron-up') {
+                $(this).find('span').removeClass('fa-chevron-up');
+                $(this).find('span').addClass('fa-chevron-down');
+            } else {
+                $(this).find('span').addClass('fa-chevron-up');
+                $(this).find('span').removeClass('fa-chevron-down');
+            }
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
+})
+</script>
+{% endblock %}

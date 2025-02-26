@@ -1,0 +1,115 @@
+  
+.content.demo_responsive{
+   width: 100%;
+   padding: 0 20px;
+   box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+}
+.content h2{
+   font-size: 40px;
+   font-weight: bold;
+   color: #fff;
+   margin-bottom: 30px;
+   margin-top: 30px;
+}
+.content h3{
+   font-size: 35px;
+   font-weight: 300;
+   color: #fff;
+   margin-bottom: 15px;
+   margin-top: 25px;
+}
+.content a{
+   color: #fff5c3;
+   text-decoration: underline;
+}
+.content a:hover{
+   color: #fff;
+   text-decoration: none;
+}
+ 
+.content p{
+   color: #fff;
+   font-size: 17px;
+   margin: 15px 0;
+}
+.content strong{
+   font-weight: bold;
+   font-size: 17px;
+   color: #fff5c3;
+}
+.content code strong{
+   color: #000;
+}
+.content table{
+   background-color: #fff;
+   width: 100%;
+}
+.content table thead tr th{
+   border: 1px solid #505050;
+   padding: 8px;
+   font-size: 17px;
+   color: #ff7260;
+   font-weight: bold;
+}
+.content table tr:nth-child(even) td{
+   background-color: #f0f0f0;
+}
+.content .pws_example_mixed_content_block{
+   width: 900px;
+   position: relative;
+}
+.content .pws_example_mixed_content_block:after{
+   display: block;
+   content: '';
+   clear: both;
+}
+.content .pws_example_mixed_content_left{
+   width: 350px;
+   position: relative;
+   float: left;
+   display: block;
+}
+.content .pws_example_mixed_content_right{
+   width: 550px;
+   position: relative;
+   float: left;
+   display: block;
+   color: #505050;
+}
+.content .pws_example_mixed_content_right h3,
+.content .pws_example_mixed_content_right p{
+   margin: 0 0 15px 0;
+   color: #505050;
+}
+ 
+/* Demo colors */
+.content .pws_demo_colors{
+   display: block;
+   margin: 15px 0;
+}
+
+.content .pws_demo_colors_title{
+    color:#fff;
+    vertical-align:top;
+    display:inline-block;
+    width:120px;
+    height:30px;
+    
+    padding:6px 0 0 0;
+    
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+}
+
+.content .pws_demo_colors a{
+   width: 30px;
+   height: 30px;
+   display: inline-block;
+   border: 3px solid #fff;
+   box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+} 

@@ -1,0 +1,325 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">Gallery</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block"> {{AlbumsList.events}}  </h4>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+              {% include 'templates/includes/Advertisement/Topadvertisement.html' %} 
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<section class="section-content1">
+    {% if videos %}
+    <div class="container-fluid home" id="videos">
+        <div class="col-md-12">
+            <div class="">
+                <div class="video_header">
+                <h4>Videos</h4></div>
+                <ul id="" class="list-unstyled row video_list">                    
+                    {% for item in videos %}
+                    <li class="col-xs-12" id="{{loop.index}}">
+                        <a href="{{item.url}}" target="_blank" style="cursor: pointer">{{item.name}}</a>
+                    </li>
+                    {% endfor %}     
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endif %} 
+    <div class="container-fluid home">
+        <div class="col-md-12">
+            <div class="demo-gallery" id="img-gallery">
+                <div class="video_header" style="margin-bottom: 15px;">
+                <h4>Images</h4></div>
+                <ul id="lightgallery" class="list-unstyled row">
+                    {% if image_gallery %}{% for item in image_gallery %}
+                    <li class="col-xs-12 col-sm-6 col-md-3" data-responsive="{{item.image}} 800" data-src="{{item.image}}">
+                        <a href="">
+                            <img class="img-responsive" src="{{item.image}}" style="height: 175px;">
+                        </a>
+                    </li>
+                    {% endfor %} {% elif AlbumsList.cover_image %}
+                    <li class="col-xs-12 col-sm-6 col-md-3" data-responsive="{{AlbumsList.cover_image}} 800" data-src="{{AlbumsList.cover_image}}">
+                        <a href="">
+                            <img class="img-responsive" src="{{AlbumsList.cover_image}}" style="height: 175px;">
+                        </a>
+                    </li> 
+                    {% else %}
+                    <li class="col-xs-12" style="font-size: 18px;font-weight: 600;padding-left: 25px;">No Images Found.</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="marker" id="marker" value="{{marker}}">
+    <input type="hidden" name="directory" id="directory" value="{{img_directory}}">
+    
+</section>
+<style>
+    .b-isotope-grid__wrap-info {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        bottom: 20px;
+        left: 20px;
+        padding: 10px;
+        -webkit-transition: all .3s;
+        transition: all .3s;
+        text-align: center;
+        opacity: 0;
+        background-color: transparent !important;
+    }
+    </style>
+    <style type="text/css">
+    .demo-gallery>ul {
+        margin-bottom: 0;
+    }
+
+    .demo-gallery>ul>li {
+        float: left;
+        margin-bottom: 15px;
+
+      /*  width: 25%;*/
+    }
+
+    .demo-gallery>ul>li a {
+       border-radius: 3px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    float: left;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .demo-gallery>ul>li a>img {
+        -webkit-transition: -webkit-transform 0.15s ease 0s;
+        -moz-transition: -moz-transform 0.15s ease 0s;
+        -o-transition: -o-transform 0.15s ease 0s;
+        transition: transform 0.15s ease 0s;
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+        height: 100%;
+        width: auto;
+    }
+
+    .demo-gallery>ul>li a:hover>img {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1);
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    .demo-gallery>ul>li a:hover .demo-gallery-poster>img {
+        opacity: 1;
+    }
+
+    .demo-gallery>ul>li a .demo-gallery-poster {
+        background-color: rgba(0, 0, 0, 0.1);
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        -webkit-transition: background-color 0.15s ease 0s;
+        -o-transition: background-color 0.15s ease 0s;
+        transition: background-color 0.15s ease 0s;
+    }
+
+    .demo-gallery>ul>li a .demo-gallery-poster>img {
+        left: 50%;
+        margin-left: -10px;
+        margin-top: -10px;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        -webkit-transition: opacity 0.3s ease 0s;
+        -o-transition: opacity 0.3s ease 0s;
+        transition: opacity 0.3s ease 0s;
+    }
+
+    .demo-gallery>ul>li a:hover .demo-gallery-poster {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .demo-gallery .justified-gallery>a>img {
+        -webkit-transition: -webkit-transform 0.15s ease 0s;
+        -moz-transition: -moz-transform 0.15s ease 0s;
+        -o-transition: -o-transform 0.15s ease 0s;
+        transition: transform 0.15s ease 0s;
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+        height: 100%;
+        width: 100%;
+    }
+
+    .demo-gallery .justified-gallery>a:hover>img {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1);
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    .demo-gallery .justified-gallery>a:hover .demo-gallery-poster>img {
+        opacity: 1;
+    }
+
+    .demo-gallery .justified-gallery>a .demo-gallery-poster {
+        background-color: rgba(0, 0, 0, 0.1);
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        -webkit-transition: background-color 0.15s ease 0s;
+        -o-transition: background-color 0.15s ease 0s;
+        transition: background-color 0.15s ease 0s;
+    }
+
+    .demo-gallery .justified-gallery>a .demo-gallery-poster>img {
+        left: 50%;
+        margin-left: -10px;
+        margin-top: -10px;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        -webkit-transition: opacity 0.3s ease 0s;
+        -o-transition: opacity 0.3s ease 0s;
+        transition: opacity 0.3s ease 0s;
+    }
+
+    .demo-gallery .justified-gallery>a:hover .demo-gallery-poster {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .demo-gallery .video .demo-gallery-poster img {
+        height: 48px;
+        margin-left: -24px;
+        margin-top: -24px;
+        opacity: 0.8;
+        width: 48px;
+    }
+
+    .demo-gallery.dark>ul>li a {
+        border: 3px solid #04070a;
+    }
+
+    .home .demo-gallery {
+        padding-bottom: 80px;
+    }
+    .video_header{
+        padding: 15px;
+        background: #f4f0f1;
+        border: 1px solid #ddd;
+    }
+    .video_list{
+        padding: 15px;
+        border: 1px solid #ddd;
+        margin: 0px;
+        border-top: none;
+    }
+    .video_list{
+        line-height: 40px;
+    }
+    #img-gallery{
+        margin-top: 20px;
+    }
+</style>
+{% endblock %} {% block script %}
+<script type="text/javascript">
+function openVideo(video) {
+    $("#VideoIframe").attr("src", "https://www.youtube.com/embed/" + video);
+    $('#VideoModal').modal('show')
+}
+function download_video(id){
+    var url=$('#videos #'+id).find('a').attr('data-url')
+    var filename=$('#videos #'+id).find('a').text()
+    if(url){
+        frappe.call({
+            method:'gscommunity.gscommunity.doctype.gallery.gallery.download_video',
+            args:{
+                url:url,
+                filename:filename
+            },
+            callback:function(data){
+                console.log(data.message)
+                // $('#videos #'+id).find('a').attr('href',data.message)
+                // $('#videos #'+id).find('a').trigger('click')
+            }
+        })
+    }
+}
+
+$(function() {
+    $('.modal').on('hidden.bs.modal', function(e) {
+        $iframe = $(this).find("iframe");
+        $iframe.attr("src", $iframe.attr("src"));
+    });
+});
+var scrol_object=true;
+var waiting=false;
+$(window).scroll(function(){
+    if(waiting){
+        return;
+    }
+    waiting=true;
+    scroll()
+})
+function scroll(){
+    var marker=$('#marker').val();
+    var directory=$('#directory').val();
+    if(marker!='' && scrol_object!=false){
+        frappe.call({
+            method:'gscommunity.gscommunity.doctype.gallery.gallery.get_scroll_data',
+            args:{
+                marker:marker,
+                directory:directory
+            },
+            callback:function(data){                
+                if(data.message!=undefined){
+                    $('#marker').val(data.message.marker)
+                    var img_html=''
+                    for(var i=0;i<data.message.image.length;i++){
+                        img_html+='<li class="col-xs-12 col-sm-6 col-md-3" data-responsive="'+data.message.image[i].url; 
+                        img_html+=' 800" data-src="'+data.message.image[i].url+'"><a href=""><img class="img-responsive" src="'
+                        img_html+=data.message.image[i].url+'" style="height: 175px;object-fit: cover;"></a></li>'
+                    }
+                    var gallery=$('#img-gallery #lightgallery').lightGallery()
+                    $('#img-gallery #lightgallery').append(img_html);
+                    $lg = $('#lightgallery');
+                    $lg.data('lightGallery').destroy(true);
+                    $('#img-gallery #lightgallery').lightGallery();
+                    if(data.message.marker=='')
+                        scrol_object=false
+                }else{
+                    scrol_object=false
+                }
+                waiting=false;
+            }
+        })
+    }
+}
+</script>
+{% endblock %}

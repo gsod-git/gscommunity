@@ -1,0 +1,572 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<section class="parallax breadcrumb-top1" style="padding-top:40px;padding-bottom: 40px;min-height: 400px;">
+    <div class="container-fliuid">
+        <div class="page-container" id="page-members" data-path="members">
+            <div class="page-content without-sidebar">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 payment">
+                        <h4 class="" style="font-size: 25px !important;padding-bottom: 20px;"> 
+                            Complete Payment  
+                        </h4>
+                        <div class="payment-tabs">
+                            <a class="btn tabActive" data-attr="cart">Cart</a>
+                            <a class="btn" data-attr="payment">Payment</a>
+                        </div>
+                        <div class="col-md-12 col-sm-12 tbl_div" id="cart" style="border: 1px solid #ccc">
+                            <table class="table table-bordered" style="display: none;">
+                                <thead>
+                                    <tr>
+                                        <th>User Info</th>
+                                        <th>Payment Type</th>
+                                        <th>Total Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>First Name</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" name="firstname" id="firstname" autocomplete="off" class="form-control" required="required">
+                                        <span class="error" id="fname_err">Please enter first name</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>Last Name</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" name="lastname" id="lastname" autocomplete="off" class="form-control" required="required">
+                                        <span class="error" id="lname_err">Please enter last name</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="email" name="email" id="email" autocomplete="off" class="form-control" required="required">
+                                        <span class="error" id="email_err">Please enter email</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>Phone Number</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" name="phone" id="phone" autocomplete="off" class="form-control" required="required">
+                                        <span class="error" id="phone_err">Please enter phone number</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>Amount</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" name="amount" id="amount" autocomplete="off" class="form-control" required="required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="control_btns">
+                                <div>
+                                    <button class="btn btn-primary" onclick="goback()">Back</button>
+                                    <button style="float: right;" class="btn btn-primary" onclick="next('payment','cart')">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 tbl_div" id="payment" style="display: none;border: 1px solid #ccc">
+                            <div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>Name on Card<span> *</span></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" name="card-name" id="card-name" class="form-control" required="required" autocomplete="off">
+                                        <span class="error" id="cardname_err">Please enter name</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>Card Number<span> *</span></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" name="card-number" id="card-number" required="required" class="form-control" autocomplete="off" maxlength="16" minlength="16">
+                                        <span class="error" id="cardnumber_err">Please enter card number</span>
+                                        <span class="error" id="cardnumlen_err">Please enter 16 digit card number</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>Expiration Date<span> *</span></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="col-md-4" style="padding-left: 0;padding-right: 0">
+                                            <select name="exp-month" id="exp-month" required="required" class="form-control">
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4" style="padding-left: 0;padding-right: 0">
+                                            <select name="exp-year" id="exp-year" required="required" class="form-control"></select>
+                                        </div>
+                                        <span class="error" id="exp_err">Please enter valid expiry details</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>CVV<span> *</span></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="password" name="card-cvv" id="card-cvv" class="form-control" required="required" autocomplete="off" maxlength="3" minlength="3">
+                                        <span class="error" id="cardcvv_err">Please enter cvv</span>
+                                        <span class="error" id="cardcvvlen_err">Please enter 3 digit cvv</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="control_btns">
+                                <div>
+                                    <button class="btn btn-primary" onclick="next('cart','payment')">Back</button>
+                                    <button style="float: right;" class="btn btn-primary" type="submit" onclick="proceedPayment()">Proceed</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+<style>
+.payment {
+    padding: 0 5%;
+}
+
+.payment_title {
+    border-bottom: 1px solid #eaeaeb;
+    padding: 10px;
+}
+
+form {
+    padding: 10px;
+}
+
+.form-control {
+    padding: 5px !important;
+    width: 75% !important;
+    border: 1px solid #cecaca !important;
+}
+
+label {
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.form-group .text-muted {
+    color: #121111 !important;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.tbl_div {
+    padding: 20px 25px;
+}
+
+.table thead tr th {
+    padding: 15px;
+    color: #fff;
+}
+
+.table tbody tr td p {
+    line-height: 20px;
+    text-align: center;
+}
+
+.table tbody tr td {
+    font-size: 15px;
+    padding: 15px;
+}
+
+.table thead {
+    background-color: #84616b;
+}
+
+.table-bordered {
+    border: 1px solid #dbced2;
+}
+
+#control_btns {
+    margin-top: 6%;
+    margin-bottom: 5%;
+}
+
+.payment-tabs {
+    margin-left: 2%;
+    margin-bottom: 20px;
+}
+
+.payment-tabs .btn {
+    border-radius: 0;
+    background: #dddcda;
+    color: #222;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.payment-tabs .btn:hover {
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+.tabActive {
+    background: #84616b !important;
+    color: #fff !important;
+}
+
+#payment span {
+    color: red;
+}
+
+.error {
+    color: red;
+    display: none;
+}
+</style>
+{% endblock %} {% block script %}
+<script type="text/javascript">
+function SubmitPaypal() {
+    localStorage.setItem("mem_amount_paypal", $("#amount").val());
+    if ($("#amount").val() != "") {
+        $("#FormPay").find("input[name=item_name]").val("GSOD Donation");
+        $("#FormPay").find("input[name=amount]").val($("#amount").val());
+        $("#FormPay").find("input[name=first_name]").val($("#first_name").val());
+        $("#FormPay").find("input[name=last_name]").val($("#last_name").val());
+        $("#FormPay").find("input[name=address1]").val($("#address1").val());
+        $("#FormPay").find("input[name=city]").val($("#city").val());
+        $("#FormPay").find("input[name=phone]").val($("#phone").val());
+        $("#FormPay").find("input[name=country]").val($("#country").val());
+        $("#FormPay").find("input[name=currency]").val($("#currency").val());
+        $("#FormPay").find("input[name=email]").val($("#email").val());
+        $("#FormPay").submit();
+    } else {
+        frappe.msgprint(__('Please Enter the Amount to Proceed'));
+    }
+
+}
+
+function goback() {
+    window.history.back();
+}
+
+function proceedPayment() {
+    $('#cardname_err').hide()
+    $('#cardnumber_err').hide()
+    $('#cardcvv_err').hide()
+    $('#exp_err').hide()
+    var cardnumber = $('#card-number').val()
+    var cardcvv = $('#card-cvv').val()
+    var expmonth = $('#exp-month option:selected').val()
+    var expyear = $('#exp-year option:selected').val()
+    var cardname = $('#card-name').val()
+    var date=new Date();
+    var year=date.getFullYear()
+    year=year.toString().substr(-2)
+    var error=0
+    if(parseInt(expyear)<=parseInt(year)){
+        var month=date.getMonth()+1;
+        if(parseInt(expmonth)<month){
+            error=1
+            $('#exp_err').show()
+        }
+    }
+    if (cardname != '' && cardnumber != '' && expmonth != '' && expyear != '' && error == 0) {
+        var exp=expmonth+expyear
+        SubmitPayment(cardnumber,cardcvv,exp,cardname)
+    } else {
+        if (cardname == '') {
+            $('#cardname_err').show()
+        }
+        if (cardnumber == '') {
+            $('#cardnumber_err').show()
+        }
+        if (cardcvv == '') {
+            $('#cardcvv_err').show()
+        }
+    }
+}
+
+function next(id, hide) {
+    $('#fname_err').hide()
+    $('#lname_err').hide()
+    $('#email_err').hide()
+    $('#phone_err').hide()
+    if (id == 'payment') {
+        var fname = $('#firstname').val()
+        var lname = $('#lastname').val()
+        var email = $('#email').val()
+        var phone = $('#phone').val()
+        if (fname != '' && lname != '' && email != '' & phone != '') {
+            $('.payment-tabs a').removeClass('tabActive')
+            $('.payment-tabs a[data-attr=' + id + ']').addClass('tabActive')
+            $('#' + id).show()
+            $('#' + hide).hide()
+        } else {
+            if (fname == '') {
+                $('#fname_err').show()
+            }
+            if (lname == '') {
+                $('#lname_err').show()
+            }
+            if (email == '') {
+                $('#email_err').show()
+            }
+            if (phone == '') {
+                $('#phone_err').show()
+            }
+        }
+    } else {
+        $('.payment-tabs a').removeClass('tabActive')
+        $('.payment-tabs a[data-attr=' + id + ']').addClass('tabActive')
+        $('#' + id).show()
+        $('#' + hide).hide()
+    }
+}
+frappe.ready(function() {
+    var member_ids = getCookie('member_id');
+    console.log(member_ids)
+    var amount = localStorage.getItem('donationamount');
+    var initial_amount = localStorage.getItem('initial_amount');
+    var now = localStorage.getItem('new_amount');
+
+    var doctypes = localStorage.getItem('doctype');
+    var member_html = ''
+    if (member_ids != '') {
+        frappe.call({
+            method: "gscommunity.gscommunity.api.getmemberdetails",
+            args: {
+                "memberid": member_ids
+            },
+            callback: function(r) {
+                $("input[name=email]").val(r.message[0].email);
+                $("input[name=firstname]").val(r.message[0].member_name);
+                $("input[name=lastname]").val(r.message[0].last_name);
+                $("input[name=phone]").val(r.message[0].phone_no);
+                $("input[name=city]").val(r.message[0].city);
+                $("input[name=address1]").val(r.message[0].address_line_1 + " , " + r.message[0].city);
+                if (doctypes == 'Membership') {
+                    member_html += '<td><p>' + r.message[0].member_name + ' ' + r.message[0].last_name
+                    member_html += '<br>' + r.message[0].email + '</td><td>Membership Registration</td>';
+                    console.log(now)
+                    console.log(initial_amount)
+                    if (initial_amount && now) {
+                        var cur_amount = now - initial_amount;
+                        $("input[name=amount]").val(cur_amount);
+                        member_html += '<td>$ ' + cur_amount + '</td>'
+                        // localStorage.setItem("initial_amount", "");
+                        // localStorage.setItem('new_amount',"");
+                    } else if (initial_amount != '' && now == '') {
+                        $("input[name=amount]").val(initial_amount);
+                        member_html += '<td>$ ' + initial_amount + '</td>'
+                        // localStorage.setItem("initial_amount", "");
+                    } else {
+                        $("input[name=amount]").val(now);
+
+                        member_html += '<td>$ ' + now + '</td>'
+                        // localStorage.setItem("initial_amount", "");
+                        // localStorage.setItem('new_amount',"");
+                    }
+                    $('input[name=amount]').attr('disabled', true)
+                    if (r.message[0].phone_no) {
+                        $('#phone').attr('disabled', true)
+                    }
+                    if (r.message[0].email) {
+                        $('#email').attr('disabled', true)
+                    }
+                    if ($('#firstname').val() != '') {
+                        $('#firstname').attr('disabled', true)
+                    }
+                    if ($('#lastname').val() != '') {
+                        $('#lastname').attr('disabled', true)
+                    }
+                    if (doctypes == 'Membership') {
+                        console.log(member_html)
+                        $('table tbody tr').html(member_html)
+                    }
+                }
+            }
+        });
+    }
+
+    console.log(frappe.session.user)
+    var docname = localStorage.getItem('docname');
+    if (doctypes && docname && doctypes != 'Membership') {
+        frappe.call({
+            method: 'gscommunity.gscommunity.doctype.donation.donation.get_details',
+            args: {
+                doctype: doctypes,
+                docname: docname
+            },
+            callback: function(r) {
+                console.log(r.message)
+                var html = ''
+                if (doctypes == 'Donation') {
+                    html += '<td><p>'
+                    if (r.message[0].donate_as_guest) {
+                        html += r.message[0].full_name
+                        $('#firstname').val(r.message[0].full_name)
+                    } else {
+                        html += r.message[0].member_name + ' ' + r.message[0].last_name
+                        $('#firstname').val(r.message[0].member_name)                        
+                    }                    
+                    html += '<br>' + r.message[0].email
+                    html += '</p></td>'
+                    html += '<td>Donation</td><td>$ ' + r.message[0].donation_amount + '</td>'
+                    $('#amount').val(r.message[0].donation_amount)
+                }
+                if (doctypes == 'Sponsorship') {
+                    html += '<td><p>' + r.message[0].sponsor_name
+                    $('#firstname').val(r.message[0].sponsor_name)
+                    if (r.message[0].sponsor_type == 'Member') {
+                        html += ' ' + r.message[0].last_name
+                        $('#lastname').val(r.message[0].last_name)
+                    }                   
+                    html += '<br>' + r.message[0].email + '</p></td>'
+                    html += '<td>Sponsorship</td><td>$ ' + r.message[0].amount + '</td>'
+                    $('#amount').val(r.message[0].amount)
+                }
+                $('#lastname').val(r.message[0].last_name)
+                $('#email').val(r.message[0].email)
+                $('#phone').val(r.message[0].phone)
+                console.log(r.message[0].amount)
+                
+                $('#amount').attr('disabled', true)
+                if (r.message[0].phone) {
+                    $('#phone').attr('disabled', true)
+                }
+                if (r.message[0].email) {
+                    $('#email').attr('disabled', true)
+                }
+                if ($('#firstname').val() != '') {
+                    $('#firstname').attr('disabled', true)
+                }
+                if ($('#lastname').val() != '') {
+                    $('#lastname').attr('disabled', true)
+                }
+                console.log(html)
+                $('table tbody tr').html(html)
+            }
+        })
+    }
+
+})
+
+$(document).ready(function() {
+    var date = new Date()
+    console.log(date.getMonth())
+    var current_year = date.getFullYear()
+    var html = '';
+    for (var i = 0; i < 10; i++) {
+        html += '<option value="' + current_year.toString().substr(-2) + '">' + current_year + '</option>';
+        current_year = current_year + 1;
+    }
+    $('#exp-year').html(html)
+    $('#phone').keydown(function(e) {
+        KeyDown(e);
+    });
+    $('#card-number').keydown(function(e) {
+        KeyDown(e);
+    });
+    $('#card-cvv').keydown(function(e) {
+        KeyDown(e);
+    });
+    $('#card-number').change(function(e) {
+        var cardnumber=$('#card-number').val()
+        if(cardnumber.length!=16){
+            $('#cardnumlen_err').show()
+            $('#card-number').val('')
+        }
+    });
+    $('#card-cvv').change(function(e) {
+        var cardcvv=$('#card-cvv').val()
+        if(cardcvv.length!=3){
+            $('#cardcvvlen_err').show()
+            $('#card-cvv').val('')
+        }
+    });
+})
+
+function SubmitPayment(cardnumber,cardcvv,exp,cardname) {
+    var fname=$('#firstname').val()
+    var lname=$('#lastname').val()
+    var phone=$('#phone').val()
+    var email=$('#email').val()
+    var query = "username=demo&password=password";
+    query += "&ccnumber="+cardnumber+"&ccexp="+exp+"&cvv="+cardcvv+"&amount="+$('#amount').val()+"&";
+    query += "firstname=" + encodeURIComponent(fname) + "&";
+    query += "lastname=" + encodeURIComponent(lname) + "&";
+    // query += "address1=" + encodeURIComponent("124 Shipping Main St & 2nd avenue") + "&";
+    query += "email=" + encodeURIComponent(email) + "&";
+    query += "phone=" + encodeURIComponent(phone) + "&";
+    query += "type=sale";
+    $.ajax({
+        cache: false,
+        type: "POST",
+        contentType: 'application/x-www-form-urlencoded', 
+        xhrFields: { withCredentials: true }, 
+        crossDomain: true,
+        url: "https://secure.nationalprocessinggateway.com/api/transact.php?" + query,
+        "headers": {              
+              "Access-Control-Allow-Origin":"*"
+        },
+        success: function(responsedata) {
+            console.log(responsedata)            
+            var response=responsedata.split('&')
+            var payment_response=response[0].split('=')[1]
+            var response_text=response[1].split('=')[1]
+            var transaction_id=response[3].split('=')[1]
+            // var payment_response=1;
+            // var response_text='SUCCESS';
+            // var transaction_id='123456'
+            localStorage.setItem('response',payment_response)
+            localStorage.setItem('response_text',response_text)
+            localStorage.setItem('transaction_id',transaction_id)
+            window.location.href='/thankyou'
+        }
+    });
+
+}
+function KeyDown(e) {
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+        // Allow: Ctrl+A, Command+A
+        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+        // Allow: home, end, left, right, down, up
+        (e.keyCode >= 35 && e.keyCode <= 40)) {
+        // let it happen, don't do anything
+        return;
+    }
+    // Ensure that it is a number and stop the keypress
+    if ((e.shiftKey || e.keyCode == 13 || e.keyCode == 10 || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+    }
+}
+</script>
+{% endblock %}

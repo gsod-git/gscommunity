@@ -1,0 +1,167 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">Samaj Darshan</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">Samaj Darshan</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax ">
+    <div class="container-fluid event-schedule-area-two">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-9" style="margin-bottom: 20px">
+                    <div class="col-md-12">
+                        <div class="col-md-12 mb-10 bg-head" style="padding-left: 0;padding-right: 0;    ">
+                            <div class="df">
+                                <div class="col-md-9">
+                                    <h4 class="ui-title-block">Samaj Darshan <span> - Gujarati Samaj Publication </span></h4></div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12" style="margin-top: 15px">
+                            <div class="col-md-3 col-sm-3"></div>
+                            <div class="col-md-6 col-sm-6" style="border: 1px solid #929292">
+                                <div class="archives">
+                                    {% if darshan %}{% for item in darshan%}{% if item.pdf %}
+                                    <a target="_blank" href="{{item.pdf}}">{{item.month}} {{item.year}}</a> {% else %}
+                                    <a href="#">{{item.month}}
+                                {% endif %}{% endfor %}{% endif %}
+                            </div>
+                            <div class="archives">
+                                <a href="/samajdarshanarchives">Samaj Darshan Archives</a>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3"></div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="margin: 15px;">
+                            <p style="text-align: center;">Please Note:
+                                <br>
+                                <span style="text-align: center;margin-top: 15px;">You may have to download/install 'Vakil', 'Gopika', 'Shruti' fonts to read some Gujarati text within Samaj Darshan.</span></p>
+                            <p style="text-align: center;"><a href="/assets/gscommunity/assets/fonts/Vakil01.ttf">Download Vakil Font</a></p>
+                            <p style="text-align: center;"><a href="/assets/gscommunity/assets/fonts/Gopika.ttf">Download Gopika Font</a></p>
+                            <p style="text-align: center;"><span style="text-decoration: underline;font-weight: 500">Installing Gujarati Fonts</span>
+                                <br> Download above Fonts by Clicking it Open Control panel, click 'Fonts' And then from file menu 'Install font'</p>
+                            <p style="text-align: center">
+                                <a href="http://www.adobe.com/products/acrobat/readstep.html">
+                                <img src="/assets/frappe/images/GetAcrobatReader.gif">
+                            </a>
+                                <br>
+                                <span style="font-size: 12px;">
+                                In order to view the e-SamajDarshans, you will need to have Adobe Acrobat Reader installed on your PC. Adobe Acrobat Reader is a <br><a href="http://www.adobe.com/products/acrobat/readstep.html" style="font-size: 13px;">free download available here</a>
+                            </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        {% if samaj %}{% for item in samaj %}{% if item.list %}{% for s_list in item.list %}{% if s_list.sponsor %}
+                        <div class="col-md-12">
+                            <br>
+                            <h6 class="ui-title-block mb-20">{{s_list.month}}</span></h6>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Sponsorship Plan</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Features</th>
+                                            <th scope="col">Register</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for data in s_list.sponsor %}
+                                        <tr class="inner-box">
+                                            <td>
+                                                <div class="event-wrap">
+                                                    <h5>{{data.item_name}}</h5>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="r-no">
+                                                    <span>$ {{data.item_amount}} </span>
+                                                </div>
+                                            </td>
+                                            <td scope="row">
+                                                <div class="primary-btn r-no" style="text-align: left">
+                                                    <span>
+                                                                <ul>
+                                                                {% if data.features %}{% for feature in data.features %}
+                                                                <li>{{feature.features}}</li>
+                                                                {% endfor %}{% endif %}
+                                                                </ul>
+                                                            </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="primary-btn r-no">
+                                                    <a href="/sponsors-registration?new=1&Type=Samaj%20Darshan&Plan={{data.name}}&Amount={{data.item_amount}}">Click here to sponsor
+                                            </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}{% endfor %}{% endif %}{% endfor %} {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12 ">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} {% block style %}
+<style type="text/css">
+.archives {
+    padding: 15px;
+    margin: 15px 2px;
+    border: 1px solid #a2a2a2;
+    text-align: center;
+}
+
+.table {
+    -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.table thead {
+    background: #84616b !important;
+    color: #fcfbfc !important;
+    font-size: 20px;
+}
+
+.table thead tr th {
+    padding: 20px;
+    border: 0;
+}
+
+.table>thead>tr>th {
+    color: #fcfbfc !important;
+}
+</style>
+{% endblock %}

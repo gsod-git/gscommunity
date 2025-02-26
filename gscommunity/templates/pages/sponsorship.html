@@ -1,0 +1,243 @@
+{% extends "templates/baseweb.html" %} 
+{% block title %}
+{{ _("My Account") }}
+{% endblock %} 
+{% block header %}
+
+
+
+
+<h1>{{ _("My Account") }}</h1>{% endblock %} {% block page_sidebar %} {% include "templates/pages/web_sidebar.html" %} {% endblock %} {% block page_content %}
+<!-- no-cache -->
+<div class="row your-account-info hidden-xs pagecenter" style="min-height: 400px; padding-bottom: 50px;">
+   
+
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 price-table 
+    aos-init aos-animate" data-aos="fade-right">
+        <div class="top-content text-center silver2">  
+            <div class="title">
+                 <span class="user-image-myaccount"></span> 
+                  <div class="protitle"> <span>  Welcome  !   </span> 
+                  <span> {{ fullname }} </span> </div>
+            </div>
+        </div>
+
+        <div class="bottom-content text-center" >
+        
+
+        <ul class="list-unstyled">
+
+               <li  class="lirow">
+                    <a href="/me">
+                     <h6  style="padding-left: 5%;">
+                     <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i>
+                 Profile Info</h6>
+                    </a>
+                </li>
+
+
+                <li class="lirow">
+                    <a href="/update-password">
+                        <h6 style="padding-left: 5%;">
+                      <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i>  {{ _("Reset Password") }}</h6>
+                    </a>
+                </li>
+                <li  class="lirow">
+                    <a href="/update-profile?name={{ user }}">
+                        <h6 style="padding-left: 5%;">
+                        <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i>
+                    {{ _("Edit Profile") }}</h6>
+                    </a>
+                </li>
+                <li  class="lirow">
+                    <a href="/yellowpage">
+                        <h6 style="padding-left: 5%;">
+
+                         <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i>  Yellow Pages</h6>
+                    </a>
+                </li>
+                  <li  class="lirow">
+                    <a href="/sponsors-registration">
+                        <h6 style="padding-left: 5%;">
+
+                         <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i> Sponsorship</h6>
+                    </a>
+                </li>
+            </ul>
+       
+
+        </div>
+        
+    </div>
+
+    <div class="col-md-8  bottom-content" style="min-height: 315px">
+
+
+        <div class="col-md-12" >  
+<h6 style="padding: 15px 0; font-size: 20px !important">  Yellow Pages</h6>
+
+  <table style="width: 100%">
+  <tr>
+    <th>Name </th>
+    <th> Phone </th>
+    <th> Actions </th>
+  </tr>
+  {% if(YellowpagesList) %} {% for yp in YellowpagesList %}
+  <tr>
+    <td style="padding: 10px;">{{yp.business_name}} </td>
+    <td style="padding: 10px;">{{yp.phone}}</td>
+    <td style="padding: 10px;"> 
+         <a href="new-yellowpages?name={{yp.business_name}}"target="_blank" class="btn btn-primary">  Edit </a> 
+         <a href={{yp.route}} target="_blank" class="btn btn-default">  View  </a> 
+     </td>
+  </tr>
+
+  {% endfor %}
+ {% else %}  
+   <h3> No Records Found </h3>
+  {% endif %}
+
+   
+</table>
+                            
+
+         </div>
+    </div>
+</div>
+<div class="col-xs-12 hide" style="min-height: 400px; padding: 10px 0 0 0">
+    <ul class="list-group">
+        <a class="list-group-item" href="/profile">
+            {{ _("Profile") }}
+        </a> {% for item in sidebar_items -%}
+        <a class="list-group-item" href="{{ item.route }}" {% if item.target %}target="{{ item.target }}" {% endif %}>
+                {{ _(item.title or item.label) }}
+            </a> {%- endfor %}
+    </ul>
+</div>
+<style type="text/css">
+
+.sptitle
+{
+        color: #e50041;
+    font-weight: bold;
+    padding-right: 10px;
+}
+.silver2
+{
+        background: linear-gradient(#dee7f6,#7e5c65) !important;
+       padding: 10px;
+}
+.protitle
+{
+        color: white;    
+    font-size: 15px;
+}
+
+
+.lirow
+{
+        text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #e1c8c8;
+}
+.pagecenter {
+    margin-top: 17%;
+   
+    display: block;
+    padding: 0 2%;
+}
+
+.avatar {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+}
+
+.avatar-frame {
+    display: inline-block;
+    width: 100%;
+    height: 0;
+    padding: 50% 0px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 40px;
+}
+
+.avatar img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+}
+
+.avatar-empty {
+    border: 1px dashed #d1d8dd;
+    border-radius: 4px;
+}
+
+.avatar-small {
+    margin-right: 5px;
+    width: 24px;
+    height: 24px;
+}
+
+.avatar-small .standard-image {
+    font-size: 14px;
+}
+
+.avatar-small .avatar-frame {
+    border-radius: 3px;
+}
+
+.avatar-medium {
+    margin-right: 5px;
+    width: 36px;
+    height: 36px;
+}
+
+.avatar-medium .standard-image {
+    font-size: 18px;
+}
+
+.avatar-large {
+    margin-right: 10px;
+    width: 72px;
+    height: 72px;
+}
+
+.avatar-large .standard-image {
+    font-size: 36px;
+}
+
+.avatar-xl {
+    margin-right: 10px;
+    width: 108px;
+    height: 108px;
+}
+
+.avatar-xl .standard-image {
+    font-size: 72px;
+}
+
+.avatar-xs {
+    margin-right: 3px;
+    margin-top: -2px;
+    width: 17px;
+    height: 17px;
+    border: none;
+    border-radius: 3px;
+}
+
+.avatar-xs .standard-image {
+    font-size: 9px;
+}
+
+.avatar-text {
+    display: inline;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+}
+</style>
+{% endblock %}

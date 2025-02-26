@@ -1,0 +1,508 @@
+{% extends "templates/baseweb.html" %} {% block title %} {{ _("My Account") }} {% endblock %} {% block header %}
+<h1>{{ _("My Account") }}</h1>{% endblock %} {% block page_sidebar %} {% include "templates/pages/web_sidebar.html" %} {% endblock %} {% block page_content %}
+<!-- no-cache -->
+<div class="row your-account-info pagecenter" style="min-height: 400px; padding-bottom: 50px">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 price-table 
+    aos-init aos-animate">
+        {% include "templates/pages/gssidemenu.html" %}
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-12" style="min-height: 300px;">
+        {% if MemberInfo %} {% if MemberInfo.mstatus ==1 %}
+        <div class="alert alert-danger alert-dismissible fade in" id="warns" style="margin-left:-15px;margin-right:-15px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             Your membership was expired. Please renew!
+        </div>
+        {% endif %} {% endif %}
+        <div>
+            <!--  <div class="col-xs-4 text-right text-muted">{{ _("Name") }}</div>  -->
+            <div class="col-md-12" id="CustomerInfo" style="border:1px solid #ccc">
+                <div class="profile-heading">
+                    {% if MemberInfo %}
+                    <div> 
+                        {% if MemberInfo.image %}
+                        <a class="js-zoom-images" href="{{MemberInfo.image}}">
+                        <img src="{{MemberInfo.image}}" class="img-responsive" style="max-width: 50px;">
+                        </a>
+                        {% endif %}
+                        <h6 class="{% if MemberInfo.image %}member-name{% endif %}">{{MemberInfo.member_name}} {% if MemberInfo.middle_name %}{{MemberInfo.middle_name}} {% endif %}{{MemberInfo.last_name}}</h6>
+                      <button class="btn btn-primary mebutton" onclick="editprofile()" style="">Edit</button> 
+                    </div>
+                    {% else %}
+                    <h6>{% if Userdetails %}{{Userdetails.first_name}} {% if Userdetails.middle_name %}{{Userdetails.middle_name}} {% endif %}{% if Userdetails.last_name %}{{Userdetails.last_name}}{% endif %}{% else %}User Details{% endif %}</h6>
+                    <button class="btn btn-primary mebutton" onclick="editprofile()" style="">Become A Member</button>
+                    {% endif %}
+                </div>
+                {% if MemberInfo %}
+                <div class="col-md-12" style="">
+                    <div class="row" style="margin:18px 5px;">
+                        <!--  <div class="col-xs-4 text-right text-muted">{{ _("Name") }}</div>  -->
+                        <div class="col-md-12" id="CustomerInfo">
+                            <div class="bottom-content" style="border-bottom: 1px solid #ccc;">
+                                <h6 class="fs-18" style=""> Membership Information</h6></div>
+                            {% if MemberInfo %}
+                            <div class="col-md-12" style="padding-left: 0px!important; padding-right: 0px !important;">
+                                <table class="table table-bordered tabm" style="">
+                                    <thead style="background-color: #fff;">
+                                        <tr>
+                                            <th>Membership Type </th>
+                                            <th> Status </th>
+                                            <th>Expiry Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                                        
+                                        <span id="idmem" style="display:none;">{{MemberInfo.name}}</span>
+                                        <tr>
+                                            <td style="padding: 14px;">{{MemberInfo.membership_type}} </td>
+                                            {%if MemberInfo.active ==1%}
+                                            <td><span style="color:green;">Active</span></td>
+                                            {%else%}
+                                            <td><span style="color:red;">Inactive<span></td>
+                                            {%endif%}
+                                            {% if MemberInfo.mstatus == 1 %} 
+                                            <td>{{MemberInfo.membership_expiry_date}}<br><br><p style="color:red;">Your membership has been expired</p></td>
+                                            <td> <a type="" onclick="editprofile()" class="btn btn-primary">Renew now</a></td>
+                                            {% endif %}  
+                                            {% if MemberInfo.mstatus == 2 %} 
+                                            <td>{{MemberInfo.membership_expiry_date.strftime('%m-%d-%Y')}}</td>  
+                                            {% endif %}
+                                            {% if MemberInfo.mstatus == 0 %}
+                                            <td></td>                                           
+                                            {% endif %}
+                                        </tr>                                         
+                                    </tbody>
+                                </table>
+                                {% if show_free_yp==1 and active==1 %}
+                                <div class="free_yp">
+                                    <p>
+                                        You have one free yellowpage for your membership type.
+                                        <span>
+                                            <a href="/yellow-pages-form?new=1" class="btn btn-primary">Click Here to add Yellow Page</a>
+                                        </span>
+                                                </p>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}</div>
+                </div>
+            </div>{% endif %}
+            <div class="col-md-12" style="">
+                <div class="row" style="border:1px solid #ccc;margin:18px 5px;">
+                    <!--  <div class="col-xs-4 text-right text-muted">{{ _("Name") }}</div>  -->
+                    <div class="col-md-12" id="CustomerInfo">
+                        <div class="bottom-content" style="border-bottom: 1px solid #ccc;margin-bottom: 10px;">
+                            <h6 class="fs-18"> Primary Member Info</h6>
+                        </div>
+                        {% if Userdetails %}
+                        <div class="col-md-6 col-sm-6" style="">
+                            {% if Userdetails.full_name %}
+                            <p> <span class="sptitle"> Name : </span> {{Userdetails.full_name }}</p> {% endif %} {% if Userdetails.email %}
+                            <p> <span class="sptitle"> Email : </span> {{Userdetails.email }}</p> {% endif %}
+                        </div>
+                        <div class="col-md-5 col-sm-5" style="">
+                            {% if Userdetails.mobile_no %}
+                            <p> <span class="sptitle"> Phone  :  </span> {{Userdetails.mobile_no }}</p>{% endif %} {% if Userdetails.location %}
+                            <p> <span class="sptitle">  Address   : </span> {{Userdetails.location }} </p>{% endif %} {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if MemberInfo %} 
+        {% if(MemberInfo.FamilyInfo) %}
+        <div class="col-md-12" style="">
+            <div class="row" style="margin:18px 5px;">
+                <!--  <div class="col-xs-4 text-right text-muted">{{ _("Name") }}</div>  -->
+                <div class="col-md-12" id="CustomerInfo">
+                    <div class="bottom-content" style="border-bottom: 1px solid #ccc;">
+                        <h6 class="fs-18">  Family Details</h6></div>
+                    <div class="col-md-12" style="padding-left: 0px!important; padding-right: 0px !important;">
+                        <table class="table table-bordered tabm" id="family-table">
+                            <thead style="background-color: #fff;">
+                                <tr>
+                                    <th>Name </th>
+                                    <th> Relation</th>
+                                    <th>Gender</th>
+                                    <th class="dir_address"> Date Of Birth </th>
+                                    <th class="dir_address">Email</th>
+                                    <th class="dir_address">Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for family in MemberInfo.FamilyInfo %}
+                                <tr>
+                                    <td style="padding: 14px;">{{family.member_name}} </td>
+                                    <td>{{family.relation}}</td>
+                                    <td>{{family.gender}}</td>
+                                    <td class="dir_address"> {{family.date_of_birth.strftime('%m-%d-%Y')}} </td>
+                                    <td class="dir_address"> {{family.email}} </td>
+                                    <td class="dir_address"> {{family.phone_no}} </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>{% endif %}
+        {% if Userdetails.braintree_subscriptions %}
+        <div class="col-md-12" style="">
+            <div class="row" style="margin:18px 5px;">
+                <!--  <div class="col-xs-4 text-right text-muted">{{ _("Name") }}</div>  -->
+                <div class="col-md-12" id="CustomerInfo">
+                    <div class="bottom-content" style="border-bottom: 1px solid #ccc;">
+                        <h6 class="fs-18">Subscription Details</h6></div>
+                    <div class="col-md-12" style="padding-left: 0px!important; padding-right: 0px !important;">
+                        <table class="table table-bordered tabm" id="subscription-table">
+                            <thead style="background-color: #fff;">
+                                <tr>
+                                    <th class="hidden-xs">Subscription Id</th>
+                                    <th>Subscription For</th>
+                                    <th class="hidden-xs">Subscription Status</th>
+                                    <th>Next Billing Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in Userdetails.braintree_subscriptions %}
+                                <tr>
+                                    <td class="hidden-xs" style="padding: 14px;">{{item.subscription_id}} </td>
+                                    <td>{{item.subscription_for}}</td>
+                                    <td class="hidden-xs">{{item.status}}</td>
+                                    <td>{{item.next_bill_date.strftime('%m-%d-%Y')}}</td> 
+                                    <td>
+                                        {% if item.status=='Active' %}
+                                        <a style="cursor: pointer;" onclick="cancel_subscription(this)" data-subscription="{{item.subscription_id}}">Cancel</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 hide" style="min-height: 400px; padding: 10px 0 0 0">
+    <ul class="list-group">
+        <a class="list-group-item" href="/profile">
+            {{ _("Profile") }}
+    </a> {% for item in sidebar_items -%}
+        <a class="list-group-item" href="{{ item.route }}" {% if item.target %}target="{{ item.target }}" {% endif %}>
+        {{ _(item.title or item.label) }}
+      </a> {%- endfor %}
+    </ul>
+</div>
+<style type="text/css">
+.warn {
+    margin-top: 173px;
+    height: 40px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-left: 10px;
+    background-color: red;
+    color: white;
+}
+
+th,
+td {
+    text-align: left !important;
+}
+
+.sptitle {
+    color: #e50041;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.silver2 {
+    background: linear-gradient(#dee7f6, #7e5c65) !important;
+    padding: 10px;
+}
+
+.protitle {
+    color: white;
+    font-size: 15px;
+}
+
+
+.lirow {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #e1c8c8;
+}
+
+.pagecenter {
+    margin-top: 12%;
+
+    display: block;
+    padding: 0 2%;
+}
+
+.avatar {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+}
+
+.avatar-frame {
+    display: inline-block;
+    width: 100%;
+    height: 0;
+    padding: 50% 0px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 40px;
+}
+
+.avatar img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+}
+
+.avatar-empty {
+    border: 1px dashed #d1d8dd;
+    border-radius: 4px;
+}
+
+.avatar-small {
+    margin-right: 5px;
+    width: 24px;
+    height: 24px;
+}
+
+.avatar-small .standard-image {
+    font-size: 14px;
+}
+
+.avatar-small .avatar-frame {
+    border-radius: 3px;
+}
+
+.avatar-medium {
+    margin-right: 5px;
+    width: 36px;
+    height: 36px;
+}
+
+.avatar-medium .standard-image {
+    font-size: 18px;
+}
+
+.avatar-large {
+    margin-right: 10px;
+    width: 72px;
+    height: 72px;
+}
+
+.avatar-large .standard-image {
+    font-size: 36px;
+}
+
+.avatar-xl {
+    margin-right: 10px;
+    width: 108px;
+    height: 108px;
+}
+
+.avatar-xl .standard-image {
+    font-size: 72px;
+}
+
+.avatar-xs {
+    margin-right: 3px;
+    margin-top: -2px;
+    width: 17px;
+    height: 17px;
+    border: none;
+    border-radius: 3px;
+}
+
+.avatar-xs .standard-image {
+    font-size: 9px;
+}
+
+.avatar-text {
+    display: inline;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+}
+
+.bottom-content {
+    /*margin-top: -5px;*/
+    padding: 10px;
+}
+
+#CustomerInfo {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.tabm {
+    margin-bottom: 0px !important;
+}
+
+.table tbody td {
+    padding: 14px;
+}
+
+.table>thead>tr>th {
+    padding: 12px 10px;
+}
+
+.table-bordered>thead>tr>th,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>tbody>tr>td,
+.table-bordered>tfoot>tr>td {
+    border: 1px solid #ccc;
+}
+
+.table>caption+thead>tr:first-child>th,
+.table>colgroup+thead>tr:first-child>th,
+.table>thead:first-child>tr:first-child>th,
+.table>caption+thead>tr:first-child>td,
+.table>colgroup+thead>tr:first-child>td,
+.table>thead:first-child>tr:first-child>td {
+    border: 1px solid #ccc;
+}
+
+.free_yp {
+    background: #fcfdd0;
+    padding: 18px 15px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+.free_yp p {
+    font-weight: 500;
+}
+
+.free_yp p span {
+    float: right;
+    margin-top: -10px;
+}
+
+.profile-heading {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+
+.profile-heading h6 {
+    font-size: 20px !important
+}
+
+.fs-18 {
+    font-size: 18px !important
+}
+.member-name{
+    margin-left: 7%;
+    margin-top: -4%;
+}
+.mebutton{
+    margin-top: -40px;
+}
+@media screen and (max-width: 1024px) and (min-width: 568px) {
+    .pagecenter {
+        margin-top: 190px;
+    }
+    .profile-heading {
+        padding: 13px;
+    }
+    .fs-18 {
+        font-size: 16px !important
+    }
+    .profile-heading h6 {
+        font-size: 18px !important
+    }
+    #family-table thead tr th{
+        font-size: 13px;
+        padding: 5px 7px;
+    }
+    .member-name{
+        margin-left: 11%;
+        margin-top: -6%;
+    }
+    .mebutton{
+        margin-top: -9% !important;
+    }
+}
+@media screen and (max-width: 720px) and (min-width: 320px){
+    .profile-heading{
+        padding: 10px;
+    }
+    .mebutton{
+        margin-top: -24% !important;
+    }
+    .member-name{
+        margin-left: 0%;
+        margin-top: 2%;
+    }
+}
+@media screen and (max-width: 767px){
+    .table thead tr th{
+        font-size: 12px
+    }
+    .table tbody tr td{
+        font-size: 12px
+    }
+}
+</style>
+{% endblock %} {% block script %}
+<script>
+{% include "templates/includes/me/me.js" %}
+
+function editprofile() {
+    var member = getCookie('member_id');
+    var f = $('#idmem').text();
+    console.log(f)
+    if (member) {
+        window.location.href = '/membership-registration?name=' + member;
+    } else {
+        window.location.href = '/membership-registration?new=1';
+    }
+}
+$(document).ready(function(){
+    var url=localStorage.getItem('booking_url')
+    booktickets()
+})
+function booktickets(){
+    var booking_event_id=localStorage.getItem('booking_event_id')
+    var booking_url=localStorage.getItem('booking_url')
+    var url=booking_url+'/redirectpage?Event='+booking_event_id
+    var member_id=getCookie('member_id');
+    console.log(booking_event_id)
+    if(booking_event_id!=''&&booking_event_id!=null){
+        if(member_id!=''){
+            // window.open(url,'_blank')
+            frappe.call({
+                method:'gscommunity.gscommunity.api.generate_user_token',
+                args:{
+                    member:member_id
+                },
+                callback:function(data){
+                    console.log(data.message)
+                    var user=Encrypt(frappe.session.user)
+                    console.log(user)
+                    url=url+'&token='+data.message.token+'&user='+data.message.user
+                    console.log(url)
+                    localStorage.removeItem('redirect_url')                
+                    window.location=url
+                }
+            })
+        }
+    }
+}
+</script>
+{% endblock %}

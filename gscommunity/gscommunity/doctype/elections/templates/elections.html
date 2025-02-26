@@ -1,0 +1,77 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">{{election.title}}</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block"> {{election.title}}  </h4>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+              {% include 'templates/includes/Advertisement/Topadvertisement.html' %} 
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<section class="section-content1">
+    <div class="container-fluid home">
+        <div class="col-xs-12 col-md-9">
+            {% if election %}
+            <div>{{election.description}}</div>
+            {% endif %}
+            <div class="election-link">
+            	<a href="/election-nomination-form?new=1&election={{election.name}}" class="btn btn-primary">Register Now</a>
+            </div>
+            <input name="election_name" id="election_name" type="hidden" value="{{election.name}}">
+        </div>
+        <div class="col-md-3 col-xs-12 ">
+            {% include 'templates/includes/Advertisement/Advertisement.html' %}
+        </div>
+    </div>  
+</section>
+<style type="text/css">
+.election-link{
+	text-align: center;
+	margin: 30px;
+}
+</style>
+{% endblock %} {% block script %}
+<script type="text/javascript">
+$(document).ready(function(){
+    var member=getCookie('member_id')
+    var election=$('#election_name').val()
+    if(member!=''){
+        frappe.call({
+            method:'gscommunity.gscommunity.doctype.elections.elections.get_member_nomination',
+            args:{
+                member:member,
+                election:election
+            },
+            callback:function(data){
+                if(data.message=='1'){
+                    $('.election-link').hide()
+                }
+            }
+        })
+    }
+})
+</script>
+{% endblock %}

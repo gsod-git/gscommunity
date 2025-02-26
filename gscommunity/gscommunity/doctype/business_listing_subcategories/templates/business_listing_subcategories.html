@@ -1,0 +1,211 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div>
+    <div class="bg-grey breadcrumb-top1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/"><i class="icon fa fa-home"></i></a>
+                        </li>
+                        <li><a href="/yellowpages"> Yellowpages</a>
+                        </li>
+                        {% for c in CategoryList %}
+                        <li><a href="{{c.route}}"> 
+                        {{c.name}}</a>
+                        </li>
+                        {% endfor %}
+                        <li class="active">
+                            {{title}}
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12" style="margin: 15px;">
+                            <h4 class="ui-title-block"> {{title}}  </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8" style="padding: 10px;">
+                    {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="background-image: url('/assets/frappe/gscommunity/media/y2.jpg') !important;    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.7;">
+        <form class="b-filter">
+            <div class="">
+                <div class="container">
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-xs-12">
+                            <div class="text-center" style="margin-bottom: 10px;">
+                                <h6 class="ui-title-block" style="font-size: 22px !important">Find Your  Business Destination</h6>
+                                <div class="ui-decor"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2"> </div>
+                        <div class="col-md-6 col-sm-6">
+                            <input type="text" class="form-control ui-autocomplete-input" name="searchyellowpage" id="yellowpages_search" placeholder="Enter the search keywords" autocomplete="off" />
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div>
+                                <button type="button" class="btn btn-lg btn-primary" id="search_item">search </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <section class="parallax" style="padding-bottom: 40px; padding-top: 20px;   background: #fafbfc !important;min-height: 320px;">
+        <div class="container-fluid event-schedule-area-two">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="col-md-12 mb-10 bg-head" style="padding-left: 0;padding-right: 0;">
+                        <div class="df">
+                            <div class="col-md-9">
+                                <h4 class="ui-title-block"> {{title}}</h4></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <main class="">
+                        <div class="goods-group-2 list-goods ">
+                            {% if SponsorshipTypeList %} {% for spt in SponsorshipTypeList %} {% for spb in spt.SponsorsBusinessList %}{% if spb.YellowpagesList %} {% for yp in spb.YellowpagesList %}
+                            <div class="box col-md-5 col-sm-6" style="cursor: pointer;margin: 1%;width: 48% !important">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="col-md-4">
+                                            <a class="js-zoom-images" href="{% if yp.image %}{{yp.image}}{% else %}/assets/frappe/images/background.png{% endif %}">
+                                                <img src="{% if yp.image %}{{yp.image}}{% else %}/assets/frappe/images/background.png{% endif %}" alt="gujarati samaj" style="width: 100%;" />
+                                            </a>
+                                        </div>
+                                        <div class="col-md-8" style="height: 160px;">
+                                            <h4 class="media-heading"> <a href="{{yp.route}}"> {{yp.business_name}}    </a>
+                              
+                                </h4> {% if yp.phone %}
+                                            <span style="float: left;width: 100%"> 
+                                     <i class=" icon fa fa-phone" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> {{yp.phone}} </span >
+                                     {% endif %}
+                                      {% if yp.email %} 
+                                <span style="float: left;width: 100%"> 
+                                <i class="icon fa fa-envelope" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> 
+                            {{yp.email}} </span >
+                            {% endif %}
+                                      {% if yp.address %} 
+
+                                <span style="float: left;width: 100%"> 
+                                 <i class="icon fa fa-map-marker" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> 
+                               {{yp.address}}, {% if yp.address_line_2 %}{{yp.address_line_2}}{% endif %}{% if yp.city %}{{yp.city}}{% endif %} {% if yp.state %} {{yp.state}}{% endif %}{% if yp.zip_code %} {{yp.zip_code}}{% endif %}</span >
+                               {% endif %}
+                                       
+
+
+                                </div>   
+
+                      </div>
+   <div class="col-md-3">  
+
+    <!-- {% if spb.sponsorship_type == "Platinum"%}
+   <img src="/assets/gscommunity/assets/media/platinum-ribbon.png" style="width: 75px;
+    position: relative;right: -33px;
+    top: -20px;"> 
+    {% endif %}
+    {% if spb.sponsorship_type == "Gold"%}
+   <img src="/assets/gscommunity/assets/media/gold-ribbon.png" style="width: 75px;
+    position: relative;right: -33px;
+    top: -20px;"> 
+    {% endif %}
+    {% if spb.sponsorship_type == "Silver"%}
+   <img src="/assets/gscommunity/assets/media/silver-ribbon.png" style="width: 75px;
+    position: relative;right: -33px;
+    top: -20px;"> 
+    {% endif %} -->
+    {% if spt.ribbon_image %}<img src="{{spt.ribbon_image}}" style="width: 75px;position: relative;right: -33px;top: -20px;"> {% endif %}
+  </div>
+
+                       </div>
+                               
+                        </div> 
+                         {% endfor %}{% endif %}
+                            {% endfor %}
+                             {% endfor %}
+
+                            {% else %}  
+
+
+                         <div style="min-height: 210px;padding: 15px;"> 
+                            <h3> No Records Found </h3> </div>
+
+                            {% endif %}
+
+
+                        </div>
+                    </main>
+                    <main class="">
+                        <div class="goods-group-2 list-goods ">
+                            {% if YellowpagesList  %} 
+                            {% for yp in YellowpagesList %}
+                              
+                    <div class="box col-md-5 col-sm-6"  style="cursor: pointer;margin: 1%;width: 48% !important">
+ <div class="col-md-4"> 
+                                 <a class="js-zoom-images" href="{% if yp.image %}{{yp.image}}{% else %}/assets/frappe/images/background.png{% endif %}">
+                                            <img src="{% if yp.image %}{{yp.image}}{% else %}/assets/frappe/images/background.png{% endif %}" alt="gujarati samaj"  style="width: 100%;" />
+                                        </a>
+                                    </div>  
+                                  <div class="col-md-8" style="height: 160px;">
+                                   <h4 class="media-heading"> <a href="{{yp.route}}"> {{yp.business_name}}</a>
+                                </h4>
+                                 {% if yp.phone %} 
+                                    <span style="float: left;width: 100%"> 
+                                     <i class=" icon fa fa-phone" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> {{yp.phone}} </span >
+                                     {% endif %}
+                                      {% if yp.email %} 
+                                <span style="float: left;width: 100%"> 
+                                <i class="icon fa fa-envelope" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> 
+                            {{yp.email}} </span >
+                            {% endif %}
+                                      {% if yp.address %} 
+                                <span style="float: left;width: 100%"> 
+                                 <i class="icon fa fa-map-marker" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> 
+                               {{yp.address}}, {% if yp.address_line_2 %}{{yp.address_line_2}}{% endif %}{% if yp.city %}{{yp.city}}{% endif %} {% if yp.state %} {{yp.state}}{% endif %}{% if yp.zip_code %} {{yp.zip_code}}{% endif %}</span >
+                               {% endif %}
+                                </div>  
+                        </div> 
+                             {% endfor %}{% endif %}
+                        </div>
+                    </main>
+                    <!-- end .l-main-content-->
+                </div>
+                <div class="col-md-3">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+            </div>
+            </div> <!-- row -->
+        </div>
+       
+    </section>
+<style type="text/css">
+.ui-menu{
+    list-style: none;
+    background: #fff;
+    width: 41.2%;
+    width: 555px;
+}
+.ui-menu .ui-menu-item{
+    padding: 10px;
+    margin-left: -40px;
+}
+..ui-menu .ui-menu-item:hover, ..ui-menu .ui-menu-item:active, ..ui-menu .ui-menu-item:focus{
+    background: #96757d;
+    color: #fff;    
+}
+</style>  
+{% endblock %}  
+ 
+{% block script %}
+<script>
+    {% include "templates/includes/yellowpages.js" %}
+</script>
+{% endblock %}

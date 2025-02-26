@@ -1,0 +1,150 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active"> {{title}} </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block"> {{title}} </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-reviews parallax" style="padding: 60px 0px;">
+    <!--        <div class="area-bg__inner"> -->    
+    <div class="container">
+        <div class="tabset0">
+            {% if GeneralSponsorType %}{% for type in GeneralSponsorType %}{% if type.SponsorItem %}
+            <div id="general_sponsors" data-pws-tab="tab{{type.loop_value}}" data-pws-tab-name="{{type.sponsorship_type}}">
+                <div class="row">
+                    {% for item in type.SponsorItem %}
+                    <div class="tabdivheight" data-loop="{{loop.index}}">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 price-table aos-init aos-animate" data-aos="fade-right">
+                            <div class="top-content text-center silver1">
+                                <div class="title">
+                                    <img src="{{item.image}}" style="width: 20%; min-height: 55px;" />
+                                    <h4>{{item.item_name}}</h4>
+                                </div>
+                            </div>
+                            <div class="bottom-content text-center" id="feature{{loop.index}}" style="min-height: 500px;">
+                                {% if item.features %}{% for feature in item.features %}
+                                <span style="width: 100%;padding: 5px 15px;float: left;text-align: left;font-size: 14px;"> 
+                                    <i class="fa fa-check" aria-hidden="true" style="color: #4caf50;    font-size: 14px;padding-right: 10px;"></i> {{feature.features}}
+                                </span> {% endfor %}{% endif %}
+                            </div>
+                            <div class="" style="padding: 10px;background: #d3c3c7;text-align: center;">
+                                <h4 style="color:#574046">$ {{item.item_amount}}</h4>
+                            </div>
+                            <div style="padding: 10px;background-image: radial-gradient(circle farthest-side at center bottom,#e50041,#ca1b4d 125%) !important;margin-bottom: 25px;">
+                                <a href="/sponsors-registration/new?sponsor_type={{item.sponsorship_type}}&sponsorship_plan={{item.name}}&amount={{item.item_amount}}">
+                                    <h5 style="text-align: center;color:white !important">  Become a Sponsor   </h5> </a>
+                            </div>
+                        </div>
+                    </div>                    
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}{% endfor %}{% endif %} {% if SponsorTypes %}{% for type in SponsorTypes %}{% if type.Type %}
+            <div data-pws-tab="tab{{type.loop_value}}" data-pws-tab-name="{{type.sponsorship_type}}">
+                {% for head in type.Type %}{% if head.SponsorItem %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <br>
+                        <h6 class="ui-title-block mb-20">{{head.name}}</h6>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="wi-25">Sponsorship Plan</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Features</th>
+                                        <th scope="col">Register</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in head.SponsorItem %}
+                                    <tr class="inner-box">
+                                        <td>
+                                            <div class="event-wrap">
+                                                <h5> 
+                                         {{item.item_name}} </h5>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="r-no">
+                                                <span>$ {{item.item_amount}} </span>
+                                            </div>
+                                        </td>
+                                        <td scope="row">
+                                            <div class="primary-btn r-no" style="text-align: left">
+                                                <span>
+                                                    <ul>
+                                                        {% if item.features %}{% for feature in item.features %}
+                                                        <li>{{feature.features}}</li>
+                                                        {% endfor %}{% endif %}
+                                                    </ul>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="primary-btn r-no">
+                                                <a href="/sponsors-registration/new?sponsor_type={{item.sponsorship_type}}&sponsorship_plan={{item.name}}&amount={{item.item_amount}}">Click here to sponsor
+                                            </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}{% endfor %}
+            </div>
+            {% endif %}{% endfor %}{% endif %}
+        </div>
+    </div>
+    </div>
+</section>
+{% endblock %} {% block style %}
+<style>
+.table thead {
+    background: #84616b;
+    font-size: 20px;
+}
+
+.table thead tr th {
+    padding: 20px;
+}
+
+.table thead th {
+    color: #fcfbfc !important;
+}
+</style>
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function(){
+        $('#general_sponsors .tabdivheight').each(function(){
+            var loop=$(this).attr('data-loop')
+            $(this).find('#feature'+loop).slimScroll({
+                height: ($(window).height() - 100)
+            }); 
+        })               
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,107 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active">Past Presidents/Chairmen</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block">Past Presidents/Chairmen</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-content1 parallax ">
+    <div class="container-fluid event-schedule-area-two">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-9" style="margin-bottom: 20px;">
+                    <div class="col-md-12">
+                        <div class="col-md-12 mb-10 bg-head" style="padding-left: 0;padding-right: 0;    ">
+                            <div class="df">
+                                <div class="col-md-9">
+                                    <h4 class="ui-title-block">Past <span> Presidents/Chairmen </span></h4></div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                        </div>
+                        <table id="past-grid" class="table-responsive" style="width:100%">
+                            <thead class="table">
+                                <tr style="background: rgba(227, 217, 220, 0.87);">
+                                    <th scope="col">Year</th>
+                                    <th scope="col">President</th>
+                                    <th scope="col">Chairman</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if(committee) %} {% for member in committee %}
+                                <tr class="inner-box">
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{member.year}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{member.president}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="r-no">
+                                            <span>{{member.chairman}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}{% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12 ">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} {% block style %}
+<style type="text/css">
+.table-bordered {
+    border: 1px solid transparent !important;
+}
+
+table.dataTable tbody tr {
+    background-color: #ffffff !important;
+}
+
+table.dataTable tbody td {
+    text-align: left !important;
+}
+
+.dataTables_filter {
+    position: absolute;
+    display: block !important;
+    right: 0;
+    top: -50px;
+    padding-right: 10px;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+    padding: 3px 18px;
+}
+</style>
+{% endblock %}}

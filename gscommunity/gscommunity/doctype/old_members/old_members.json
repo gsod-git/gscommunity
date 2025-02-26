@@ -1,0 +1,276 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2018-06-21 12:23:01.829479",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "member_id",
+  "member_name",
+  "middle_name",
+  "membership_type",
+  "email",
+  "gender",
+  "active",
+  "members_count",
+  "self_relation",
+  "column_break_5",
+  "last_name",
+  "membership_expiry_date",
+  "phone_no",
+  "mobile_no",
+  "date_of_birth",
+  "ageyears",
+  "member_group",
+  "image",
+  "address",
+  "address_line_1",
+  "city",
+  "zip_code",
+  "column_break_18",
+  "address_line_2",
+  "state",
+  "newsletter_subscription",
+  "newsletter",
+  "children",
+  "table_25",
+  "payment_info",
+  "membership",
+  "column_break_40",
+  "membership_amount",
+  "family_members_limit"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "OM-"
+  },
+  {
+   "fieldname": "member_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Member ID"
+  },
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "First Name"
+  },
+  {
+   "fieldname": "middle_name",
+   "fieldtype": "Data",
+   "label": "Middle Name"
+  },
+  {
+   "fieldname": "membership_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Membership Type",
+   "options": "Membership Type"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Email"
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Link",
+   "label": "Gender",
+   "options": "Gender"
+  },
+  {
+   "default": "1",
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "Active"
+  },
+  {
+   "fieldname": "members_count",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Members Count",
+   "options": "membership_type.count"
+  },
+  {
+   "default": "Self",
+   "fieldname": "self_relation",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Member ",
+   "options": "Relationship"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Last name"
+  },
+  {
+   "fieldname": "membership_expiry_date",
+   "fieldtype": "Date",
+   "label": "Membership Expiry Date"
+  },
+  {
+   "fieldname": "phone_no",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Mobile No"
+  },
+  {
+   "fieldname": "mobile_no",
+   "fieldtype": "Data",
+   "label": "Whatsapp No"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date Of Birth"
+  },
+  {
+   "fieldname": "ageyears",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Age"
+  },
+  {
+   "fieldname": "member_group",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Member Group"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Image",
+   "no_copy": 1,
+   "print_hide": 1
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Section Break",
+   "label": "Address"
+  },
+  {
+   "fieldname": "address_line_1",
+   "fieldtype": "Data",
+   "label": "Address Line 1"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "zip_code",
+   "fieldtype": "Int",
+   "label": "Zip Code"
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "address_line_2",
+   "fieldtype": "Data",
+   "label": "Address Line 2"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State",
+   "length": 2
+  },
+  {
+   "fieldname": "newsletter_subscription",
+   "fieldtype": "Section Break",
+   "label": "Newsletter Subscription"
+  },
+  {
+   "fieldname": "newsletter",
+   "fieldtype": "Link",
+   "label": "Newsletter",
+   "options": "Email Group"
+  },
+  {
+   "depends_on": "eval:doc.family_members_limit>0",
+   "fieldname": "children",
+   "fieldtype": "Section Break",
+   "label": "Family Details"
+  },
+  {
+   "fieldname": "table_25",
+   "fieldtype": "Table",
+   "options": "Other Members"
+  },
+  {
+   "fieldname": "payment_info",
+   "fieldtype": "Section Break",
+   "label": "Payment Info"
+  },
+  {
+   "fieldname": "membership",
+   "fieldtype": "Data",
+   "label": "Membership ",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_40",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "membership_amount",
+   "fieldtype": "Data",
+   "label": "Membership Amount ($ - USD)",
+   "options": "membership_type.amount"
+  },
+  {
+   "fieldname": "family_members_limit",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Family Members Limit"
+  }
+ ],
+ "image_field": "image",
+ "links": [],
+ "modified": "2024-07-09 01:41:44.491962",
+ "modified_by": "Administrator",
+ "module": "Gscommunity",
+ "name": "Old Members",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "member_name,email",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "member_name",
+ "track_changes": 1
+}

@@ -1,0 +1,77 @@
+{% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active"> Photo / Video Gallery </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block"> Photo / Video Gallery  </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<section class="section-content1 parallax">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-9">
+                    {% if frappe.user == 'Guest' %} {% for ag in ShowAllAlbumGroup %}
+                    <div class="col-xs-12 col-md-4 col-sm-6" style="margin-bottom: 10px">
+                        <section class="b-team-002">
+                            <div class="b-team-2__media">                                
+                                <a href="{{ag.route}}">  <img class="img-responsive"  href="{{ag.route}}"        src="{% if ag.cover_image %}{{ag.cover_image}}{% else %}/assets/frappe/images/background.png{% endif %}" alt="Foto" style="height: 200px;object-fit: cover;width: 100%;cursor: pointer" /> </a>
+                            </div>
+                            <a href="{{ag.route}}">
+                                <h3 class="b-team-002__name" style="height: 35px;text-align: left;padding: 10px;"> <a  href="{{ag.route}}"> {{ag.events}} </a></h3> </a>
+                        </section>
+                    </div>
+                    {% endfor %} {% else %} {% for ag in ShowToMemberAlbumGroup %}
+                    <div class="col-xs-12 col-md-3 col-sm-6" style="margin-bottom: 10px">
+                        <section class="b-team-002">
+                            <div class="b-team-2__media">                                
+                                <a href="{{ag.route}}">   <img class="img-responsive" src="{% if ag.cover_image %}{{ag.cover_image}}{% else %}/assets/frappe/images/background.png{% endif %}" alt="Foto"  href="{{ag.route}}" style="height: 200px;object-fit: cover;" />
+                                </a>
+                            </div>
+                            <h3 class="b-team-002__name" style="height: 35px;text-align: left;padding: 10px;"> <a  href="{{ag.route}}"> {{ag.events}} </a></h3>
+                        </section>
+                    </div>
+                    {% endfor %} {% endif %}
+                </div>
+                <div class="col-md-3 col-xs-12">
+                    {% include 'templates/includes/Advertisement/Advertisement.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">
+.b-team-002 {
+    text-align: center;
+    background: #ece5e7;
+    padding-bottom: 7px;
+}
+
+.b-team-002__name {
+    margin-top: 10px;
+    font-size: 16px;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+    color: #e50041;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,273 @@
+{
+ "actions": [],
+ "allow_guest_to_view": 1,
+ "autoname": "naming_series:",
+ "creation": "2018-05-05 19:50:09.553535",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "business_details",
+  "business_name",
+  "business_type",
+  "sponsor",
+  "user",
+  "published",
+  "route",
+  "column_break_3",
+  "status",
+  "category",
+  "subcategory",
+  "published_on",
+  "expires_on",
+  "contact_details",
+  "owner_name",
+  "email",
+  "address",
+  "city",
+  "zip_code",
+  "column_break_9",
+  "phone",
+  "fax",
+  "address_line_2",
+  "state",
+  "notes_website",
+  "description",
+  "naming_series",
+  "website_url",
+  "view_count",
+  "banner_image",
+  "image"
+ ],
+ "fields": [
+  {
+   "fieldname": "business_details",
+   "fieldtype": "Section Break",
+   "label": "Business Details"
+  },
+  {
+   "fieldname": "business_name",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Business Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "business_type",
+   "fieldtype": "Select",
+   "label": "Business Type",
+   "options": "\nMember\nSponsor",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.business_type=='Sponsor'",
+   "fieldname": "sponsor",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Sponsor",
+   "options": "Sponsorship"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User"
+  },
+  {
+   "default": "0",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "Published"
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_global_search": 1,
+   "label": "Route"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Waiting for approval",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Waiting for approval\nApproved\nExpired\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Category",
+   "options": "Business Listing Category"
+  },
+  {
+   "fieldname": "subcategory",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sub Category",
+   "options": "Business Listing Subcategories"
+  },
+  {
+   "depends_on": "eval:((doc.published == 1))",
+   "fieldname": "published_on",
+   "fieldtype": "Date",
+   "label": "Published On"
+  },
+  {
+   "fieldname": "expires_on",
+   "fieldtype": "Date",
+   "label": "Expires On"
+  },
+  {
+   "fieldname": "contact_details",
+   "fieldtype": "Section Break",
+   "label": "Contact Details"
+  },
+  {
+   "fieldname": "owner_name",
+   "fieldtype": "Data",
+   "label": "Owner Name"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Data",
+   "label": "Address Line 1",
+   "reqd": 1
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City",
+   "reqd": 1
+  },
+  {
+   "fieldname": "zip_code",
+   "fieldtype": "Data",
+   "label": "Zip Code",
+   "length": 5,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone",
+   "length": 10
+  },
+  {
+   "fieldname": "fax",
+   "fieldtype": "Data",
+   "label": "Fax"
+  },
+  {
+   "fieldname": "address_line_2",
+   "fieldtype": "Data",
+   "label": "Address Line 2"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State",
+   "length": 2,
+   "reqd": 1
+  },
+  {
+   "fieldname": "notes_website",
+   "fieldtype": "Section Break",
+   "label": "Notes & Website Link"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "ignore_xss_filter": 1,
+   "label": "Description"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "YP-"
+  },
+  {
+   "description": "Please include https:// or https:// for your website url",
+   "fieldname": "website_url",
+   "fieldtype": "Data",
+   "label": "Website Url"
+  },
+  {
+   "fieldname": "view_count",
+   "fieldtype": "Data",
+   "label": "View Count",
+   "read_only": 1
+  },
+  {
+   "fieldname": "banner_image",
+   "fieldtype": "Section Break",
+   "label": "Banner Image"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
+  }
+ ],
+ "has_web_view": 1,
+ "is_published_field": "published",
+ "links": [],
+ "modified": "2024-07-09 01:48:35.569273",
+ "modified_by": "Administrator",
+ "module": "Gscommunity",
+ "name": "Yellow Pages",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,196 @@
+ {% extends "templates/baseweb.html" %} 
+
+
+{% block content %}
+
+   <div class="bg-grey breadcrumb-top1">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="/"><i class="icon fa fa-home"></i></a>
+                            </li>
+                            <li class="active">{{title}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+ <section class="section-content1 parallax">
+        
+        {% if SponsorsList %} {% for sp in SponsorsList %} 
+            <div class="container-fluid event-schedule-area-two">
+                    <div class="row">
+                 <div class="col-md-12">
+                    <div class="col-md-9">
+                    <section class="b-car-details" >
+            
+                            
+                             
+                                <div class="b-car-details__section" style="padding-top: 0">
+                                   
+                               
+                                     <h4 class="b-car-details__section-title">{{sp.name}}
+                                      <span style="    font-size: 18px;
+                          color: gray;padding-left: 25px">  {{sp.company_name}} </span> </h4>
+                                  <div class="" style="border: 1px solid  #dbced2;    padding-bottom: 10px;">
+                                    <div class="div-text">
+                                   
+                                    <div class="about-author clearfix contact-det">
+                                  
+
+                                  <h4 class="b-car-details__section-title" style="    padding-left: 20px;"> Contact 
+
+ {% if sp.website_url %}
+                                     <span> <a href="{{sp.website_url}}" target="_blank" style="    font-size: 16px;
+                                      padding-left: 20px;">   <i class="fa fa-desktop" aria-hidden="true" 
+                                    style="padding-right: 10px;"></i>  {{sp.website_url}}</a>  </span>
+                                {% endif %}
+                            </h4>
+
+
+                                  <div class="" >
+                                     <div class="col-md-6" style="padding-right: 0">
+                                         <span class="about-author__title yellow-title yellow-i" style="font-size: 16px"><i class="fa fa-user"></i>{{sp.company_name}}</span>  
+                                    </div>
+                                   
+                                    <div class="col-md-6">
+                                          <span  class="about-author__title yellow-title yellow-i"  style="font-size: 16px;text-transform: lowercase;"> <i class="icon fa fa-map-marker" aria-hidden="true"></i> {{sp.address}}</span> 
+                                    </div>
+                                      <div class="col-md-6" style="padding-right: 0;padding-top: 15px">
+                                         <span class="about-author__title yellow-title yellow-i" style="font-size: 16px"><i class="fa fa-phone"></i>{{sp.phone}}</span> 
+                                    </div>
+                                   
+                                    <div class="col-md-6" style="padding-top: 15px">
+                                          <span  class="about-author__title yellow-title yellow-i"  style="font-size: 16px;text-transform: lowercase;"><i class="fa fa-envelope-open"></i>{{sp.email}}</span> 
+                                    </div>
+
+                                </div>
+
+                              <div class="col-md-12" style="padding-top: 20px">
+                                                <div style="width: 100%;"><img class="sp-image" src="{{sp.image}}" alt="slider" data-default="{{sp.image}}" style="width:100%;height: 400px">
+                                                </div>
+                                            </div>
+
+                                            {% if (sp.description) %}
+                                           
+                                            <div class="col-md-12" style="padding-top: 20px">
+                                                <p>{{sp.description}}</p>
+                                            </div>
+                                            {% endif %}
+
+
+                            </div>
+                                    </div>
+                                
+                                    </div>
+                                    
+                                </div>
+
+
+
+
+
+                                
+                            </section>
+
+ 
+
+                    </div>
+                     <div class="col-md-3">
+                </div>
+            </div>
+                </div>
+            </div>
+
+             {% endfor %}{% endif %}
+        </section>
+
+
+{% endblock %}
+
+
+
+
+ {% block style %}
+
+
+<style type="text/css">
+    pad-d{
+  padding: 20px 30px 20px !important; 
+}
+/*.yellow-li{
+  list-style: none;
+}
+.yellow-li li i{
+    font-size: 24px;
+    padding-right: 10px;
+    color: #2988db;
+}
+*/
+.yellow-li li{
+  font-weight: 600;
+}
+.ad-sec{
+  list-style: none;
+      padding-left: 0;
+}
+.ad-sec img{
+  width: 100%;
+  padding-bottom: 10px;
+}
+.list-goods_th .b-goods-1__name{
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 16px;
+    text-align: center;
+}
+.b-filter-2__title{
+  background: #212121
+}
+.mi-20{
+  margin-top: 20px;
+}
+.flex-1{
+  display: inline-flex;
+}
+.div-text{
+    width: 100%;
+   
+}
+/*.div-img{
+      width: 30%;
+   
+}*/
+.contact-det{
+    padding: 0 !important;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    margin-top: 20px;
+}
+.yellow-i i{
+    font-size: 16px;
+    color: #e50041;
+    margin-right: 10px;
+}
+.yellow-i{
+    font-size: 16px;
+    background: #ece5e7;
+    padding: 15px 15px;
+    font-weight: 700;
+}
+.pad-20{
+  padding-top:20px;
+}
+.ad-sec {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ad-sec img {
+    width: 100%;
+    padding-bottom: 10px;
+}
+</style>
+{% endblock %}

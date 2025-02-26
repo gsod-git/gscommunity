@@ -1,0 +1,169 @@
+<!-- <div class="top-content text-center silver2">   -->
+<!-- <div class="title"> -->
+<!--  <span class="user-image-myaccount"></span> -->
+<!--  <div class="protitle"> <span>  Welcome  !   </span> 
+                  <span> {{ fullname }} </span> </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<div class="bottom-content text-center" style="padding: 0;background-color: #fff;">
+    <ul class="list-unstyled sidebar">
+        <li class="header lihead">
+            <h6 style="">My Profile</h6></li>
+        <li class="lirow">
+            <a href="/me">
+                <h6 style="padding-left: 5%;">
+                     <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i>
+                    Profile Info
+                </h6>
+            </a>
+        </li>
+        <li class="lirow">
+            <a href="/update-password">
+                <h6 style="padding-left: 5%;">
+                    <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i>  {{ _("Reset Password") }}
+                </h6>
+            </a>
+        </li>
+        <li class="lirow">
+            <input name="mem_id" hidden>
+            <a id="mem" href="">
+                <h6 style="padding-left: 5%;">
+                    <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i>
+                    {{ _("Edit Profile") }}
+                </h6>
+            </a>
+        </li>
+        <li class="lirow" id="yellowpage_menu">
+            <a href="/yellowpage">
+                <h6 style="padding-left: 5%;">
+                    <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i> Yellow Pages
+                </h6>
+            </a>
+        </li>
+        <li class="lirow" id="sponsor_menu">
+            <a href="/sponsorlist">
+                <h6 style="padding-left: 5%;">
+                    <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i>Sponsorship Details
+                </h6>
+            </a>
+        </li>
+        <li class="lirow">
+            <a href="/donations">
+                <h6 style="padding-left: 5%;">
+                    <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i>Donation
+                </h6>
+            </a>
+        </li>
+        <li class="lirow" id="volunteer_menu">
+            <a href="/volunteer-registration?new=1">
+                <h6 style="padding-left: 5%;">
+                    <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i> Volunteer Registration
+                </h6>
+            </a>
+        </li>
+        <li class="lirow" id="booking_menu">
+            <a href="/bookings">
+                <h6 style="padding-left: 5%;">
+                    <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i>Event Bookings
+                </h6>
+            </a>
+        </li>
+        <li class="lirow" id="team_menu">
+            <a href="/teamlist">
+                <h6 style="padding-left: 5%;">
+                    <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 15px;padding-right: 15px"></i>Event Competition Details
+                </h6>
+            </a>
+        </li>
+    </ul>
+</div>
+<style type="text/css">
+li {
+    border-bottom: 0px;
+}
+
+.sidebar {
+    border: 1px solid #e1c8c8;
+    border-bottom: none;
+}
+
+.lihead {
+    text-align: left;
+    padding: 10px;
+
+    text-align: center;
+    background-color: #e3d9dc;
+}
+
+.lihead {
+    color: #6f4b56;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 720px) {
+    .lihead h6 {
+        font-size: 17px;
+        color: #6f4b56;
+    }
+    .lirow a h6 {
+        font-size: 12px;
+    }
+}
+</style>
+<script type="text/javascript">
+frappe.ready(function() {
+    var member_ids = getCookie('member_id');
+    if (member_ids) {
+        $("input[name=mem_id]").val(member_ids)
+        $("#mem").attr('href', '/membership-registration?name=' + member_ids)
+    } else {
+        $("#mem").attr('href', '/membership-registration?new=1')
+    }
+});
+frappe.ready(function() {
+    var member = getCookie('member_id');
+    frappe.call({
+        method: 'gscommunity.gscommunity.doctype.general_settings.general_settings.get_menu_settings',
+        args: {
+            member: member
+        },
+        callback: function(data) {
+            if (data.message.yp == 0) {
+                $('#yellowpage_menu').hide()
+            } else {
+                $('#yellowpage_menu').show()
+            }
+            if (data.message.new_sp == 1) {
+                $('#yellowpage_menu').show()
+                var url = window.location.pathname;
+                if (url == '/yellowpage') {
+                    $('#sponsor_type').val('Sponsor')
+                }
+            } else {
+                // $('#yellowpage_menu').hide()
+            }
+            if (data.message.team == 0) {
+                $('#team_menu').hide()
+            } else {
+                $('#team_menu').show()
+            }
+            if (data.message.sp == 0) {
+                $('#sponsor_menu').hide()
+            } else {
+                $('#sponsor_menu').show()
+            }
+            if (data.message.volunteer != '') {
+                $('#volunteer_menu a').attr('href', '/volunteer-registration?name=' + data.message.volunteer)
+            }
+            if (member == '') {
+                $('#volunteer_menu').hide()
+            }
+            if(data.message.booking==1){
+                $('#booking_menu').show();
+            }else{
+                $('#booking_menu').hide();
+            }
+        }
+    })
+})
+</script>

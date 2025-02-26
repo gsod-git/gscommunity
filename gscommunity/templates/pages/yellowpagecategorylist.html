@@ -1,0 +1,86 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div>
+    <div class="bg-grey breadcrumb-top1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/"><i class="icon fa fa-home"></i></a>
+                        </li>
+                        <li><a href="/yellowpages"> Yellowpages</a>
+                        </li>
+                        <li class="active">
+                            {{title}}
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="parallax section-content1">
+        <div class="container-fluid event-schedule-area-two">
+            <div class="row">
+                <div class="container-fluid">
+                    <div class="col-xs-12" style="margin-bottom: -10px;">
+                        <h6 class="ui-title-block text-white" style="font-size: 24px !important">  {{title}} </h2>
+                                <div class="ui-decor2" style="background-color: #fff;"></div>
+                           
+                        </div>
+                    
+                </div>
+
+
+                <div class="col-md-9">
+                    <main class="">
+                        <div class="goods-group-2 list-goods ">
+ 
+
+                            {% if(YellowpagesList) %} {% for yp in YellowpagesList %}
+                    <div class="box col-md-5"  style="cursor: pointer;margin: 1%;width: 48% !important">
+
+                                <div class="col-md-4"> 
+                                 <a class="js-zoom-images" href="{{yp.image}}">
+                                            <img src="{{yp.image}}" alt="gujarati samaj"  style="width: 100%;" />
+                                        </a>
+                                    </div>  
+                                  <div class="col-md-8" style="height: 160px;">
+
+                                   <h4 class="media-heading"> <a href="{{yp.route}}"> {{yp.business_name}}  </a>
+                              
+                                </h4>
+                                    <span style="float: left;width: 100%"> 
+                                     <i class=" icon fa fa-phone" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> {{yp.phone}} </span >
+                                <span style="float: left;width: 100%"> 
+                                <i class="icon fa fa-envelope" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> 
+                            {{yp.email}} </span >
+                                <span style="float: left;width: 100%"> 
+                                 <i class="icon fa fa-map-marker" aria-hidden="true" style="padding-right: 10px;color: #84616b;"></i> 
+                               {{yp.address}}</span >
+
+
+                                </div>   
+                        </div> 
+                            {% endfor %}
+
+                            {% else %}  
+
+
+                            <h3> No Records Found </h3>
+
+                            {% endif %}
+
+
+                        </div>
+                    </main>
+                    <!-- end .l-main-content-->
+                </div>
+                <div class="col-md-3">
+            
+            </div>
+
+
+            </div> <!-- row -->
+        </div>
+       
+    </section>
+{% endblock %}

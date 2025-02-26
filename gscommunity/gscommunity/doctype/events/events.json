@@ -1,0 +1,308 @@
+{
+ "actions": [],
+ "allow_guest_to_view": 1,
+ "allow_import": 1,
+ "creation": "2018-05-29 20:33:14.194486",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "name1",
+  "route",
+  "published",
+  "column_break_3",
+  "event_type",
+  "event_group",
+  "timings",
+  "start_date",
+  "column_break_6",
+  "end_date",
+  "view_count",
+  "section_break_9",
+  "banner_image",
+  "section_break_11",
+  "venue_type",
+  "event_venue",
+  "location",
+  "address_line_2",
+  "column_break_21",
+  "city",
+  "state",
+  "zip_code",
+  "timeline",
+  "table_16",
+  "description",
+  "event_tickets",
+  "enable_tickets",
+  "paypal_ticket",
+  "booking_event_id",
+  "column_break_28",
+  "event_volunteers",
+  "require_volunteer",
+  "table_29",
+  "accounts",
+  "accounting_group",
+  "column_break_31",
+  "accounting_head"
+ ],
+ "fields": [
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Route"
+  },
+  {
+   "default": "0",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "Published"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "event_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Event Type",
+   "options": "Event Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "event_group",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Event Group",
+   "options": "Event Group"
+  },
+  {
+   "fieldname": "timings",
+   "fieldtype": "Section Break",
+   "label": "Timings"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "default": "1",
+   "fieldname": "view_count",
+   "fieldtype": "Data",
+   "label": "View Count",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "banner_image",
+   "fieldtype": "Attach Image",
+   "label": "Banner Image"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break",
+   "label": "Event Location"
+  },
+  {
+   "fieldname": "venue_type",
+   "fieldtype": "Select",
+   "label": "Venue Type",
+   "options": "\nEvent Hall\nOutside Place"
+  },
+  {
+   "depends_on": "eval:doc.venue_type==\"Event Hall\"",
+   "fieldname": "event_venue",
+   "fieldtype": "Link",
+   "label": "Event Venue",
+   "options": "Event Halls"
+  },
+  {
+   "depends_on": "eval:doc.venue_type!=\"Event Hall\"",
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Address Line 1"
+  },
+  {
+   "depends_on": "eval:doc.venue_type!=\"Event Hall\"",
+   "fieldname": "address_line_2",
+   "fieldtype": "Data",
+   "label": "Address Line 2"
+  },
+  {
+   "fieldname": "column_break_21",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.venue_type!=\"Event Hall\"",
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "depends_on": "eval:doc.venue_type!=\"Event Hall\"",
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State",
+   "length": 2
+  },
+  {
+   "depends_on": "eval:doc.venue_type!=\"Event Hall\"",
+   "fieldname": "zip_code",
+   "fieldtype": "Data",
+   "label": "Zip Code"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "timeline",
+   "fieldtype": "Section Break",
+   "label": "Event Schedule"
+  },
+  {
+   "fieldname": "table_16",
+   "fieldtype": "Table",
+   "options": "Event Timeline"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "ignore_xss_filter": 1,
+   "label": "Description"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "event_tickets",
+   "fieldtype": "Section Break",
+   "label": "Event Tickets"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_tickets",
+   "fieldtype": "Check",
+   "label": "Enable Tickets"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.enable_tickets==\"1\"",
+   "fieldname": "paypal_ticket",
+   "fieldtype": "Check",
+   "label": "Enable Paypal Ticket"
+  },
+  {
+   "depends_on": "eval:doc.enable_tickets==\"1\"",
+   "fieldname": "booking_event_id",
+   "fieldtype": "Data",
+   "label": "Booking Event Id"
+  },
+  {
+   "fieldname": "column_break_28",
+   "fieldtype": "Column Break"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "event_volunteers",
+   "fieldtype": "Section Break",
+   "label": "Event Volunteers"
+  },
+  {
+   "default": "0",
+   "fieldname": "require_volunteer",
+   "fieldtype": "Check",
+   "label": "Need Volunteers"
+  },
+  {
+   "depends_on": "eval:doc.require_volunteer==1",
+   "fieldname": "table_29",
+   "fieldtype": "Table",
+   "options": "Event Volunteer"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "accounts",
+   "fieldtype": "Section Break",
+   "label": "Accounting Details"
+  },
+  {
+   "fieldname": "accounting_group",
+   "fieldtype": "Link",
+   "label": "Accounting Group",
+   "options": "Accounting Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_31",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "accounting_head",
+   "fieldtype": "Link",
+   "label": "Accounting Head",
+   "options": "Accounting Category",
+   "reqd": 1
+  }
+ ],
+ "has_web_view": 1,
+ "is_published_field": "published",
+ "links": [],
+ "modified": "2024-07-05 09:53:41.587682",
+ "modified_by": "Administrator",
+ "module": "Gscommunity",
+ "name": "Events",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "route": "events",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,29 @@
+{
+ "add_total_row": 0, 
+ "apply_user_permissions": 0, 
+ "creation": "2018-06-14 19:21:44.199197", 
+ "disabled": 0, 
+ "docstatus": 0, 
+ "doctype": "Report", 
+ "idx": 0, 
+ "is_standard": "Yes", 
+ "modified": "2018-07-16 01:30:41.354009", 
+ "modified_by": "Administrator", 
+ "module": "Gscommunity", 
+ "name": "GSOD Members Report", 
+ "owner": "Administrator", 
+ "ref_doctype": "Member", 
+ "report_name": "GSOD Members Report", 
+ "report_type": "Script Report", 
+ "roles": [
+  {
+   "role": "Guest"
+  }, 
+  {
+   "role": "admin"
+  }, 
+  {
+   "role": "System Manager"
+  }
+ ]
+}

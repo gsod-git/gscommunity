@@ -1,0 +1,890 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div class="bg-grey breadcrumb-top1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li><a href="/event">Events</a>
+                    </li>
+                    <li class="active">{{title}}</li>
+                </ol>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 15px;">
+                        <h4 class="ui-title-block"> Events </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 10px;">
+                {% include 'templates/includes/Advertisement/Topadvertisement.html' %}
+            </div>
+        </div>
+    </div>
+    <!--  <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="icon fa fa-home"></i></a>
+                    </li>
+                    <li class="active"><a href="/event">   Events  </a></li>
+                    <li class="active">{{title}}</li>
+                </ol>
+            </div>
+        </div>
+    </div> -->
+</div>
+{% if EventsList %} {% for event in EventsList %}
+<section class="section-content1  parallax">
+    <div class="container-fluid event-schedule-area-two ">
+        <div class="col-md-9" style="margin-bottom: 20px;">
+            <section class="b-car-details">
+                <div class="" style="border: 1px solid #dbced2;padding-bottom: 10px;">
+                    <div class="div-text">
+                        <div class="clearfix contact-det">
+                            <h4 class="b-car-details__section-title yellow-header">
+                                <input type="hidden" id="EventName" name="EventName" value="{{event.name}}">
+                                <input type="hidden" id="route" name="route" value="{{event.route}}">
+                                {{event.name}}
+                                <span class="about-author__title yellow-title yellow-i aa1" style="text-transform:none;cursor: pointer;" onclick="LoadMap('{% if event.venue_type=='Event Hall'%}{% if event.event_venue %}{{event.event_venue}},{% endif %}{% endif %} {{event.location}},{% if event.address_line_2 %} {{event.address_line_2}},{% endif %} {% if event.city %}{{event.city}},{% endif %} {% if event.state %}{{event.state}}{% endif %} {% if event.zip_code %}- {{event.zip_code}}{% endif %}')" style="cursor: pointer;"> 
+                                    <i class="icon fa fa-map-marker" aria-hidden="true" ></i> 
+                                    {% if event.event_venue %}{{event.event_venue}},
+                                    {% endif %} {% if event.event_venue %}{{event.location}},{% endif %}{% if event.address_line_2 %} {{event.address_line_2}},{% endif %} {% if event.city %}{{event.city}},{% endif %} {% if event.state %}{{event.state}}{% endif %} {% if event.zip_code %}- {{event.zip_code}}{% endif %}
+                                </span>
+                            </h4>
+                            <div class="">
+                                <div class="col-md-4">
+                                    <span class="about-author__title yellow-title yellow-i"><i class="fa fa-calendar"></i>{{event.days}}</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="about-author__title yellow-title yellow-i">
+                                        <i class="fa fa-calendar"></i>
+                                        {{event.dates}}, {{event.months}}
+                                        {% if event.end_date %} - {{event.end_dates}}, {{event.end_months}}{% endif %}
+                                    </span>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="hidden" name="ViewCount" id="ViewCount" value="{{event.view_count}}">
+                                    <span class="about-author__title yellow-title yellow-i">
+                                        <i class="fa fa-eye"></i>
+                                        {% if event.view_count!='null' %}{{event.view_count}}{% else %}0{% endif %} Views
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 dd pad-b" style="padding-top: 15px;margin-top: 15px;border-top: 1px solid #f4f0f1;">
+                                <div class="survey_btn">
+                                    {% if event.require_volunteer %}
+                                    <a style="cursor: pointer;margin-right: 20px;" onclick='register_event_volunteer()'>Become a volunteer</a> {% endif %} {% if Survey %}
+                                    <input type="hidden" id="survey_name" value="{{Survey.name}}">
+                                    <input type="hidden" id="survey_response_view" value="{{Survey.view_response_by}}">
+                                    <a id="take_survey" style="cursor: pointer;" href="/{{Survey.route}}">Take a Survey</a> {% if Survey.view_response_by=='Show to all' %}
+                                    <a style="cursor: pointer;" href="/surveyresponse?survey={{Survey.name}}" id="view_survey">View Survey Response</a> {% endif %} {% endif %}
+                                </div>
+                                <div>
+                                </div>
+                                {% if event.enable_tickets and not event.paypal_ticket %}
+                                <input type="hidden" name="booking_url" id="booking_url" value="{{booking_url}}">
+                                <input type="hidden" name="booking_event_id" id="booking_event_id" value="{{event.booking_event_id}}">
+                                <a onclick="booktickets()" class="btn btn-primary" style="float: right;margin-bottom: 15px;">Book Tickets</a> {% endif %}
+                                {% if event.banner_image %}
+                                <img src="{{event.banner_image}}" style="display: block;height: auto;max-width: 100%;"> {% endif %} 
+
+                            </div>
+                            {% if event.description %}
+                            <div class="col-md-12">
+                                <p>{{event.description}}</p>
+                            </div> {% endif %} {% if event.enable_tickets and event.paypal_ticket %}
+                            <input type="hidden" name="paypal_enable" value="{{event.paypal_ticket}}">
+                            <div id="member-login" style="margin-top: 20px;">
+                                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <h5>Member Ticket:$12</h5>
+                                            <p>(Age 13 and above)</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="image" src="https://www.paypal.com//en_US/i/btn/sc-but-02.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+                                            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                            <input type="hidden" name="add" value="1">
+                                            <input type="hidden" name="cmd" value="_cart">
+                                            <input type="hidden" name="business" value="navratri@gsod.org">
+                                            <input type="hidden" name="item_name" value="GSOD Navratri 2018 Ticket-MEMBER-Adult">
+                                            <input type="hidden" name="amount" value="12.00">
+                                            <input type="hidden" name="shipping" value="0.00">
+                                            <input type="hidden" name="buyer_credit_promo_code" value="">
+                                            <input type="hidden" name="buyer_credit_product_category" value="">
+                                            <input type="hidden" name="buyer_credit_shipping_method" value="">
+                                            <input type="hidden" name="buyer_credit_user_address_change" value="">
+                                            <input type="hidden" name="no_shipping" value="2">
+                                            <input type="hidden" name="no_note" value="A">
+                                            <input type="hidden" name="currency_code" value="USD">
+                                            <input type="hidden" name="tax" value="0.00">
+                                            <input type="hidden" name="lc" value="US">
+                                            <input type="hidden" name="bn" value="PP-ShopCartBF">
+                                            <input type="hidden" name="return" value="">
+                                            <input type="hidden" name="notify_url" value="">
+                                        </div>
+                                    </div>
+                                </form>
+                                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <h5>Member Kids Ticket:$5</h5>
+                                            <p>(Age 6 - 12)</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="image" src="https://www.paypal.com//en_US/i/btn/sc-but-02.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+                                            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                            <input type="hidden" name="add" value="1">
+                                            <input type="hidden" name="cmd" value="_cart">
+                                            <input type="hidden" name="business" value="navratri@gsod.org">
+                                            <input type="hidden" name="item_name" value="GSOD Navratri 2018 Ticket-MEMBER-Adult">
+                                            <input type="hidden" name="amount" value="5.00">
+                                            <input type="hidden" name="shipping" value="0.00">
+                                            <input type="hidden" name="buyer_credit_promo_code" value="">
+                                            <input type="hidden" name="buyer_credit_product_category" value="">
+                                            <input type="hidden" name="buyer_credit_shipping_method" value="">
+                                            <input type="hidden" name="buyer_credit_user_address_change" value="">
+                                            <input type="hidden" name="no_shipping" value="2">
+                                            <input type="hidden" name="no_note" value="A">
+                                            <input type="hidden" name="currency_code" value="USD">
+                                            <input type="hidden" name="tax" value="0.00">
+                                            <input type="hidden" name="lc" value="US">
+                                            <input type="hidden" name="bn" value="PP-ShopCartBF">
+                                            <input type="hidden" name="return" value="">
+                                            <input type="hidden" name="notify_url" value="">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="non-member-login" style="margin-top: 20px;">
+                                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <h5>Non Member Ticket:$15</h5>
+                                            <p>(Age 13 and above)</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="image" src="https://www.paypal.com//en_US/i/btn/sc-but-02.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+                                            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                            <input type="hidden" name="add" value="1">
+                                            <input type="hidden" name="cmd" value="_cart">
+                                            <input type="hidden" name="business" value="navratri@gsod.org">
+                                            <input type="hidden" name="item_name" value="GSOD Navratri 2018 Ticket-MEMBER-Adult">
+                                            <input type="hidden" name="amount" value="15.00">
+                                            <input type="hidden" name="shipping" value="0.00">
+                                            <input type="hidden" name="buyer_credit_promo_code" value="">
+                                            <input type="hidden" name="buyer_credit_product_category" value="">
+                                            <input type="hidden" name="buyer_credit_shipping_method" value="">
+                                            <input type="hidden" name="buyer_credit_user_address_change" value="">
+                                            <input type="hidden" name="no_shipping" value="2">
+                                            <input type="hidden" name="no_note" value="A">
+                                            <input type="hidden" name="currency_code" value="USD">
+                                            <input type="hidden" name="tax" value="0.00">
+                                            <input type="hidden" name="lc" value="US">
+                                            <input type="hidden" name="bn" value="PP-ShopCartBF">
+                                            <input type="hidden" name="return" value="">
+                                            <input type="hidden" name="notify_url" value="">
+                                        </div>
+                                    </div>
+                                </form>
+                                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <h5>Non Member Kids Ticket:$5</h5>
+                                            <p>(Age 6 - 12)</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="image" src="https://www.paypal.com//en_US/i/btn/sc-but-02.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+                                            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                            <input type="hidden" name="add" value="1">
+                                            <input type="hidden" name="cmd" value="_cart">
+                                            <input type="hidden" name="business" value="navratri@gsod.org">
+                                            <input type="hidden" name="item_name" value="GSOD Navratri 2018 Ticket-MEMBER-Adult">
+                                            <input type="hidden" name="amount" value="5.00">
+                                            <input type="hidden" name="shipping" value="0.00">
+                                            <input type="hidden" name="buyer_credit_promo_code" value="">
+                                            <input type="hidden" name="buyer_credit_product_category" value="">
+                                            <input type="hidden" name="buyer_credit_shipping_method" value="">
+                                            <input type="hidden" name="buyer_credit_user_address_change" value="">
+                                            <input type="hidden" name="no_shipping" value="2">
+                                            <input type="hidden" name="no_note" value="A">
+                                            <input type="hidden" name="currency_code" value="USD">
+                                            <input type="hidden" name="tax" value="0.00">
+                                            <input type="hidden" name="lc" value="US">
+                                            <input type="hidden" name="bn" value="PP-ShopCartBF">
+                                            <input type="hidden" name="return" value="">
+                                            <input type="hidden" name="notify_url" value="">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            {% endif %} {% if(event.eventtimings) %}
+                            <div class="col-md-12">
+                                <h6 class="ui-title-block mb-20">Event<span> Schedule</span></h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="wi-25">Sessions</th>
+                                                <th scope="col">Date </th>
+                                                <th scope="col">From </th>
+                                                <th scope="col">To </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for e in event.eventtimings %}
+                                            <tr class="inner-box">
+                                                <td>
+                                                    <div class="event-wrap">
+                                                        <h5> 
+                                         {{e.title}} </h5>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="r-no">
+                                                        <span> {{e.date}} </span>
+                                                    </div>
+                                                </td>
+                                                <td scope="row">
+                                                    <div class="primary-btn r-no">
+                                                        <span>{{e.from_time}}</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="primary-btn r-no">
+                                                        <span>{{e.to_time}}</span>
+                                                        <br>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            {% endif %} {% if Competition %}
+                            <div class="col-md-12">
+                                <br>
+                                <h6 class="ui-title-block mb-20">Event<span> Competitions</span></h6>
+                                <div class="table-responsive">
+                                    <table class="table" id="competition">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="wi-25">Competition</th>
+                                                <th scope="col">Registration Start Date </th>
+                                                <th scope="col">Registration End Date </th>
+                                                <th scope="col">Register </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in Competition %}
+                                            <tr class="inner-box" id="{{loop.index}}">
+                                                <td>
+                                                    <div class="event-wrap">
+                                                        <h5>{{item.competition_type}}</h5>
+                                                        <input type="hidden" id="comp_name" value="{{item.name}}">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="r-no">
+                                                        <span>{{item.registration_start_date}} </span>
+                                                    </div>
+                                                </td>
+                                                <td scope="row">
+                                                    <div class="primary-btn r-no">
+                                                        <span>{{item.registration_end_date}}</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="primary-btn r-no">
+                                                        <a href="/event-registration-form?new=1&Event={{item.events}}&Competition={{item.name}}" id="add_team">Click here to register
+                                                        </a>
+                                                        <a href="/teamlist" id="view_team" style="display: none">View Teams
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            {% endif %} {% if Sponsorship %}
+                            <div class="col-md-12">
+                                <br>
+                                <h6 class="ui-title-block mb-20">Event<span> Sponsorship</span></h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="wi-25">Sponsorship Plan</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">Features</th>
+                                                <th scope="col">Register</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in Sponsorship %}
+                                            <tr class="inner-box">
+                                                <td>
+                                                    <div class="event-wrap">
+                                                        <h5> 
+                                         {{item.item_name}} </h5>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="r-no">
+                                                        <span>$ {{item.item_amount}} </span>
+                                                    </div>
+                                                </td>
+                                                <td scope="row">
+                                                    <div class="primary-btn r-no" style="text-align: left">
+                                                        <span>
+                                                                <ul>
+                                                                {% if item.features %}{% for feature in item.features %}
+                                                                <li>{{feature.features}}</li>
+                                                                {% endfor %}{% endif %}
+                                                                </ul>
+                                                            </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="primary-btn r-no">
+                                                        <a href="/sponsors-registration?new=1&Type=Events&Plan={{item.name}}&Amount={{item.item_amount}}">Click here to sponsor</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-3">
+            {% include 'templates/includes/Advertisement/Advertisement.html' %}
+        </div>
+    </div>
+</section>
+{% endfor %}{% endif %} {% endblock %} {% block style %}
+<style>
+.event-schedule-area-two .table {
+    -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.event-schedule-area-two .table:hover {
+    -webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, .1);
+}
+
+.event-schedule-area-two .table thead {
+    background-color: #e9ecef;
+    color: #495057 !important;
+    font-size: 20px;
+}
+
+.event-schedule-area-two .table thead tr th {
+    padding: 20px;
+    border: 0;
+}
+
+.event-schedule-area-two .table tbody {
+    background: #fff;
+}
+
+.event-schedule-area-two .table tbody tr.inner-box {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.event-schedule-area-two .table tbody tr th {
+    border: 0;
+    padding: 20px 20px;
+    vertical-align: middle;
+}
+
+.event-schedule-area-two .table tbody tr th .event-date {
+    color: #252525;
+    text-align: center;
+}
+
+.event-schedule-area-two .table tbody tr th .event-date span {
+    font-size: 38px;
+    line-height: 50px;
+    font-weight: normal;
+}
+
+.col-white {
+    color: #fff !important;
+}
+
+.event-schedule-area-two .table tbody tr td .event-wrap h5 a:hover {
+    color: #044A91;
+}
+
+.event-schedule-area-two .table tbody tr td .event-wrap h5 {
+    font-size: 18px;
+    line-height: 20px;
+    color: #212121 !important;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.event-schedule-area-two .table tbody tr td .event-wrap .organizers {
+    display: -webkit-inline-box !important;
+    display: -ms-inline-flexbox !important;
+    display: inline-flex !important;
+    margin: 10px 0 !important;
+}
+
+.event-schedule-area-two .table tbody tr td {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.event-schedule-area-two .table tbody tr td .event-wrap .time span {
+    color: #252525;
+    font-family: "Poppins", sans-serif;
+    color: #656565;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.organizers a {
+    font-size: 15px;
+}
+
+.r-no {
+    color: #4b373d !important;
+}
+
+.r-no span {
+    font-size: 15px;
+    line-height: 1.375;
+}
+
+.r-no br {
+    font-size: 15px;
+    line-height: 1.375;
+}
+
+.wi-25 {
+    width: 20%;
+}
+
+.event-schedule-area-two .table tbody tr td .event-img img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+}
+
+.event-date p {
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.mar-40 {
+    margin-top: 40px;
+}
+
+.dd img {
+    width: 100%;
+    max-height: 7500px;
+}
+
+.event-body {
+    background: #fff;
+    padding: 40px 0;
+    border: 1px solid #D7D7D7;
+    border-top: 1px solid transparent;
+}
+
+.ad-sec {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ad-sec img {
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mi-height {
+    min-height: 105px;
+    border: 0;
+    padding: 20px 20px;
+    vertical-align: middle;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.box-1 .desc {
+    padding: 0 10px 15px 10px;
+    padding: 20px 20px;
+    vertical-align: middle;
+    min-height: 107px;
+}
+
+.red {
+    background-image: radial-gradient(circle farthest-side at center bottom, #dc0945, #c22351 125%);
+}
+
+.green {
+    background-image: radial-gradient(circle farthest-side at center bottom, #dc0945, #c22351 125%);
+}
+
+.blue {
+    background-image: radial-gradient(circle farthest-side at center bottom, #dc0945, #c22351 125%);
+}
+
+.yellow {
+    background-image: radial-gradient(circle farthest-side at center bottom, #dc0945, #c22351 125%);
+}
+
+.overlay-event {
+    background-image: url(/assets/gscommunity/assets/media/event-pat.png);
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.b-advantages-1__title {
+    vertical-align: middle;
+    line-height: 42px;
+}
+
+.event-schedule-area-two .table thead {
+    background: #84616b !important;
+    color: #fcfbfc !important;
+}
+
+.table>thead>tr>th {
+    color: #fcfbfc !important;
+}
+
+table>thead>tr>th,
+table>tbody>tr>th,
+table>tfoot>tr>th,
+table>thead>tr>td,
+table>tbody>tr>td,
+table>tfoot>tr>td {
+    border: 1px solid #dbced2;
+}
+
+.survey_btn {
+    float: right;
+    margin-bottom: 15px;
+}
+
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #e3d9dc;
+    border-radius: .25rem;
+    padding: 10px;
+}
+
+.card i {
+    font-size: 32px;
+}
+
+.mb-20 {
+    margin-bottom: 10px;
+}
+
+pad-d {
+    padding: 20px 30px 20px !important;
+}
+
+.yellow-li li {
+    font-weight: 600;
+}
+
+.ad-sec {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ad-sec img {
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.list-goods_th .b-goods-1__name {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.b-filter-2__title {
+    background: #212121
+}
+
+.mi-20 {
+    margin-top: 20px;
+}
+
+.flex-1 {
+    diyp.ay: inline-flex;
+}
+
+.div-text {
+    width: 100%;
+}
+
+.contact-det {
+    padding: 0 !important;
+    border: 1px solid tranyp.rent;
+    border-radius: 2px;
+    /*  margin-top: 20px;*/
+}
+
+.yellow-i i {
+    font-size: 14px;
+    color: #e50041;
+    margin-right: 10px;
+}
+
+.yellow-i {
+    font-size: 14px;
+    background: #f5f5f5;
+    padding: 15px 15px;
+    font-weight: 500;
+}
+
+.pad-20 {
+    padding-top: 20px;
+}
+
+.ad-sec {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ad-sec img {
+    width: 100%;
+    padding-bottom: 10px;
+}
+#member-login,#non-member-login{
+    margin:20px;
+}
+</style>
+{% endblock %} {% block script %}
+<script type="text/javascript">
+function LoadMap(address) {
+
+    var URL = "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent(address);
+    window.open(URL);
+}
+
+$(document).ready(function() {
+    var Name = $("#EventName").val();
+    var Value = $("#ViewCount").val();
+    if (Value == "null") {
+        $("#ViewCount").val("0");
+        Value = $("#ViewCount").val();
+    }
+    check_login();
+    var PageCount = parseInt(Value) + 1;
+    frappe.call({
+        method: "gscommunity.gscommunity.doctype.events.events.add_pagecount",
+        args: { "name": Name, "pagecount": PageCount },
+
+        callback: function(r) {
+            console.log(r);
+        }
+    });
+    var paypal_ticket = $('input[name=paypal_enable]').val();
+    if (paypal_ticket == '1') {
+        var member = getCookie('member_id')
+        var is_member=getCookie('is_member')
+        var active=getCookie('active')
+        if (member != '' && is_member=="1" && active=="1") {
+            $('#member-login').show();
+            $('#non-member-login').hide();
+        } else {
+            $('#member-login').hide();
+            $('#non-member-login').show();
+        }
+        var protocol=window.location.protocol;
+        var hostname=window.location.hostname;
+        var pathname=window.location.pathname;
+        var url=protocol+'//'+hostname+pathname
+        $('input[name=return]').val(protocol+'//'+hostname)
+        $('input[name=notify_url]').val(url)
+    }
+})
+
+function check_login() {
+    var member = getCookie('member_id');
+    var is_member=getCookie('is_member')
+    var active=getCookie('active')
+    if (member == '' || is_member=="0" || active=="0") {
+        $('.survey_btn').hide();
+    } else {
+        $('.survey_btn').show();
+        $('#view_survey').hide();
+        check_for_choreographer(member)
+        var survey = $('#survey_name').val();
+        if (survey != '' && survey != undefined) {
+            frappe.call({
+                method: 'gscommunity.gscommunity.doctype.event_survey.event_survey.check_user',
+                args: {
+                    user: getCookie('user_id'),
+                    survey: $('#survey_name').val()
+                },
+                callback: function(data) {
+                    if (data.message == 1) {
+                        $('#take_survey').hide();
+                        var survey_response = $('#survey_response_view').val()
+                        if (survey_response == 'Show to all') {
+                            $('#view_survey').show();
+                        }
+                    }
+                }
+            })
+        }
+    }
+}
+
+function register_event_volunteer() {
+    var user = getCookie('member_id');
+    frappe.call({
+        method: 'gscommunity.gscommunity.doctype.events.events.add_event_volunteer',
+        args: {
+            'member': user,
+            'event': $('#EventName').val()
+        },
+        callback: function(data) {
+            if (data.message == '0') {
+                window.location.href = '/volunteer-registration?new=1'
+            } else if (data.message == 'Success') {
+                frappe.msgprint('You are successfully registered as a volunteer for this event')
+            } else if (data.message == 'Already Registered') {
+                frappe.msgprint('You are already been registered as volunteer for this event')
+            }
+        }
+    })
+}
+
+function check_for_choreographer(member) {
+    $('#competition tbody tr').each(function() {
+        var competition = $(this).find('#comp_name').val()
+        var id = $(this).attr('id')
+        if (member != '' && competition != '') {
+            frappe.call({
+                method: 'gscommunity.gscommunity.doctype.events.events.get_choreographer_details',
+                args: {
+                    competition: competition,
+                    member: member
+                },
+                callback: function(data) {
+                    console.log(data.message)
+                    if (data.message != undefined) {
+                        if (data.message.team >= data.message.comp) {
+                            // $(this).find('.primary-btn a').text('View Teams')
+                            // $(this).find('.primary-btn a').attr('href','/teamlist')
+                            $('#' + id + ' #add_team').hide()
+                            $('#' + id + ' #view_team').show()
+                        }
+                    }
+                }
+            })
+        }
+    })
+}
+
+function booktickets() {
+    var booking_event_id = $('#booking_event_id').val()
+    var booking_url = $('#booking_url').val()
+    var url = booking_url + '/redirectpage?Event=' + booking_event_id
+    var member_id = getCookie('member_id');
+    if (member_id != '') {
+        // window.open(url,'_blank')
+        var windowReference = window.open();
+        frappe.call({
+            method: 'gscommunity.gscommunity.api.generate_user_token',
+            args: {
+                member: member_id
+            },
+            callback: function(data) {
+                var user = Encrypt(frappe.session.user)
+                url = url + '&token=' + data.message.token + '&user=' + data.message.user
+                localStorage.removeItem('redirect_url')
+                // window.open(url,'_blank')
+                windowReference.location = url;
+            }
+        })
+    } else {
+        localStorage.setItem('booking_event_id', $('#booking_event_id').val())
+        localStorage.setItem('booking_url', $('#booking_url').val())
+        window.location.href = '/login#login'
+    }
+}
+
+function Encrypt(str) {
+    if (!str) str = "";
+    str = (str == "undefined" || str == "null") ? "" : str;
+    try {
+        var key = 146;
+        var pos = 0;
+        ostr = '';
+        while (pos < str.length) {
+            ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
+            pos += 1;
+        }
+
+        return ostr;
+    } catch (ex) {
+        return '';
+    }
+}
+
+function Decrypt(str) {
+    if (!str) str = "";
+    str = (str == "undefined" || str == "null") ? "" : str;
+    try {
+        var key = 146;
+        var pos = 0;
+        ostr = '';
+        while (pos < str.length) {
+            ostr = ostr + String.fromCharCode(key ^ str.charCodeAt(pos));
+            pos += 1;
+        }
+
+        return ostr;
+    } catch (ex) {
+        return '';
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,481 @@
+<header class="header header-boxed-width navbar-fixed-top header-background-white header-color-black header-topbar-dark header-logo-black header-topbarbox-1-left header-topbarbox-2-right header-navibox-1-left header-navibox-2-right header-navibox-3-right header-navibox-4-right">
+    <div class="container container-boxed-width">
+        <!--  <nav class="navbar navbar-light bg-light" style="display: block;background-color: #dee7f6 !important;">
+        <a class="navbar-brand" href="#">
+    <img src="/assets/gscommunity/assets/media/top-1.jpg" class="d-inline-block align-top" alt="" style="    padding-left: 15px;height: 44px;"></a>
+    </nav> -->
+        <div class="header header-topbarbox-2-right">
+            <nav class="bg-main">
+                <div class="container-fluid d-block">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-7 socialweb">
+                            <img src="/assets/gscommunity/assets/media/index.gif">
+                        </div>
+                        <div class="col-xs-12 mobileimg">
+                            <img src="/assets/gscommunity/assets/media/index.jpg" style="width: 100%">
+                        </div>
+                        <div class="col-md-3 col-sm-4 socialweb" style="padding-top: 8px;">
+                            <ul class="social-network social-circle float-right" >
+                            {% if contact_details.facebook %}
+                                <li>
+                                    <a href="{{contact_details.facebook}} " target="_blank " class="icoFacebook social-bg" title="Facebook" style="background-color: #3B5998;"><i class="fa fa-facebook "></i></a>
+                                </li>
+                            {% endif %}
+                            {% if contact_details.twitter %}
+                                <li>
+                                    <a href="{{contact_details.twitter}} " target="_blank " class="icoTwitter social-bg " title="Twitter" style="background-color: #33ccff;"><i class="fa fa-twitter "></i></a>
+                                </li> 
+                            {% endif %}
+                            {% if contact_details.youtube %}
+                                <li>
+                                    <a href="{{contact_details.youtube}} " target="_blank " class="icoTwitter social-bg " title="Youtube" style="background-color: #33ccff;"><i class="fa fa-youtube "></i></a>
+                                </li> 
+                            {% endif %}
+                            {% if contact_details.email %}
+                                <li>
+                                    <a href="mailto:{{contact_details.email}}" class="contact-mail" style="font-size: 11px;"><i class="fa fa-envelope" style="padding-right: 15px "></i>
+                                    <span class="social-gmail-text"> {{contact_details.email}} </span></a>
+                                </li>
+                            {% endif %}
+                              <div class="row ">               
+                                  <div class="col-md-2 col-sm-2"> </div>
+                                  <div class="col-md-4 col-sm-4 pad-left" style="background: #c7b5bc;text-align: center; cursor: pointer;">
+                                      <a href="/gsod-donation ">  Donations </a> 
+                                  </div>
+                                  <div class="col-md-1"> </div>
+                                  <div class="col-md-4 col-sm-4 pad-left menu-last" style="background: #c7b5bc;text-align: center; cursor: pointer;" onclick="subscribe_now()">
+                                        Subscribe 
+                                  </div>
+                              </div>
+                            </ul> 
+                        </div>
+                        <div class="col-md-1 col-sm-1 socialweb ">
+                            <img src="/assets/gscommunity/assets/media/gsod_map_gif.gif" class="flo-right" style="padding-right: 10px;">                 
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>      
+        <nav class="Navigationbar" role="navigation ">
+            <div class="navbar-header ">
+                <div class="row ">
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <button class="menu-mobile-button visible-xs-block js-toggle-mobile-slidebar toggle-menu-button ">
+                            <i class="toggle-menu-button-icon"><span></span><span></span><span></span><span></span><span></span><span></span></i>
+                        </button>
+                    </div>
+                  
+               <div class="col-md-10 col-sm-10 col-xs-10"> 
+                    <ul class="social-network social-circle float-right "">
+                        <li><a href="#" class="icoFacebook social-bg" title="Facebook" style="background-color:  #3B5998;width: 20px !important; "><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" class="icoTwitter social-bg" title="Twitter" style="background-color:  #33ccff;width: 20px !important;"><i class="fa fa-twitter"></i></a></li>
+                        {% if contact_details.email %}
+                        <li><a href="mailto:{{contact_details.email}}" style="width:150px;font-size: 11px;color:white"><i class="fa fa-envelope" style="padding-right: 15px"></i>
+                          <span class="social-gmail-text"> {{contact_details.email}} </span> </a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">About US  <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown dropdown-submenu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">About Samaj</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/aboutus">About Gujarati Samaj </a></li>
+                                        <li><a href="/history">History of Gujarati Samaj</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/directory">Directory </a></li>
+                                <li><a href="/samaj-benefits">Samaj Benefits</a></li>
+                                <li><a href="/news">Community News</a></li>
+                                <li><a href="/current-by-laws">Current By Laws </a></li>
+                                <li class="dropdown dropdown-submenu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Committee</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/operatingcommitee">Current Committee</a></li>
+                                        <li><a href="/previouscommittee">Previous Committee</a></li>
+                                        <li><a href="/pastpresident">Previous Chairman &amp; President</a></li>
+                                        <li><a href="/choreographer">Choreographers</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/samajdarshan">Samaj Darshan </a></li>
+                                <li><a href="/faq"> FAQ  </a></li>
+                                <li><a href="/help">Help</a></li>
+                            </ul>
+                        </li>
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">GSOD Members <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/membership">Become a Member</a></li>
+                                <li><a href="/existingmember">Old Member Registration</a></li>
+                                <li><a href="/member">Membership Types</a></li>
+                                <li><a href="/membership-form"> Membership Form</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Events <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/event">  Events</a></li>
+                                <li><a href="/eventcalendar">  Event Calender</a></li>
+                            </ul>
+                        </li>
+                        <li class="active"><a href="/albums">Gallery</a></li>
+                        <li class="dropdown" style="display: none;">
+                            <a href="/yellowpages"> Yellow Pages <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                {% if(YellowpageCategoryList) %} {% for ypc in YellowpageCategoryList %}
+                                <li class="dropdown dropdown-submenu">
+                                    <a href="/{{ypc.route}}">{{ypc.name}}</a> {% if(ypc.YellowpageSubCategoryList) %}
+                                    <ul class="dropdown-menu">
+                                    {% for ypsc in ypc.YellowpageSubCategoryList %}
+                                        <li><a href="/{{ypsc.route}}"> {{ypsc.name}} </a></li>
+                                    {% endfor %}
+                                    </ul> {% endif %}
+                                </li>
+                                {% endfor %}{% endif %}
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Senior (GSS) <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/about-gss"> About GSS</a></li>
+                                <li><a href="/gss"> Senior (GSS) Events</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Youth (GSY) <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/about-gsy"> About GSY</a></li>
+                                <li><a href="/gsy"> Youth (GSY) Events</a></li>
+                            </ul>
+                        </li>
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sponsors <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/sponsorstype">Become a Sponsor</a></li>
+                                <li><a href="/sponsors">Our Sponsors</a></li>
+                            </ul>
+                        </li>
+                      
+                        {% if frappe.user == 'Guest' %}
+                        <li class="active"><a href="/login#login"> Login </a></li>
+                        {% else %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">  My Account <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/me">My Account</a></li>
+                                <li><a href="/desk">Admin</a></li>
+                                <li><a href="/?cmd=web_logout">  Sign out</a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if elections %}
+                        <li><a href="/elections">Elections</a></li>
+                        {% endif %}
+                        <!-- <li><a href="/contact_us"> Contact Us </a></li> -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="background: #e50041;">
+                                Event <span class="blink">Tickets</span><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a style="cursor: pointer;" onclick="check_login()" data-url="https://www.i9live.com/diwali-2019">Member Tickets</a></li>
+                                <li><a target="_blank" href="https://www.i9live.com/diwali-2019">Non Member Tickets</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+        <!-- The Modal -->
+        <!-- <div id="myModal00" class="sdsf">
+
+ 
+  <div class="modal-content00">
+   <div class="modal-header00">
+      <span class="close00">&times;</span>
+      <span style="text-align: center;    color: #e50041;font-size: 24px;">Subscribe to Our Newsletter</span>
+    </div>
+  <div class="modal-body00">
+      <form id="newsletterForm" style="margin-top: 10px;"> 
+      
+      
+
+      <div class="row" style="margin-bottom: 20px;">  
+       <div class="col-md-6" > 
+        <label style="width: 100%"> First Name </label>
+        <input type="text" name="firstname"   
+      id="firstname" style="width: 100%" required> 
+       </div>
+        
+       <div  class="col-md-6" >  <label style="width: 100%"> Last Name </label>
+       <input type="text" name="lastname"  
+      id="lastname" style="width: 100%"> </div>
+       </div>
+
+<div class="row" style="margin-bottom: 20px;">  
+     
+        
+       <div  class="col-md-6" >  <label style="width: 100%"> Email</label>
+       <input type="email" name="email" 
+      id="email" style="width: 100%"> </div>
+
+        <div class="col-md-6" > 
+        <label style="width: 100%">Phone </label>
+        <input type="number" name="phone"    
+      id="phone" style="width: 100%" required> 
+       </div>
+
+
+       </div>
+
+<div class="row" style="margin-bottom: 20px;">  
+     
+        
+       <div  class="col-md-6" > 
+        <label style="width: 100%"> Subscripe For</label>
+        <select name="type" id="type" style="width: 100%">  
+        <option value="ALL" selected>ALL </option>
+        <option value="Newsletter"> Newsletter </option> 
+        </select>
+    
+
+       </div>
+     <div  class="col-md-6" > 
+          <button   style="margin-top: 15px;"
+
+       class="btn btn-primary  tittlebtn" onclick="myFunction()">Subscribe</button>
+    
+
+       </div>
+     
+
+
+
+      
+
+
+   
+
+
+      </form>
+
+    </div>
+  </div>
+
+</div>
+  
+ -->
+        <!-- 
+    <div id="myModal000" class="modal00">
+
+ 
+  <div class="modal-content00">
+    <div class="modal-header00">
+      <span class="close">&times;</span>
+      <h4 style="text-align: center;">Subscribe to Our Newsletter</h4>
+    </div>
+    <div class="modal-body00">
+      <form id="newsletterForm"> 
+      
+      <input type="email" name="email" placeholder="Enter your email" id="email" style="width: 100%">
+
+      <button  type="button" style="margin-top: 15px;" 
+       class="btn btn-primary btn-form-submit  tittlebtn" onclick="SubmitNewsletter()">Subscribe</button>
+
+
+      </form>
+
+    </div>
+     
+  </div>
+
+</div>
+ -->
+</header>
+<style type="text/css">
+.navbar-light .navbar-brand {
+    color: #fff !important;
+}
+
+.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show>.nav-link {
+    color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+    color: rgba(255, 255, 255, .7);
+}
+
+.d-block {
+    display: block;
+}
+
+
+
+
+/*=========================
+  Icons
+ ================= */
+
+
+/* footer social icons */
+
+ul.social-network {
+    list-style: none;
+    display: inline;
+    margin-left: 30px !important;
+    padding: 43px 0;
+}
+
+ul.social-network li {
+    display: inline;
+    margin: 0 5px;
+}
+
+
+
+
+/* footer social icons */
+
+.social-network a.icoRss:hover {
+    background-color: #F56505;
+}
+
+.social-network a.icoFacebook:hover {
+
+    opacity: .9;
+}
+
+.social-network a.icoTwitter:hover {
+
+    opacity: .9;
+}
+
+.social-network a.icoGoogle:hover {
+    background-color: #BD3518;
+}
+
+.social-network a.icoVimeo:hover {
+    background-color: #0590B8;
+}
+
+.social-network a.icoLinkedin:hover {
+    background-color: #007bb7;
+}
+
+.social-network a.icoRss:hover i,
+.social-network a.icoFacebook:hover i,
+.social-network a.icoTwitter:hover i,
+.social-network a.icoGoogle:hover i,
+.social-network a.icoVimeo:hover i,
+.social-network a.icoLinkedin:hover i {
+    color: #fff;
+}
+
+a.socialIcon:hover,
+.socialHoverClass {
+    color: #44BCDD;
+}
+
+.social-circle li a {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto 0 auto;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    text-align: center;
+    width: 100px;
+    height: 40px;
+    font-size: 14px;
+    background-color: transparent !important;
+}
+
+.social-circle li i {
+    margin: 0;
+    line-height: 43px;
+    text-align: center;
+}
+
+.social-circle li a:hover i,
+.triggeredHover {
+    /* -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -ms--transform: rotate(360deg);
+    transform: rotate(360deg);*/
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.social-circle i {
+    color: #fcfbfc;
+    -webkit-transition: all 0.8s;
+    -moz-transition: all 0.8s;
+    -o-transition: all 0.8s;
+    -ms-transition: all 0.8s;
+    transition: all 0.8s;
+}
+
+.social-bg {
+    background-color: #000;
+}
+
+.social-network {
+    margin-bottom: 0rem !important;
+}
+
+.navbar .navbar-nav>li>a {
+    font-size: 11px;
+    padding: 0px 15px;
+}
+
+.bg-main {
+    height: 100px;
+    background-repeat: repeat;
+}
+
+.flo-right {
+    float: right;
+    margin-top: 8px;
+    height: 80px !important;
+}
+.blink {
+      animation: blinker 1s cubic-bezier(.5, 0, 1, 1) infinite alternate;
+      /*font-size: 9px;*/
+      /*margin-right: 2px;*/
+    }
+    @keyframes blinker {  
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+</style>
+<script type="text/javascript">
+function logout() {
+    frappe.call({
+        method: "frappe.auth.logout",
+        args: {},
+        callback: function(r) {
+
+        }
+
+    });
+}
+</script>
