@@ -41,23 +41,28 @@ def create_members(first_name, last_name, email, mobile_no):
 @frappe.whitelist(allow_guest=True)
 def create_user_detail(first_name, last_name, email, mobile_no):
 	# frappe.msgprint(frappe._("{0}").format(mobile_no))
+	if frappe.db.get_all("User",filters={"email":email}):
+		return {"status":"Failed","message":"User with same email id is already exists."}
+	if frappe.db.get_all("User",filters={"mobile_no":mobile_no}):
+		return {"status":"Failed","message":"User with same mobile no id is already exists."}
 	result= frappe.get_doc({
 		"doctype": "User",
 		"first_name": first_name,
 		"last_name":last_name,
 		"email":email,
 		"mobile_no":mobile_no,
-		"send_welcome_email":1
-	}).insert()
-	frappe.get_doc({
-		"doctype":"Has Role",
-		"name": nowdate(),
-		"parent": email,
-		"parentfield": "roles",
-		"parenttype": "User",
-		"role": "Web User"
-		}).insert()
-	return result
+		"send_welcome_email":1,
+		"roles":[{"role":"Web User"}]
+	}).insert(ignore_permissions=True)
+	# frappe.get_doc({
+	# 	"doctype":"Has Role",
+	# 	"name": nowdate(),
+	# 	"parent": email,
+	# 	"parentfield": "roles",
+	# 	"parenttype": "User",
+	# 	"role": "Web User"
+	# 	}).insert(ignore_permissions=True)
+	return {"status":"Success","message":"Mail will send to your registered mail id to set new password.Please login to continue member registration."}
 
 @frappe.whitelist()
 def create_member_detail(first_name, last_name, email, mobile_no):

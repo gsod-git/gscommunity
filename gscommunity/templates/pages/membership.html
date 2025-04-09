@@ -223,8 +223,9 @@ td {
 </style>
 {% endblock %} {% block script %}
 <script type="text/javascript">
+   
 $(document).ready(function() {
-
+     frappe.sys_defaults = frappe.boot.sysdefaults;
 });
 
 var widId = "";
@@ -232,7 +233,7 @@ var onloadCallback = function() {
 
     localStorage.setItem("recapt", 0);
     widId = grecaptcha.render('recapchaWidget', {
-        'sitekey': '6Lc7MWEUAAAAAF88zZuXAm2FZSnDPhTc364xnHJD'
+        'sitekey': '6LdNqwIrAAAAAO6UXj5FoV_yhs1UL80vrFauqvS8'
     });
 
 };
@@ -300,13 +301,15 @@ $("#validatemember").submit(function(e) {
             callback: function(r) {
 
                 console.log(r.message)
-                if (r.message) {
-                    frappe.msgprint("Mail will send to your registered mail id.Please login to continue member registration.")
+                if (r.message.status=="Success") {
+                    frappe.msgprint(r.message.message)
                     setTimeout(function() {
-
                         window.location.href = "/login#login";
                     }, 6000);
 
+                }
+                else{
+                    frappe.throw(r.message.message);
                 }
 
             }

@@ -43,7 +43,7 @@
                                                     <h4 style="font-size: 15px;">{{ms.name}}</h4>
                                                 </div>
                                             </div>
-                                            <div class="bottom-content text-center" style="min-height: 350px;">
+                                            <div class="bottom-content text-center" style="min-height: 200px;">
                                                 <span style="width: 100%;padding: 10px 20px;float: left;text-align: left;"> 
                                                     <i class="fa fa-check" aria-hidden="true" style="color: #4caf50;font-size: 14px;padding-right: 10px;"></i> {{ms.membership_info}}
                                                 </span> 
@@ -54,7 +54,7 @@
                                                 {% endfor %} {% endif %}
                                             </div>
                                             <div class="" style="padding: 10px;background: #d3c3c7;text-align: center;">
-                                                <h4 style="color:#574046">  $ {{ms.amount}}<span> </span> </h4>
+                                                <h4 style="color:#574046">  $ {{'%0.2f' %ms.amount}}<span> </span> </h4>
                                             </div>
                                             <div style="margin-bottom: 20px">
                                                 <button onclick="reg_membership('{{ms.name}}','{{ms.amount}}')" data-field="{{ms.name}}" id="memberpay" class="btn silver1 bnew">

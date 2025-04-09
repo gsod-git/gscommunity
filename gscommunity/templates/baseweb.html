@@ -239,7 +239,7 @@
     {% endif -%}
     <script type="text/javascript">
     $(document).ready(function() {
-
+frappe.sys_defaults = frappe.boot.sysdefaults;
         console.log($(window).width());
 
         $('#example').DataTable();
