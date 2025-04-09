@@ -91,10 +91,10 @@
                                         <li><a href="/history">History of Gujarati Samaj</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="/directory">Directory </a></li>
+                                <!-- <li><a href="/directory">Directory </a></li> -->
                                 <li><a href="/samaj-benefits">Samaj Benefits</a></li>
-                                <li><a href="/news">Community News</a></li>
-                                <li><a href="/current-by-laws">Current By Laws </a></li>
+                                <!-- <li><a href="/news">Community News</a></li> -->
+                                <!-- <li><a href="/current-by-laws">Current By Laws </a></li> -->
                                 <li class="dropdown dropdown-submenu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Committee</a>
                                     <ul class="dropdown-menu">
@@ -104,9 +104,9 @@
                                         <li><a href="/choreographer">Choreographers</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="/samajdarshan">Samaj Darshan </a></li>
+                                <!-- <li><a href="/samajdarshan">Samaj Darshan </a></li>
                                 <li><a href="/faq"> FAQ  </a></li>
-                                <li><a href="/help">Help</a></li>
+                                <li><a href="/help">Help</a></li> -->
                             </ul>
                         </li>
                           <li class="dropdown">
@@ -179,14 +179,22 @@
                         <li><a href="/elections">Elections</a></li>
                         {% endif %}
                         <!-- <li><a href="/contact_us"> Contact Us </a></li> -->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="background: #e50041;">
-                                Event <span class="blink">Tickets</span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                        {%if event_tickets%}
+                        <li class="dropdown" style="background: #e50041;">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            Event <span class="blink">Tickets</span><b class="caret"></b></a>
+                            <!-- <ul class="dropdown-menu">
                                 <li><a style="cursor: pointer;" onclick="check_login()" data-url="https://www.i9live.com/diwali-2019">Member Tickets</a></li>
-                                <li><a target="_blank" href="https://www.i9live.com/diwali-2019">Non Member Tickets</a></li>
+                                            <li><a target="_blank" href="https://www.i9live.com/diwali-2019">Non Member Tickets</a></li>
+                            </ul> -->
+                            <ul class="dropdown-menu">
+                                {%for item in event_tickets%}
+                                <li><a   href="/{{item.event_route}}">{{item.event_name}}</a></li>
+                                {%endfor%}
                             </ul>
+
                         </li>
+                        {%endif%}
                     </ul>
                 </div>
             </div>
