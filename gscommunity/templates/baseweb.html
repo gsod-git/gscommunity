@@ -146,14 +146,22 @@
             <li><a href="/elections">Elections</a></li>
             {% endif %}
             <li><a href="/contact_us"> Contact Us </a></li>
+            {%if event_tickets%}
             <li class="dropdown" style="background: #e50041;">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 Event <span class="blink">Tickets</span><b class="caret"></b></a>
-                <ul class="dropdown-menu">
+                <!-- <ul class="dropdown-menu">
                     <li><a style="cursor: pointer;" onclick="check_login()" data-url="https://www.i9live.com/diwali-2019">Member Tickets</a></li>
                                 <li><a target="_blank" href="https://www.i9live.com/diwali-2019">Non Member Tickets</a></li>
+                </ul> -->
+                <ul class="dropdown-menu">
+                    {%for item in event_tickets%}
+                    <li><a   href="/{{item.event_route}}">{{item.event_name}}</a></li>
+                    {%endfor%}
                 </ul>
+
             </li>
+            {%endif%}
         </ul>
     </div>
     <div class="l-theme animated-css" data-header="sticky" data-header-top="200" data-canvas="container">

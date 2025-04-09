@@ -41,7 +41,7 @@ def update_website_context(context):
 	for item in YellowpageCategoryList:
 		item.YellowpageSubCategoryList=frappe.db.get_all('Business Listing Subcategories',fields=['name','category','route'], filters={'published':1,'category':item.name}) 
 	context.YellowpageCategoryList=YellowpageCategoryList
-
+	context.event_tickets = frappe.db.get_all("Event Tickets",fields=['event_name','event_route'])
 @frappe.whitelist()
 def get_ads():
 	AdsList=frappe.db.get_all('GSOD Promotions',fields=['*'],filters={'published':1,'position':'Right (W x H - 4.67 x 2.67 (inches))','status':'Approved'}) 
