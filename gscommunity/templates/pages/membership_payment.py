@@ -38,3 +38,40 @@ def get_context(context):
     frappe.throw(_("You need to be logged in to access this page"), frappe.PermissionError)
 
 
+
+@frappe.whitelist(allow_guest=True)
+def ProccedPayment(**kwargs):
+  kwargs=frappe._dict(kwargs)
+  nonce_from_the_client = kwargs.payment_method_nonce
+  amount = kwargs.amount
+  member_id = frappe.db.get_all("Member",filters={"email":frappe.session.user})
+  result = gateway.transaction.sale({
+      "amount":amount,
+      "payment_method_nonce": nonce_from_the_client,
+      "order_id":member_id[0].name,
+      "options": {
+        "submit_for_settlement": True
+      }
+  })
+  if result.is_success:
+    frappe.local.cookie_manager.set_cookie("response", "1")
+    transaction=result.transaction.__dict__
+    frappe.local.cookie_manager.set_cookie("transaction", transaction['id'])
+    data=make_payments(amount,"Membership",member_id[0].name,kwargs.membership_type,kwargs.customer_email,transaction['id'])
+    if data=='Success':
+      return werkzeug.utils.redirect("/thankyou")
+  else:
+    return werkzeug.utils.redirect("/payment_failed")
+
+@frappe.whitelist(allow_guest=True)
+def make_payments(amount,doctype,docname,membership_type,email,transaction):
+  if doctype=='Donation':
+    from gscommunity.gscommunity.doctype.donation.donation import make_payment
+    make_payment(docname,email,amount,transaction)
+  elif doctype=='Sponsorship':
+    from gscommunity.gscommunity.doctype.sponsorship.sponsorship import make_payment
+    make_payment(docname,email,amount,transaction)
+  elif doctype=='Membership':
+    from nonprofit.nonprofit.doctype.membership.membership import make_payment
+    make_payment(docname,email,amount,membership_type,transaction)
+  return 'Success'

@@ -4,7 +4,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <form id="checkout" method="post">
-                <input type="hidden" value="gscommunity.templates.pages.braintreepayment.ProccedPayment" name="cmd" />
+                <input type="hidden" value="gscommunity.templates.pages.membership_payment.ProccedPayment" name="cmd" />
                 <input type="hidden" name="amount" value="150">
                 <input type="hidden" name="recurring_payment" value="">
                 <input type="hidden" name="customer" value="">
@@ -46,6 +46,8 @@ $(document).ready(function() {
     if(localStorage.getItem('membership_payment')){
         window.history.pushState(null, "", window.location.href);
         $("#btn-payment").val("Pay $"+parseFloat(localStorage.getItem('membership_payment')).toFixed(2));
+        $("input[name='membership_type']").val(localStorage.getItem('membership_typename'));
+        $("input[name='customer_email']").val(frappe.session.user);
         frappe.call({
             method: "gscommunity.templates.pages.membership_payment.generate_client_token",
             callback: function(Responseresult) {
