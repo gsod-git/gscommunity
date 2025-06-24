@@ -47,6 +47,7 @@ $(document).ready(function() {
         window.history.pushState(null, "", window.location.href);
         $("#btn-payment").val("Pay $"+parseFloat(localStorage.getItem('membership_payment')).toFixed(2));
         $("input[name='membership_type']").val(localStorage.getItem('membership_typename'));
+        $("input[name='amount']").val(localStorage.getItem('membership_payment'));
         $("input[name='customer_email']").val(frappe.session.user);
         frappe.call({
             method: "gscommunity.templates.pages.membership_payment.generate_client_token",

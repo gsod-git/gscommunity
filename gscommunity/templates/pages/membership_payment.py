@@ -39,7 +39,7 @@ def get_context(context):
 
 
 
-@frappe.whitelist(allow_guest=True)
+@frappe.whitelist()
 def ProccedPayment(**kwargs):
   kwargs=frappe._dict(kwargs)
   nonce_from_the_client = kwargs.payment_method_nonce
@@ -53,6 +53,7 @@ def ProccedPayment(**kwargs):
         "submit_for_settlement": True
       }
   })
+  frappe.log_error("result",result)
   if result.is_success:
     frappe.local.cookie_manager.set_cookie("response", "1")
     transaction=result.transaction.__dict__
