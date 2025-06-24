@@ -45,7 +45,7 @@ button.paypal.is-active:hover{
 $(document).ready(function() {
     if(localStorage.getItem('membership_payment')){
         window.history.pushState(null, "", window.location.href);
-        $("#btn-payment").val("$"+parseFloat(localStorage.getItem('membership_payment')).toFixed(2));
+        $("#btn-payment").val("Pay $"+parseFloat(localStorage.getItem('membership_payment')).toFixed(2));
         frappe.call({
             method: "gscommunity.templates.pages.membership_payment.generate_client_token",
             callback: function(Responseresult) {
