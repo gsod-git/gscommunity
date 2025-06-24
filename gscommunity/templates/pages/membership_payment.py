@@ -62,7 +62,9 @@ def ProccedPayment(**kwargs):
     if data=='Success':
       return werkzeug.utils.redirect("/thankyou")
   else:
-    return werkzeug.utils.redirect("/payment_failed")
+    # return werkzeug.utils.redirect("/payment_failed")
+    frappe.local.response["type"] = "redirect"
+    frappe.local.response["location"] = "/payment_failed"
 
 @frappe.whitelist(allow_guest=True)
 def make_payments(amount,doctype,docname,membership_type,email,transaction):
