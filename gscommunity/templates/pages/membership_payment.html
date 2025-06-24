@@ -1,0 +1,60 @@
+ {% extends "templates/baseweb.html" %} {% block content %}
+<div style="min-height:500px;" class="wrapper">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form id="checkout" method="post">
+                <input type="hidden" value="gscommunity.templates.pages.braintreepayment.ProccedPayment" name="cmd" />
+                <input type="hidden" name="amount" value="150">
+                <input type="hidden" name="recurring_payment" value="">
+                <input type="hidden" name="customer" value="">
+                <input type="hidden" name="customer_email" value="">
+                <input type="hidden" name="customer_fname" value="">
+                <input type="hidden" name="customer_lname" value="">
+                <input type="hidden" name="plan_id" value="">
+                <input type="hidden" name="order_id" value="">
+                <input type="hidden" name="doctype" value="">
+                <input type="hidden" name="membership_type" value="">
+                <div id="payment-form"></div>
+                <div style="text-align: center;margin-top: 10px;">
+                  <input type="submit" class="btn btn-primary" value="Pay $10">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+<style type="text/css">
+.wrapper {
+    margin-top: 160px;
+}
+
+#braintree-paypal-button {
+    display: none !important;
+}
+button.paypal.is-active{
+  background: #fff !important;
+}
+button.paypal.is-active:hover{
+  background: #fff !important;
+}
+</style>
+<script src="/assets/gscommunity/assets/libs/jquery-1.12.4.min.js"></script>
+<script src="https://js.braintreegateway.com/js/braintree-2.32.1.min.js"></script>
+<script>
+$(document).ready(function() {
+    window.history.pushState(null, "", window.location.href);
+    frappe.call({
+        method: "gscommunity.templates.pages.membership_payment.generate_client_token",
+        callback: function(Responseresult) {
+            braintree.setup(Responseresult.message,
+                "dropin", {
+                    container: "payment-form",
+                    amount:localStorage.getItem('membership_payment')
+            });
+            $('#braintree-paypal-button').hide()
+        }
+    });
+
+</script>
+{% endblock %}
