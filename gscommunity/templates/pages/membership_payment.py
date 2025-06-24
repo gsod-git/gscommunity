@@ -60,7 +60,9 @@ def ProccedPayment(**kwargs):
     frappe.local.cookie_manager.set_cookie("transaction", transaction['id'])
     data=make_payments(amount,"Membership",member_id[0].name,kwargs.membership_type,kwargs.customer_email,transaction['id'])
     if data=='Success':
-      return werkzeug.utils.redirect("/thankyou")
+      frappe.local.response["type"] = "redirect"
+      frappe.local.response["location"] = "/thankyou"
+      # return werkzeug.utils.redirect("/thankyou")
   else:
     # return werkzeug.utils.redirect("/payment_failed")
     frappe.local.response["type"] = "redirect"
