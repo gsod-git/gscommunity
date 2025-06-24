@@ -171,22 +171,10 @@
         localStorage.setItem("membership_payment", amount);
         var locl_type = localStorage.getItem("membership_typename");
         if (locl_type) {
-            window.location.href = "/membership";
+            window.location.href = "/membership-registration";
         }
     }
 
-    //       $('#memberpay').click(function() {
-
-
-    //         localStorage.setItem("membership_payment", pay);
-    //       });
-    //       if (typeof(Storage) !== "undefined") {
-
-    //     localStorage.setItem("membership_payment", "trewterwytwery");
-
-    //     // document.getElementById("result").innerHTML = localStorage.getItem("membership_payment");
-    // } else {
-    //     // document.getElementById("result").innerHTML = "";
-    // }
+   
     </script>
     {% endblock %}
