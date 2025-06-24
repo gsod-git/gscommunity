@@ -77,7 +77,11 @@
              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">GSOD Members <b class="caret"></b></a>
                 <ul class="dropdown-menu">
+                    {%if frappe.session.user=="Guest"%}
                     <li><a href="/membership">Become a Member</a></li>
+                    {%else%}
+                    <li><a href="/member">Become a Member</a></li>
+                    {%endif%}
                     <li><a href="/existingmember">Old Member Registration</a></li>
                     <li><a href="/member"> Membership Types</a></li>
                     <li><a href="/membership-form"> Membership Form</a></li>
