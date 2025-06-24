@@ -31,3 +31,10 @@ gateway = braintree.BraintreeGateway(
 @frappe.whitelist(allow_guest=True)
 def generate_client_token():	
 	return gateway.client_token.generate()
+
+
+def get_context(context):
+  if frappe.session.user=='Guest':
+    frappe.throw(_("You need to be logged in to access this page"), frappe.PermissionError)
+
+

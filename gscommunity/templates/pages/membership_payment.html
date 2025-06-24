@@ -17,7 +17,7 @@
                 <input type="hidden" name="membership_type" value="">
                 <div id="payment-form"></div>
                 <div style="text-align: center;margin-top: 10px;">
-                  <input type="submit" class="btn btn-primary" value="Pay $10">
+                  <input type="submit" id="btn-payment" class="btn btn-primary" value="Pay $10">
                 </div>
             </form>
         </div>
@@ -43,18 +43,25 @@ button.paypal.is-active:hover{
 <script src="https://js.braintreegateway.com/js/braintree-2.32.1.min.js"></script>
 <script>
 $(document).ready(function() {
-    window.history.pushState(null, "", window.location.href);
-    frappe.call({
-        method: "gscommunity.templates.pages.membership_payment.generate_client_token",
-        callback: function(Responseresult) {
-            braintree.setup(Responseresult.message,
-                "dropin", {
-                    container: "payment-form",
-                    amount:localStorage.getItem('membership_payment')
-            });
-            $('#braintree-paypal-button').hide()
-        }
-    });
+    if(localStorage.getItem('membership_payment')){
+        window.history.pushState(null, "", window.location.href);
+        $("#btn-payment").val("$"+parseFloat(localStorage.getItem('membership_payment')).toFixed(2));
+        frappe.call({
+            method: "gscommunity.templates.pages.membership_payment.generate_client_token",
+            callback: function(Responseresult) {
+                braintree.setup(Responseresult.message,
+                    "dropin", {
+                        container: "payment-form",
+                        amount:localStorage.getItem('membership_payment')
+                });
+                $('#braintree-paypal-button').hide()
+            }
+        });
+    }
+    else{
+        window.location.href='/member';
+    }
+    
 });
 
 </script>
